@@ -1,0 +1,1 @@
+{"kitManifest":{"$":{"name":"SysMikNativeLib","checksum":"324911d8","hasNatives":"true","doc":"false","version":"1.2.28","vendor":"SysMik","description":"NATIVE API","buildHost":"gs-xp-7-001","buildTime":"2013-06-10T14:30:34.671+02:00"},"depends":[{"depend":[{"$":{"on":"sys 1.2"}}]}]}}

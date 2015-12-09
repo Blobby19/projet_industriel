@@ -1,0 +1,17 @@
+{
+  entrees:[
+    '{{repeat(2,5)}}',
+    {
+      type: '{{random("temperature","hygrometrie","pression","defaut")}}',
+      emplacement: '{{random("airneuf","reprise","melange","soufflage")}}'
+    }
+  ],
+    sorties:[
+      '{{repeat(5,7)}}',
+      {
+        type: '{{random("moteur","registre","vanne")}}',
+        emplacement: '{{random("airneuf","reprise","melange","soufflage")}}'
+      }
+    ]
+}
+

@@ -1,0 +1,24 @@
+{
+  "name": "projet-industriel",
+  "version": "0.0.1",
+  "description": "Logiciel de génération de programme de régulation de CTA",
+  "main": "app.js",
+  "dependencies": {
+    "adm-zip": "^0.4.7",
+    "async": "^1.5.0",
+    "xml2js": "^0.4.15"
+  },
+  "devDependencies": {
+    "bunyan": "^1.5.1",
+    "nodemon": "^1.8.1"
+  },
+  "scripts": {
+    "start": "nodemon --ignore /lib -e js | bunyan"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://Fedora19@bitbucket.org/Fedora19/projet-industriel.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
