@@ -3,6 +3,7 @@ Import des librairies npm
  */
 var fs = require('fs');
 var bunyan = require('bunyan');
+var express = require('express');
 
 var log_error = './logs/error.log';
 var log_info = './logs/info.log';
@@ -41,7 +42,10 @@ var installation = function(){
 
 var main = function(){
   installation();
-  jsonSax.create_xml();
+  //jsonSax.create_xml();
 }
 
-main();
+
+var app = express();
+
+//main();
