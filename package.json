@@ -1,0 +1,18 @@
+{
+  "name": "projet-industriel-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon . | bunyan",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bunyan": "^1.5.1"
+  },
+  "dependencies": {
+    "xml2js": "^0.4.16"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "config": {
+    "locationTags":["app", "links"],
+    "root":{
+      "templateUrl":"templates/root.xml"
+    },
+    "templates": [
+      {
+        "type":"properties",
+        "name": "header",
+        "templateUrl": "templates/app_header.xml",
+        "description": "Header de l'application",
+        "required": true,
+        "locationTag": "app",
+        "params":[
+          {
+            "name": "appName",
+            "value" : "String"
+          }
+        ]
+      },
+      {
+        "type": "component",
+        "name": "service",
+        "templateUrl": "templates/app_service.xml",
+        "description":"Services de l'application",
+        "required": true,
+        "locationTag": "app",
+        "params":[
+        ]
+      }
+    ]
+  }
+}
