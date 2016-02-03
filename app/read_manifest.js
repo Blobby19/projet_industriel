@@ -20,6 +20,7 @@ var log = bunyan.createLogger({
   ]
 });
 
+// Permet de lire les fichiers
 var read_zip = function(zipFile, callback){
   log.info('read_zip');
 
@@ -30,9 +31,9 @@ var read_zip = function(zipFile, callback){
   	}
 
 	var file = new AdmZip(zipFile);
-	
+
 	var zipEntries = file.getEntries();
-	
+
 	zipEntries.forEach(function(zipEntry){
 	  //console.log(zipEntry.toString());
 	  if(zipEntry.entryName == "manifest.xml"){
@@ -44,7 +45,9 @@ var read_zip = function(zipFile, callback){
   log.info('sortie read_zip');
 }
 
+// Fonction qui permet de lire le dossier sedona
 var read_folder = function(folderName, version){
+  console.log(folderName);
   log.info('read_folder');
   fs.exists(folderName, function(exist){
     if(!exist){
@@ -74,7 +77,7 @@ var read_folder = function(folderName, version){
                           throw err;
                         }
                         log.info('New file '+get_name_of_kit(file)+'.json created');
-                      });  
+                      });
                     });
                   });
                 }
@@ -88,6 +91,7 @@ var read_folder = function(folderName, version){
   log.info('sortie read_folder');
 }
 
+// Récupere le nom des kits
 var get_name_of_kit = function(data){
   return data.replace(/-[0-9a-z]+-1.2.28.kit/gi, '');
 }

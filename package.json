@@ -7,6 +7,7 @@
     "adm-zip": "^0.4.7",
     "async": "^1.5.0",
     "express": "^4.13.3",
+    "prompt": "^0.2.14",
     "xml2js": "^0.4.15"
   },
   "devDependencies": {
