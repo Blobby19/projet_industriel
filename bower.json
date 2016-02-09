@@ -1,0 +1,25 @@
+{
+  "name": "projet-industriel-2",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Fedora19 <luc.viala19@gmail.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [
+    "node"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": ">=2.1.1",
+    "Materialize": "materialize#^0.97.5"
+  }
+}
