@@ -10,9 +10,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "bunyan": "^1.5.1"
+    "bunyan": "^1.5.1",
+    "morgan": "^1.6.1"
   },
   "dependencies": {
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "socket.io": "^1.4.5",
     "xml2js": "^0.4.16"
   }
 }

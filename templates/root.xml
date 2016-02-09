@@ -51,6 +51,9 @@
   <kit name="web" checksum="462d43e"/>
 </schema>
 <app>
+  <prop name="deviceName" val="SCC-410"/>
+  <prop name="appName" val="{{value}}"/>
+  <prop name="scanPeriod" val="100"/>
 </app>
 <links>
 </links>

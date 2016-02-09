@@ -1,24 +1,18 @@
 {
   "config": {
+    "destinationFile": "testLuc.sax",
     "locationTags":["app", "links"],
     "root":{
-      "templateUrl":"templates/root.xml"
+      "type": "root",
+      "name": "root",
+      "templateUrl":"templates/root.xml",
+      "description": "Fichier root de l'application",
+      "required": true,
+      "params":[
+        "appName"
+      ]
     },
     "templates": [
-      {
-        "type":"properties",
-        "name": "header",
-        "templateUrl": "templates/app_header.xml",
-        "description": "Header de l'application",
-        "required": true,
-        "locationTag": "app",
-        "params":[
-          {
-            "name": "appName",
-            "value" : "String"
-          }
-        ]
-      },
       {
         "type": "component",
         "name": "service",

@@ -10,23 +10,26 @@ var builder = require('./XMLBuilderClass');
 
 module.exports = MainTag;
 
-var raw, name = "";
+var name = "";
+var raw = [];
 var templates = new Array();
 
 function MainTag(name){
   this.name = name;
 };
 
-MainTag.prototype.setRaw = function(raw){
-  raw = raw;
+MainTag.prototype.setRaw = function(_raw){
+  Logger.info('setRaw()');
+  raw = _raw;
 };
 
 MainTag.prototype.getRaw = function(){
+  Logger.info('getRaw()');
   return raw;
 };
 
-MainTag.prototype.setTemplates = function(templates){
-  templates = templates;
+MainTag.prototype.setTemplates = function(_templates){
+  templates = _templates;
 };
 
 MainTag.prototype.getTemplates = function(){
@@ -39,5 +42,12 @@ MainTag.prototype.addTemplate = function(template, args){
 };
 
 MainTag.prototype.generateTag = function(){
+  Logger.info('generateTag');
   //TODO: Genere le tag en fonction des templates qui se trouvent à l'intérieur
+  if(raw instanceof Array){
+    templates.forEach(function(template){
+      raw.push(template);
+    });
+  }
+  return raw;
 };
