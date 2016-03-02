@@ -4,8 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="vendor/Materialize/dist/css/materialize.min.css">
-
+  <link rel="stylesheet" href="/vendor/Materialize/dist/css/materialize.min.css">
   <title><%= title %></title>
 </head>
 <body>
@@ -22,35 +21,35 @@
     <div class="container">
       <div class="section">
         <div class="row">
-         <div class="col s12 m6">
-           <div class="card">
-             <div class="card-image">
-               <img src="images/sample-1.jpg">
-               <span class="card-title">CTA Double Flux</span>
-             </div>
-             <div class="card-content">
-               <p>Choisissez la CTA Double Flux</p>
-             </div>
-             <div class="card-action">
-               <a href="#">Cliquez ici pour la CTA Double Flux</a>
-             </div>
-           </div>
-         </div>
-         <div class="col s12 m6">
-           <div class="card">
-             <div class="card-image">
-               <img src="images/sample-1.jpg">
-               <span class="card-title">CTA Simple Flux</span>
-             </div>
-             <div class="card-content">
-               <p>Choisissez la CTA Simple Flux</p>
-             </div>
-             <div class="card-action">
-               <a href="#">Cliquez ici pour la CTA Simple Flux</a>
-             </div>
-           </div>
-         </div>
-       </div>
+          <div class="col s12 m6">
+            <div class="card hoverable">
+              <div class="card-image">
+                <img src="/img/sample-1.jpg">
+                <span class="card-title">CTA Double Flux</span>
+              </div>
+              <div class="card-content">
+                <p>CTA Double Flux</p>
+              </div>
+              <div class="card-action">
+                <a href="/double">Cliquez ici pour la CTA Double Flux</a>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6">
+            <div class="card hoverable">
+              <div class="card-image">
+                <img src="/img/sample-1.jpg">
+                <span class="card-title">CTA Simple Flux</span>
+              </div>
+              <div class="card-content">
+                <p>CTA Simple Flux</p>
+              </div>
+              <div class="card-action">
+                <a href="/simple">Cliquez ici pour la CTA Simple Flux</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </main>
@@ -59,9 +58,9 @@
     <% include partials/footer %>
   </footer>
 
-  <script src="vendor/jquery/dist/jquery.min.js" charset="utf-8"></script>
-  <script src="vendor/Materialize/dist/js/materialize.min.js" charset="utf-8"></script>
-  <script src="js/socket.io.js" charset="utf-8"></script>
-  <script src="js/app.js" charset="utf-8"></script>
+  <script src="/vendor/jquery/dist/jquery.min.js" charset="utf-8"></script>
+  <script src="/vendor/Materialize/dist/js/materialize.min.js" charset="utf-8"></script>
+  <script src="/js/socket.io.js" charset="utf-8"></script>
+  <script src="/js/app.js" charset="utf-8"></script>
 </body>
 </html>

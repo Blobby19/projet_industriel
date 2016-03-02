@@ -26,17 +26,22 @@ var config_file = require('./config.json');
 // Import de la configurationd de l'application
 var constants_file = require('./application.json');
 
+app.use('/', express.static(__dirname+ '/public'));
+
 app.use(morgan('dev'));
 
 // Permet de spécifier le moteur de template
 app.set('view engine', 'ejs');
-
-app.use(express.static(__dirname+ '/public'));
+app.set('views', 'views');
 
 // Permet de servir les fichier de l'application
 app.get('/', function(req, res){
   res.render('index', constants_file.app);
 });
+
+app.get('/double', function(req, res){
+  res.render('double', constants_file.app);
+})
 
 io.on('connection', function(socket){
   console.log('Client connected!');
