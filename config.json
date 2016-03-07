@@ -14,6 +14,17 @@
     },
     "templates": [
       {
+        "type":"component",
+        "name": "folder",
+        "templateUrl": "templates/app_folder.xml",
+        "description": "Dossier contenant les inputs",
+        "required": true,
+        "locationTag": "app",
+        "params":[
+          "folderName"
+        ]
+      },
+      {
         "type": "component",
         "name": "service",
         "templateUrl": "templates/app_service.xml",

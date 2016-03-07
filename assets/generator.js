@@ -57,7 +57,8 @@ module.exports = function(rootFolder, fileName){
         if(rootConfig.params.length > 0){
           // TODO: Vérifier le nombre de parmaètres à rentrer
           // Compilation du rootTemplate afin de remplacer les différents éléments
-          rootTemplate = compileTemplate(rootConfig, [{name: "appName", value: "TestLuc"}]);
+          rootTemplate = compileTemplate(rootConfig, [{name: "appName", value: "Test"}]);
+          console.log(rootTemplate);
           appTag.setRaw(rootTemplate.sedonaApp.app);
         }
       }
@@ -94,21 +95,32 @@ module.exports = function(rootFolder, fileName){
     var numberOfArgsCorrect = false;
     var _templateFile = parseTemplate(rootFolder+ '\\'+replaceSlashs(template.templateUrl));
     if(typeof(template) ==='object'){
-      if(args !== 'undefined'
-        && args instanceof Array
-        && template.params.length === args.length){
-        args.forEach(function(arg){
-          _templateFile = replaceDynamically(_templateFile, arg, false);
-        });
+      if(template.name === 'folder'){
+        _templateFile = replaceFolderName(_templateFile, args[0]);
         return _templateFile;
       }
       else{
-        return _templateFile;
+        if(args !== 'undefined'
+          && args instanceof Array
+          && template.params.length === args.length){
+          args.forEach(function(arg){
+            _templateFile = replaceDynamically(_templateFile, arg, false);
+          });
+          return _templateFile;
+        }
+        else{
+          return _templateFile;
+        }
       }
     }
     else {
       return null;
     }
+  }
+
+  var replaceFolderName = function(obj, arg){
+    obj.comp.$.name = arg.value;
+    return obj;
   }
 
   // Fonction privée qui permet de remplacer dynamiquement les parametres dans un template
@@ -118,6 +130,7 @@ module.exports = function(rootFolder, fileName){
       for(key in obj){
         if(typeof(obj[key]) == 'object' && !(obj[key] instanceof Array)){
           if(obj[key].name === arg.name){
+            console.log(obj[key]);
             obj[key].val = arg.value;
             valid = true;
             return obj[key];
@@ -174,6 +187,38 @@ module.exports = function(rootFolder, fileName){
       }
     }
   };
+
+  // Fonction publique qui permet d'jouter un dossier dans l'app
+  generator.addFolder = function(folderName){
+    Logger.info('addFolder');
+    var folderTemplateConfig;
+    var jsonTemplate = {};
+    if(templatesAvailable[0].name === "folder"){
+      folderTemplateConfig = templatesAvailable[0];
+    }else{
+      templatesAvailable.forEach(function(template){
+        if(template.name === "folder"){
+          folderTemplateConfig = template;
+        }
+      });
+    }
+    if(folderName === undefined || folderName ==="")
+      return;
+    else{
+      jsonTemplate = compileTemplate(folderTemplateConfig, [{name: "{{value}}", value: folderName}]);
+      console.log(jsonTemplate);
+    }
+    switch(folderTemplateConfig.locationTag){
+      case "app":
+        appTag.addTemplate(jsonTemplate);
+        break;
+      case "links":
+        console.log("links");
+        break;
+      default:
+        break;
+    }
+  }
 
   // Fonction publique qui permet de générer du code XML avec tout les templates disponibles.
   generator.generateSAXFile = function(){
