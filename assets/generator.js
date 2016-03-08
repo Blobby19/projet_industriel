@@ -19,7 +19,7 @@ var builder = new xml2js.Builder();
 var config_file = require('../config.json');
 
 // Import de la classe Tag
-var MainTag = require('./TagClass.js');
+var MainTag = require('./TagClass.js').MainTag;
 
 module.exports = function(rootFolder, fileName){
 
@@ -70,6 +70,7 @@ module.exports = function(rootFolder, fileName){
     Logger.info('parseTemplate');
     var retour = {};
     if(appTag === undefined || appTag === ""){
+      Logger.warn('No MainTag defined!');
       init();
     }
     var file = fs.readFileSync(templateFile);
@@ -78,6 +79,8 @@ module.exports = function(rootFolder, fileName){
       parser.parseString(file, function(err, result){
         retour = result;
       });
+    }else{
+      Logger.warn('No MainTag defined!');
     }
     return retour;
   }
@@ -93,6 +96,7 @@ module.exports = function(rootFolder, fileName){
   var compileTemplate = function(template, args){
     Logger.info('compileTemplate');
     var numberOfArgsCorrect = false;
+
     var _templateFile = parseTemplate(rootFolder+ '\\'+replaceSlashs(template.templateUrl));
     if(typeof(template) ==='object'){
       if(template.name === 'folder'){
@@ -172,12 +176,13 @@ module.exports = function(rootFolder, fileName){
       Logger.error('Template locationTag is not defined!');
     }
     else{
+      console.log(template);
       if(args !== 'undefined')
          jsonTemplate = compileTemplate(template, args);
       else jsonTemplate = compileTemplate(template);
       switch(template.locationTag){
         case "app":
-          appTag.addTemplate(jsonTemplate);
+          appTag.addComponent(jsonTemplate);
           break;
         case "links":
           console.log("links");
@@ -210,7 +215,7 @@ module.exports = function(rootFolder, fileName){
     }
     switch(folderTemplateConfig.locationTag){
       case "app":
-        appTag.addTemplate(jsonTemplate);
+        appTag.addFolder(jsonTemplate);
         break;
       case "links":
         console.log("links");
@@ -230,7 +235,47 @@ module.exports = function(rootFolder, fileName){
       if(err) throw err;
       console.log('File saved!');
     });
-  }
+  };
+
+
+  generator.addInput= function(name, type, folder){
+    Logger.info('addInput');
+    if(name === 'undefined' || name === null){
+      name = 'UI1';
+    }
+    if(type === 'undefined' || type === null){
+      Logger.error("Failed to add input");
+      return;
+    }
+    if(folder === 'undefined' || folder === null){
+      folder = "app";
+    }
+    switch(type){
+      case "RTD":
+            console.log("RTD type");
+            break;
+      case "DI":
+            console.log("DI type");
+            break;
+      case "pulse":
+            console.log("pulse type");
+            break;
+      case "R":
+            console.log("R type");
+            break;
+      case "A":
+            console.log("A type");
+            break;
+      case "V":
+            console.log("V type");
+            break;
+      default:
+            console.log("default");
+            break;
+    }
+
+  };
+
 
   return generator;
 };

@@ -54,7 +54,36 @@
     <prop name="deviceName" val="SCC-410"/>
     <prop name="appName" val="Test"/>
     <prop name="scanPeriod" val="100"/>
+  </app>
+  <app>
+    <comp name="service" id="1" type="sys::Folder">
+      <prop name="meta" val="33685505"/>
+      <comp name="plat" id="2" type="SysMikPlatScc41xm::SccPlatformService">
+        <prop name="meta" val="33685505"/>
+        <prop name="modbusRtuEnabled" val="{{modbusActivation}}"/>
+        <prop name="modbusRtuBaud" val="3"/>
+      </comp>
+      <comp name="users" id="3" type="sys::UserService">
+        <prop name="meta" val="34144257"/>
+        <comp name="admin" id="4" type="sys::User">
+          <prop name="cred" val="hE49ksThgAeLkWB3NUU1NWeDO54="/>
+          <prop name="perm" val="2147483647"/>
+          <prop name="prov" val="255"/>
+        </comp>
+      </comp>
+      <comp name="sox" id="5" type="sox::SoxService">
+        <prop name="meta" val="34471937"/>
+        <prop name="eventsPerSec" val="10"/>
+      </comp>
+    </comp>
+  </app>
+  <app>
     <comp name="inputs" id="8" type="sys::Folder">
+      <prop name="meta" val="33685505"/>
+    </comp>
+  </app>
+  <app>
+    <comp name="ouputs" id="8" type="sys::Folder">
       <prop name="meta" val="33685505"/>
     </comp>
   </app>

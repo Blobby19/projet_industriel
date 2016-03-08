@@ -51,11 +51,12 @@ var constants_file = require('./application.json');
 generator.initialization();
 
 // Permet d'ajouter des templates dans la configuration
-//generator.addTemplate(config_file.config.templates[0]);
+generator.addTemplate(config_file.config.templates[1]);
 
 generator.addFolder("inputs");
+generator.addFolder("ouputs");
 
-//generator.addFolder("ouputs");
+generator.addInput("TAmb", "RTD", "inputs");
 
 // Permet de générer le fichier terminé
 generator.generateSAXFile();

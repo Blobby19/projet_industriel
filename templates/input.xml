@@ -1,0 +1,4 @@
+<comp name="{{value}}" id="11" type="SysMikPlatScc41xm::{{type}}">
+    <prop name="meta" val="50855937"/>
+    <prop name="channel" val="{{channel}}"/>
+</comp>

@@ -33,6 +33,60 @@
         "locationTag": "app",
         "params":[
         ]
+      },
+      {
+        "type": "component",
+        "name": "input",
+        "templateUrl": "templates/input.xml",
+        "description": "Entrees du contrôleur",
+        "required": false,
+        "locationTag": "app/inputs",
+        "params":[
+          "inputName",
+          {"type": ["V", "R", "A", "RTD", "DI", "pulse"]}
+        ],
+        "limits":[
+          {"name": "UI1", "channel":0, "RTD": true, "DI": true, "pulse": true, "V": true, "A":true, "R": true},
+          {"name": "UI2", "channel":1, "RTD": true, "DI": true, "pulse": true, "V": true, "A":true, "R": true},
+          {"name": "UI3", "channel":2, "RTD": true, "DI": true, "pulse": true, "V": true, "A":true, "R": true},
+          {"name": "UI4", "channel":3, "RTD": true, "DI": true, "pulse": true, "V": true, "A":true, "R": true},
+          {"name": "UI5", "channel":4, "RTD": true, "DI": true, "pulse": true, "V": true, "A":true, "R": true},
+          {"name": "UI6", "channel":5, "RTD": true, "DI": true, "pulse": true, "V": true, "A":true, "R": true},
+          {"name": "UI7", "channel":6, "RTD": false, "DI": true, "pulse": true, "V": true, "A":true, "R": true},
+          {"name": "UI8", "channel":7, "RTD": false, "DI": true, "pulse": true, "V": true, "A":true, "R": true},
+          {"name": "UI9", "channel":8, "RTD": false, "DI": true, "pulse": true, "V": true, "A":true, "R": true},
+          {"name": "UI10", "channel":9, "RTD": false, "DI": true, "pulse": true, "V": false, "A":false, "R": false},
+          {"name": "DI11", "channel":10, "RTD": false, "DI": true, "pulse": true, "V": false, "A":false, "R": false},
+          {"name": "DI12", "channel":11, "RTD": false, "DI": true, "pulse": true, "V": false, "A":false, "R": false},
+          {"name": "DI13", "channel":12, "RTD": false, "DI": true, "pulse": true, "V": false, "A":false, "R": false},
+          {"name": "DI14", "channel":13, "RTD": false, "DI": true, "pulse": true, "V": false, "A":false, "R": false}
+        ]
+      },
+      {
+        "type": "component",
+        "name": "output",
+        "templateUrl": "templates/output.xml",
+        "description": "Sorties du contrôleur",
+        "required": false,
+        "locationTag": "app/outputs",
+        "params":[
+          "outputName",
+          {"type": ["Analogique", "TOR"]}
+        ],
+        "limits":[
+          {"name": "AO1", "channel":0, "Analogique": true, "TOR": false},
+          {"name": "AO2", "channel":1, "Analogique": true, "TOR": false},
+          {"name": "AO3", "channel":2, "Analogique": true, "TOR": false},
+          {"name": "AO4", "channel":3, "Analogique": true, "TOR": false},
+          {"name": "NO1", "channel":0, "Analogique": false, "TOR": true},
+          {"name": "NO2", "channel":1, "Analogique": false, "TOR": true},
+          {"name": "NO3", "channel":2, "Analogique": false, "TOR": true},
+          {"name": "NO4", "channel":3, "Analogique": false, "TOR": true},
+          {"name": "NO5", "channel":4, "Analogique": false, "TOR": true},
+          {"name": "NO6", "channel":5, "Analogique": false, "TOR": true},
+          {"name": "NO7", "channel":6, "Analogique": false, "TOR": true},
+          {"name": "NO8", "channel":7, "Analogique": false, "TOR": true}
+        ]
       }
     ]
   }
