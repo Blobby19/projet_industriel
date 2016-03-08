@@ -1,0 +1,267 @@
+<?xml version='1.0'?>
+<sedonaApp>
+<schema>
+  <kit name="sys" checksum="d3984c51" />
+  <kit name="SysMikBaActuator" checksum="6a7c4482" />
+  <kit name="SysMikBaAppGeneral" checksum="0271d417" />
+  <kit name="SysMikBaAppHvac" checksum="a02c6c4c" />
+  <kit name="SysMikBaAppLighting" checksum="df3c99ca" />
+  <kit name="SysMikBaAppShading" checksum="d929a2e0" />
+  <kit name="SysMikBaOperator" checksum="77247d50" />
+  <kit name="SysMikBaSensor" checksum="43f651c0" />
+  <kit name="SysMikIntesaNet" checksum="6a64c832" />
+  <kit name="SysMikModbusClient" checksum="2cd715ea" />
+  <kit name="SysMikModbusServer" checksum="c4064f4f" />
+  <kit name="SysMikPlatScc41xm" checksum="52590f64" />
+  <kit name="datetime" checksum="3a280dce" />
+  <kit name="datetimeStd" checksum="fc5628d7" />
+  <kit name="func" checksum="821b7396" />
+  <kit name="hvac" checksum="7264c67c" />
+  <kit name="inet" checksum="25648ba7" />
+  <kit name="logic" checksum="9fe95ce1" />
+  <kit name="math" checksum="c22b255c" />
+  <kit name="pricomp" checksum="b5cd6698" />
+  <kit name="sox" checksum="397a84dd" />
+  <kit name="timing" checksum="aeaac82a" />
+  <kit name="types" checksum="10936551" />
+</schema>
+<app>
+  <prop name="deviceName" val="SCC-410"/>
+  <prop name="appName" val="Tests_Luc"/>
+  <prop name="scanPeriod" val="100"/>
+  <!-- /service -->
+  <comp name="service" id="1" type="sys::Folder">
+    <prop name="meta" val="33685505"/>
+    <!-- /service/plat -->
+    <comp name="plat" id="2" type="SysMikPlatScc41xm::SccPlatformService">
+      <prop name="meta" val="33685505"/>
+      <prop name="modbusRtuEnabled" val="true"/>
+      <prop name="modbusRtuBaud" val="3"/>
+    </comp>
+    <!-- /service/users -->
+    <comp name="users" id="3" type="sys::UserService">
+      <prop name="meta" val="34144257"/>
+      <!-- /service/users/admin -->
+      <comp name="admin" id="4" type="sys::User">
+        <prop name="cred" val="hE49ksThgAeLkWB3NUU1NWeDO54="/>
+        <prop name="perm" val="2147483647"/>
+        <prop name="prov" val="255"/>
+      </comp>
+    </comp>
+    <!-- /service/sox -->
+    <comp name="sox" id="5" type="sox::SoxService">
+      <prop name="meta" val="34471937"/>
+      <prop name="eventsPerSec" val="10"/>
+    </comp>
+  </comp>
+  <!-- /App -->
+  <comp name="App" id="6" type="sys::Folder">
+    <!-- /App/Mode -->
+    <comp name="Mode" id="7" type="sys::Folder">
+      <prop name="meta" val="34209793"/>
+      <!-- /App/Mode/TAmb -->
+      <comp name="TAmb" id="41" type="types::WriteFloat">
+        <prop name="meta" val="35651585"/>
+      </comp>
+      <!-- /App/Mode/TExt -->
+      <comp name="TExt" id="42" type="types::WriteFloat">
+        <prop name="meta" val="35258369"/>
+      </comp>
+      <!-- /App/Mode/TSouff -->
+      <comp name="TSouff" id="43" type="types::WriteFloat">
+        <prop name="meta" val="36044801"/>
+      </comp>
+      <!-- /App/Mode/TRep -->
+      <comp name="TRep" id="44" type="types::WriteFloat">
+        <prop name="meta" val="36438017"/>
+      </comp>
+      <!-- /App/Mode/ISW -->
+      <comp name="ISW" id="45" type="logic::ISW">
+        <prop name="meta" val="637992961"/>
+      </comp>
+      <!-- /App/Mode/ISW1 -->
+      <comp name="ISW1" id="46" type="logic::ISW">
+        <prop name="meta" val="806027265"/>
+      </comp>
+      <!-- /App/Mode/ISW2 -->
+      <comp name="ISW2" id="47" type="logic::ISW">
+        <prop name="meta" val="974061569"/>
+      </comp>
+      <!-- /App/Mode/ISW3 -->
+      <comp name="ISW3" id="48" type="logic::ISW">
+        <prop name="meta" val="1142095873"/>
+      </comp>
+      <!-- /App/Mode/Cmpr -->
+      <comp name="Cmpr" id="49" type="func::Cmpr">
+        <prop name="meta" val="270139393"/>
+      </comp>
+    </comp>
+    <!-- /App/Entrees -->
+    <comp name="Entrees" id="8" type="sys::Folder">
+      <prop name="meta" val="33685505"/>
+      <!-- /App/Entrees/UI1 -->
+      <comp name="UI1" id="10" type="SysMikPlatScc41xm::IoAI">
+        <prop name="meta" val="50528257"/>
+      </comp>
+      <!-- /App/Entrees/UI2 -->
+      <comp name="UI2" id="11" type="SysMikPlatScc41xm::IoAI">
+        <prop name="meta" val="50855937"/>
+        <prop name="channel" val="1"/>
+      </comp>
+      <!-- /App/Entrees/UI3 -->
+      <comp name="UI3" id="12" type="SysMikPlatScc41xm::IoAI">
+        <prop name="meta" val="51183617"/>
+        <prop name="channel" val="2"/>
+      </comp>
+      <!-- /App/Entrees/UI4 -->
+      <comp name="UI4" id="13" type="SysMikPlatScc41xm::IoAI">
+        <prop name="meta" val="51511297"/>
+        <prop name="channel" val="3"/>
+      </comp>
+      <!-- /App/Entrees/UI5 -->
+      <comp name="UI5" id="31" type="SysMikPlatScc41xm::IoAI">
+        <prop name="meta" val="51838977"/>
+        <prop name="channel" val="4"/>
+      </comp>
+      <!-- /App/Entrees/UI6 -->
+      <comp name="UI6" id="32" type="SysMikPlatScc41xm::IoAI">
+        <prop name="meta" val="52166657"/>
+        <prop name="channel" val="5"/>
+      </comp>
+      <!-- /App/Entrees/UI7 -->
+      <comp name="UI7" id="33" type="SysMikPlatScc41xm::IoAI">
+        <prop name="meta" val="52494337"/>
+        <prop name="channel" val="6"/>
+      </comp>
+      <!-- /App/Entrees/UI8 -->
+      <comp name="UI8" id="34" type="SysMikPlatScc41xm::IoAI">
+        <prop name="meta" val="52822017"/>
+        <prop name="channel" val="7"/>
+      </comp>
+      <!-- /App/Entrees/UI9 -->
+      <comp name="UI9" id="35" type="SysMikPlatScc41xm::IoAI">
+        <prop name="meta" val="53149697"/>
+        <prop name="channel" val="8"/>
+      </comp>
+      <!-- /App/Entrees/UI10 -->
+      <comp name="UI10" id="36" type="SysMikPlatScc41xm::IoAI">
+        <prop name="meta" val="53477377"/>
+        <prop name="channel" val="9"/>
+      </comp>
+      <!-- /App/Entrees/DI11 -->
+      <comp name="DI11" id="37" type="SysMikPlatScc41xm::IoDI">
+        <prop name="meta" val="469958657"/>
+        <prop name="channel" val="10"/>
+      </comp>
+      <!-- /App/Entrees/DI12 -->
+      <comp name="DI12" id="38" type="SysMikPlatScc41xm::IoDI">
+        <prop name="meta" val="470286337"/>
+        <prop name="channel" val="11"/>
+      </comp>
+      <!-- /App/Entrees/DI13 -->
+      <comp name="DI13" id="39" type="SysMikPlatScc41xm::IoDI">
+        <prop name="meta" val="470614017"/>
+        <prop name="channel" val="12"/>
+      </comp>
+      <!-- /App/Entrees/DI14 -->
+      <comp name="DI14" id="40" type="SysMikPlatScc41xm::IoDI">
+        <prop name="meta" val="470941697"/>
+        <prop name="channel" val="13"/>
+      </comp>
+    </comp>
+    <!-- /App/Sorties -->
+    <comp name="Sorties" id="9" type="sys::Folder">
+      <prop name="meta" val="33947649"/>
+      <!-- /App/Sorties/AO1 -->
+      <comp name="AO1" id="14" type="SysMikPlatScc41xm::IoAO">
+        <prop name="meta" val="771948545"/>
+      </comp>
+      <!-- /App/Sorties/AO2 -->
+      <comp name="AO2" id="15" type="SysMikPlatScc41xm::IoAO">
+        <prop name="meta" val="772407297"/>
+        <prop name="channel" val="1"/>
+      </comp>
+      <!-- /App/Sorties/AO3 -->
+      <comp name="AO3" id="17" type="SysMikPlatScc41xm::IoAO">
+        <prop name="meta" val="772866049"/>
+        <prop name="channel" val="2"/>
+      </comp>
+      <!-- /App/Sorties/AO4 -->
+      <comp name="AO4" id="18" type="SysMikPlatScc41xm::IoAO">
+        <prop name="meta" val="773324801"/>
+        <prop name="channel" val="3"/>
+      </comp>
+      <!-- /App/Sorties/Div2 -->
+      <comp name="Div2" id="23" type="math::Div2">
+        <prop name="meta" val="537526273"/>
+      </comp>
+      <!-- /App/Sorties/AOAdapt -->
+      <comp name="AOAdapt" id="24" type="types::ConstFloat">
+        <prop name="meta" val="336592897"/>
+        <prop name="out" val="10.0"/>
+      </comp>
+      <!-- /App/Sorties/Div1 -->
+      <comp name="Div1" id="25" type="math::Div2">
+        <prop name="meta" val="537067521"/>
+      </comp>
+      <!-- /App/Sorties/Div6 -->
+      <comp name="Div6" id="29" type="math::Div2">
+        <prop name="meta" val="537985025"/>
+      </comp>
+      <!-- /App/Sorties/Div7 -->
+      <comp name="Div7" id="30" type="math::Div2">
+        <prop name="meta" val="538443777"/>
+      </comp>
+      <!-- /App/Sorties/NO1 -->
+      <comp name="NO1" id="16" type="SysMikPlatScc41xm::IoDO">
+        <prop name="meta" val="773849089"/>
+      </comp>
+      <!-- /App/Sorties/NO2 -->
+      <comp name="NO2" id="19" type="SysMikPlatScc41xm::IoDO">
+        <prop name="meta" val="774176769"/>
+        <prop name="channel" val="1"/>
+      </comp>
+      <!-- /App/Sorties/NO3 -->
+      <comp name="NO3" id="20" type="SysMikPlatScc41xm::IoDO">
+        <prop name="meta" val="774504449"/>
+        <prop name="channel" val="2"/>
+      </comp>
+      <!-- /App/Sorties/NO4 -->
+      <comp name="NO4" id="21" type="SysMikPlatScc41xm::IoDO">
+        <prop name="meta" val="774832129"/>
+        <prop name="channel" val="3"/>
+      </comp>
+      <!-- /App/Sorties/NO5 -->
+      <comp name="NO5" id="22" type="SysMikPlatScc41xm::IoDO">
+        <prop name="meta" val="775159809"/>
+        <prop name="channel" val="4"/>
+      </comp>
+      <!-- /App/Sorties/NO6 -->
+      <comp name="NO6" id="26" type="SysMikPlatScc41xm::IoDO">
+        <prop name="meta" val="775487489"/>
+        <prop name="channel" val="5"/>
+      </comp>
+      <!-- /App/Sorties/NO7 -->
+      <comp name="NO7" id="27" type="SysMikPlatScc41xm::IoDO">
+        <prop name="meta" val="775815169"/>
+        <prop name="channel" val="6"/>
+      </comp>
+      <!-- /App/Sorties/NO8 -->
+      <comp name="NO8" id="28" type="SysMikPlatScc41xm::IoDO">
+        <prop name="meta" val="776142849"/>
+        <prop name="channel" val="7"/>
+      </comp>
+    </comp>
+  </comp>
+</app>
+<links>
+  <link from="/App/Sorties/Div1.out" to="/App/Sorties/AO1.in"/>
+  <link from="/App/Sorties/Div2.out" to="/App/Sorties/AO2.in"/>
+  <link from="/App/Sorties/Div6.out" to="/App/Sorties/AO3.in"/>
+  <link from="/App/Sorties/Div7.out" to="/App/Sorties/AO4.in"/>
+  <link from="/App/Sorties/AOAdapt.out" to="/App/Sorties/Div2.in2"/>
+  <link from="/App/Sorties/AOAdapt.out" to="/App/Sorties/Div1.in2"/>
+  <link from="/App/Sorties/AOAdapt.out" to="/App/Sorties/Div6.in2"/>
+  <link from="/App/Sorties/AOAdapt.out" to="/App/Sorties/Div7.in2"/>
+</links>
+</sedonaApp>

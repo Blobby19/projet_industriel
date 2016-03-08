@@ -1,0 +1,1090 @@
+<?xml version='1.0'?>
+<sedonaApp>
+<schema>
+  <kit name="sys" checksum="d3984c51" />
+  <kit name="SysMikBaActuator" checksum="6a7c4482" />
+  <kit name="SysMikBaAppGeneral" checksum="0271d417" />
+  <kit name="SysMikBaAppHvac" checksum="a02c6c4c" />
+  <kit name="SysMikBaAppLighting" checksum="df3c99ca" />
+  <kit name="SysMikBaAppShading" checksum="d929a2e0" />
+  <kit name="SysMikBaOperator" checksum="77247d50" />
+  <kit name="SysMikBaSensor" checksum="43f651c0" />
+  <kit name="SysMikIntesaNet" checksum="6a64c832" />
+  <kit name="SysMikModbusClient" checksum="2cd715ea" />
+  <kit name="SysMikModbusServer" checksum="c4064f4f" />
+  <kit name="SysMikPlatScc41xm" checksum="52590f64" />
+  <kit name="datetime" checksum="3a280dce" />
+  <kit name="datetimeStd" checksum="fc5628d7" />
+  <kit name="func" checksum="821b7396" />
+  <kit name="hvac" checksum="7264c67c" />
+  <kit name="inet" checksum="25648ba7" />
+  <kit name="logic" checksum="9fe95ce1" />
+  <kit name="math" checksum="c22b255c" />
+  <kit name="pricomp" checksum="b5cd6698" />
+  <kit name="sox" checksum="397a84dd" />
+  <kit name="timing" checksum="aeaac82a" />
+  <kit name="types" checksum="10936551" />
+</schema>
+<app>
+  <prop name="deviceName" val="SCC-410"/>
+  <prop name="appName" val="CTA_Restaurant"/>
+  <prop name="scanPeriod" val="100"/>
+  <!-- /service -->
+  <comp name="service" id="1" type="sys::Folder">
+    <prop name="meta" val="33685505"/>
+    <!-- /service/plat -->
+    <comp name="plat" id="2" type="SysMikPlatScc41xm::SccPlatformService">
+      <prop name="meta" val="33685505"/>
+      <prop name="modbusRtuEnabled" val="true"/>
+      <prop name="modbusRtuBaud" val="3"/>
+    </comp>
+    <!-- /service/users -->
+    <comp name="users" id="3" type="sys::UserService">
+      <prop name="meta" val="34144257"/>
+      <!-- /service/users/admin -->
+      <comp name="admin" id="4" type="sys::User">
+        <prop name="cred" val="hE49ksThgAeLkWB3NUU1NWeDO54="/>
+        <prop name="perm" val="2147483647"/>
+        <prop name="prov" val="255"/>
+      </comp>
+    </comp>
+    <!-- /service/sox -->
+    <comp name="sox" id="5" type="sox::SoxService">
+      <prop name="meta" val="34471937"/>
+      <prop name="eventsPerSec" val="10"/>
+    </comp>
+  </comp>
+  <!-- /App -->
+  <comp name="App" id="6" type="sys::Folder">
+    <!-- /App/CTA_31 -->
+    <comp name="CTA_31" id="11" type="sys::Folder">
+      <prop name="meta" val="33685505"/>
+      <!-- /App/CTA_31/Entrees -->
+      <comp name="Entrees" id="7" type="sys::Folder">
+        <prop name="meta" val="134676481"/>
+        <!-- /App/CTA_31/Entrees/TRep -->
+        <comp name="TRep" id="8" type="SysMikPlatScc41xm::IoAI">
+          <prop name="meta" val="117833729"/>
+          <prop name="sensorType" val="9"/>
+        </comp>
+        <!-- /App/CTA_31/Entrees/SynDef -->
+        <comp name="SynDef" id="9" type="SysMikPlatScc41xm::IoDI">
+          <prop name="meta" val="118161409"/>
+          <prop name="channel" val="6"/>
+        </comp>
+        <!-- /App/CTA_31/Entrees/AntiGel -->
+        <comp name="AntiGel" id="10" type="SysMikPlatScc41xm::IoDI">
+          <prop name="meta" val="118489089"/>
+          <prop name="channel" val="7"/>
+        </comp>
+      </comp>
+      <!-- /App/CTA_31/Sorties -->
+      <comp name="Sorties" id="17" type="sys::Folder">
+        <prop name="meta" val="134938625"/>
+        <!-- /App/CTA_31/Sorties/VBatCh -->
+        <comp name="VBatCh" id="12" type="SysMikPlatScc41xm::IoAO">
+          <prop name="meta" val="1342504961"/>
+        </comp>
+        <!-- /App/CTA_31/Sorties/VBatFr -->
+        <comp name="VBatFr" id="13" type="SysMikPlatScc41xm::IoAO">
+          <prop name="meta" val="1343160321"/>
+          <prop name="channel" val="1"/>
+        </comp>
+        <!-- /App/CTA_31/Sorties/CdeRAN -->
+        <comp name="CdeRAN" id="14" type="SysMikPlatScc41xm::IoDO">
+          <prop name="meta" val="1344208897"/>
+        </comp>
+        <!-- /App/CTA_31/Sorties/CdeVent -->
+        <comp name="CdeVent" id="15" type="SysMikPlatScc41xm::IoDO">
+          <prop name="meta" val="1344536577"/>
+          <prop name="channel" val="1"/>
+        </comp>
+        <!-- /App/CTA_31/Sorties/Div2 -->
+        <comp name="Div2" id="68" type="math::Div2">
+          <prop name="meta" val="1074069505"/>
+        </comp>
+        <!-- /App/CTA_31/Sorties/Div1 -->
+        <comp name="Div1" id="69" type="math::Div2">
+          <prop name="meta" val="1074724865"/>
+        </comp>
+        <!-- /App/CTA_31/Sorties/ConsDiv -->
+        <comp name="ConsDiv" id="70" type="types::ConstFloat">
+          <prop name="meta" val="822804481"/>
+          <prop name="out" val="10.0"/>
+        </comp>
+        <!-- /App/CTA_31/Sorties/BatCh -->
+        <comp name="BatCh" id="93" type="types::WriteFloat">
+          <prop name="meta" val="386203649"/>
+        </comp>
+        <!-- /App/CTA_31/Sorties/BatFr -->
+        <comp name="BatFr" id="94" type="types::WriteFloat">
+          <prop name="meta" val="386859009"/>
+        </comp>
+      </comp>
+      <!-- /App/CTA_31/Ete -->
+      <comp name="Ete" id="23" type="sys::Folder">
+        <prop name="meta" val="135200769"/>
+        <!-- /App/CTA_31/Ete/ConsEte -->
+        <comp name="ConsEte" id="16" type="types::ConstFloat">
+          <prop name="meta" val="117964801"/>
+          <prop name="out" val="25.0"/>
+        </comp>
+        <!-- /App/CTA_31/Ete/Kp -->
+        <comp name="Kp" id="20" type="types::ConstFloat">
+          <prop name="meta" val="118882305"/>
+          <prop name="out" val="10.0"/>
+        </comp>
+        <!-- /App/CTA_31/Ete/Ki -->
+        <comp name="Ki" id="21" type="types::ConstFloat">
+          <prop name="meta" val="119209985"/>
+          <prop name="out" val="0.5"/>
+        </comp>
+        <!-- /App/CTA_31/Ete/TRep -->
+        <comp name="TRep" id="22" type="types::WriteFloat">
+          <prop name="meta" val="118292481"/>
+          <prop name="in" val="23.582907"/>
+        </comp>
+        <!-- /App/CTA_31/Ete/LP -->
+        <comp name="LP" id="19" type="func::LP">
+          <prop name="meta" val="554172417"/>
+          <prop name="sp" val="25.0"/>
+          <prop name="kp" val="10.0"/>
+          <prop name="ki" val="0.5"/>
+        </comp>
+        <!-- /App/CTA_31/Ete/VFr -->
+        <comp name="VFr" id="71" type="types::WriteFloat">
+          <prop name="meta" val="822738945"/>
+        </comp>
+      </comp>
+      <!-- /App/CTA_31/Hiver -->
+      <comp name="Hiver" id="24" type="sys::Folder">
+        <prop name="meta" val="135462913"/>
+        <!-- /App/CTA_31/Hiver/ConsHiv -->
+        <comp name="ConsHiv" id="18" type="types::ConstFloat">
+          <prop name="meta" val="269025281"/>
+          <prop name="out" val="19.0"/>
+        </comp>
+        <!-- /App/CTA_31/Hiver/TRep -->
+        <comp name="TRep" id="25" type="types::WriteFloat">
+          <prop name="meta" val="269352961"/>
+          <prop name="in" val="23.582907"/>
+        </comp>
+        <!-- /App/CTA_31/Hiver/LP -->
+        <comp name="LP" id="26" type="func::LP">
+          <prop name="meta" val="621346817"/>
+          <prop name="sp" val="19.0"/>
+          <prop name="kp" val="10.0"/>
+          <prop name="ki" val="0.5"/>
+          <prop name="direct" val="false"/>
+        </comp>
+        <!-- /App/CTA_31/Hiver/Kp -->
+        <comp name="Kp" id="27" type="types::ConstFloat">
+          <prop name="meta" val="269746177"/>
+          <prop name="out" val="10.0"/>
+        </comp>
+        <!-- /App/CTA_31/Hiver/Ki -->
+        <comp name="Ki" id="28" type="types::ConstFloat">
+          <prop name="meta" val="270073857"/>
+          <prop name="out" val="0.5"/>
+        </comp>
+        <!-- /App/CTA_31/Hiver/VCh -->
+        <comp name="VCh" id="72" type="types::WriteFloat">
+          <prop name="meta" val="889913345"/>
+        </comp>
+      </comp>
+      <!-- /App/CTA_31/Fctmnt -->
+      <comp name="Fctmnt" id="112" type="sys::Folder">
+        <prop name="meta" val="137035777"/>
+        <!-- /App/CTA_31/Fctmnt/VBatCh -->
+        <comp name="VBatCh" id="30" type="types::WriteFloat">
+          <prop name="meta" val="2081161217"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/VBatFr -->
+        <comp name="VBatFr" id="31" type="types::WriteFloat">
+          <prop name="meta" val="2082799617"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/CdeRAN -->
+        <comp name="CdeRAN" id="32" type="types::WriteBool">
+          <prop name="meta" val="2083323905"/>
+          <prop name="in" val="true"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/CdeVent -->
+        <comp name="CdeVent" id="33" type="types::WriteBool">
+          <prop name="meta" val="2083848193"/>
+          <prop name="in" val="true"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/isHiver -->
+        <comp name="isHiver" id="29" type="types::WriteBool">
+          <prop name="meta" val="84279297"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/isEte -->
+        <comp name="isEte" id="67" type="types::WriteBool">
+          <prop name="meta" val="87031809"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/VCh -->
+        <comp name="VCh" id="73" type="types::WriteFloat">
+          <prop name="meta" val="84672513"/>
+          <prop name="in" val="20.0"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/VFr -->
+        <comp name="VFr" id="74" type="types::WriteFloat">
+          <prop name="meta" val="87425025"/>
+          <prop name="in" val="20.0"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/SyntDef -->
+        <comp name="SyntDef" id="75" type="types::WriteBool">
+          <prop name="meta" val="88866817"/>
+          <prop name="in" val="true"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/AntiGel -->
+        <comp name="AntiGel" id="76" type="types::WriteBool">
+          <prop name="meta" val="86179841"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/AntGelV -->
+        <comp name="AntGelV" id="77" type="types::ConstFloat">
+          <prop name="meta" val="86573057"/>
+          <prop name="out" val="100.0"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/ASW -->
+        <comp name="ASW" id="78" type="logic::ASW">
+          <prop name="meta" val="1342701569"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/And2 -->
+        <comp name="And2" id="79" type="logic::And2">
+          <prop name="meta" val="691011585"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/Occup -->
+        <comp name="Occup" id="80" type="types::WriteBool">
+          <prop name="meta" val="89260033"/>
+          <prop name="in" val="true"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/And1 -->
+        <comp name="And1" id="82" type="logic::And2">
+          <prop name="meta" val="541917185"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/Or2 -->
+        <comp name="Or2" id="83" type="logic::Or2">
+          <prop name="meta" val="893911041"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/And3 -->
+        <comp name="And3" id="84" type="logic::And2">
+          <prop name="meta" val="541458433"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/ASW1 -->
+        <comp name="ASW1" id="85" type="logic::ASW">
+          <prop name="meta" val="1797586945"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/ConstFl -->
+        <comp name="ConstFl" id="86" type="types::ConstFloat">
+          <prop name="meta" val="890372097"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/And4 -->
+        <comp name="And4" id="87" type="logic::And2">
+          <prop name="meta" val="654704641"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/ASW2 -->
+        <comp name="ASW2" id="88" type="logic::ASW">
+          <prop name="meta" val="1091043329"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/Not1 -->
+        <comp name="Not1" id="89" type="logic::Not">
+          <prop name="meta" val="757334017"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/And5 -->
+        <comp name="And5" id="90" type="logic::And2">
+          <prop name="meta" val="976093185"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/And6 -->
+        <comp name="And6" id="91" type="logic::And2">
+          <prop name="meta" val="1278017537"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/ASW3 -->
+        <comp name="ASW3" id="92" type="logic::ASW">
+          <prop name="meta" val="1577582593"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/TRForCh -->
+        <comp name="TRForCh" id="81" type="types::WriteFloat">
+          <prop name="meta" val="85065729"/>
+          <prop name="in" val="90.0"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/TCForCh -->
+        <comp name="TCForCh" id="185" type="types::WriteBool">
+          <prop name="meta" val="85458945"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/ASW4 -->
+        <comp name="ASW4" id="186" type="logic::ASW">
+          <prop name="meta" val="453967873"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/TRForC1 -->
+        <comp name="TRForC1" id="187" type="types::WriteFloat">
+          <prop name="meta" val="87949313"/>
+          <prop name="in" val="90.0"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/TCForC1 -->
+        <comp name="TCForC1" id="188" type="types::WriteBool">
+          <prop name="meta" val="88342529"/>
+        </comp>
+        <!-- /App/CTA_31/Fctmnt/ASW5 -->
+        <comp name="ASW5" id="189" type="logic::ASW">
+          <prop name="meta" val="456851457"/>
+        </comp>
+      </comp>
+      <!-- /App/CTA_31/Mode -->
+      <comp name="Mode" id="34" type="sys::Folder">
+        <!-- /App/CTA_31/Mode/TRep -->
+        <comp name="TRep" id="35" type="types::WriteFloat">
+          <prop name="meta" val="203685889"/>
+          <prop name="in" val="23.582907"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/Hyste1 -->
+        <comp name="Hyste1" id="36" type="func::Hysteresis">
+          <prop name="meta" val="806879233"/>
+          <prop name="risingEdge" val="18.5"/>
+          <prop name="fallingEdge" val="19.5"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/ConsHiv -->
+        <comp name="ConsHiv" id="37" type="types::WriteFloat">
+          <prop name="meta" val="202964993"/>
+          <prop name="in" val="19.0"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/ConsEte -->
+        <comp name="ConsEte" id="38" type="types::WriteFloat">
+          <prop name="meta" val="204865537"/>
+          <prop name="in" val="25.0"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/Const -->
+        <comp name="Const" id="39" type="types::ConstFloat">
+          <prop name="meta" val="204144641"/>
+          <prop name="out" val="0.5"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/Add2 -->
+        <comp name="Add2" id="40" type="math::Add2">
+          <prop name="meta" val="504758273"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/Sub2 -->
+        <comp name="Sub2" id="41" type="math::Sub2">
+          <prop name="meta" val="505217025"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/Add1 -->
+        <comp name="Add1" id="42" type="math::Add2">
+          <prop name="meta" val="506527745"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/Sub1 -->
+        <comp name="Sub1" id="43" type="math::Sub2">
+          <prop name="meta" val="506986497"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/Hyste2 -->
+        <comp name="Hyste2" id="44" type="func::Hysteresis">
+          <prop name="meta" val="808714241"/>
+          <prop name="risingEdge" val="25.5"/>
+          <prop name="fallingEdge" val="24.5"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/Or2 -->
+        <comp name="Or2" id="45" type="logic::Or2">
+          <prop name="meta" val="992346113"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/Not -->
+        <comp name="Not" id="46" type="logic::Not">
+          <prop name="meta" val="1160052737"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/ISW -->
+        <comp name="ISW" id="47" type="logic::ISW">
+          <prop name="meta" val="956497921"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/ModeNul -->
+        <comp name="ModeNul" id="48" type="types::ConstInt">
+          <prop name="meta" val="553910273"/>
+          <prop name="out" val="-1"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/ModeHiv -->
+        <comp name="ModeHiv" id="49" type="types::ConstInt">
+          <prop name="meta" val="554237953"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/ISW1 -->
+        <comp name="ISW1" id="50" type="logic::ISW">
+          <prop name="meta" val="1241710593"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/ModeEte -->
+        <comp name="ModeEte" id="51" type="types::ConstInt">
+          <prop name="meta" val="554565633"/>
+          <prop name="out" val="1"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/ISW2 -->
+        <comp name="ISW2" id="52" type="logic::ISW">
+          <prop name="meta" val="1543700481"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/Forcage -->
+        <comp name="Forcage" id="53" type="types::WriteInt">
+          <prop name="meta" val="206241793"/>
+          <prop name="in" val="-1"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/Cmpr -->
+        <comp name="Cmpr" id="54" type="func::Cmpr">
+          <prop name="meta" val="675938305"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/SRLatch -->
+        <comp name="SRLatch" id="56" type="func::SRLatch">
+          <prop name="meta" val="1345060865"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/B2F -->
+        <comp name="B2F" id="57" type="types::B2F">
+          <prop name="meta" val="1512701953"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/F2I -->
+        <comp name="F2I" id="58" type="types::F2I">
+          <prop name="meta" val="1680474113"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/ISW3 -->
+        <comp name="ISW3" id="59" type="logic::ISW">
+          <prop name="meta" val="1795358721"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/I2F -->
+        <comp name="I2F" id="55" type="types::I2F">
+          <prop name="meta" val="407633921"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/ConstFl -->
+        <comp name="ConstFl" id="60" type="types::ConstFloat">
+          <prop name="meta" val="408027137"/>
+          <prop name="out" val="-1.0"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/ModeReg -->
+        <comp name="ModeReg" id="61" type="types::WriteInt">
+          <prop name="meta" val="1981743105"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/DemuxI2 -->
+        <comp name="DemuxI2" id="62" type="logic::DemuxI2B4">
+          <prop name="meta" val="-2078343167"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/And2 -->
+        <comp name="And2" id="63" type="logic::And2">
+          <prop name="meta" val="-1860501503"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/And1 -->
+        <comp name="And1" id="64" type="logic::And2">
+          <prop name="meta" val="-1859911679"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/isHiver -->
+        <comp name="isHiver" id="65" type="types::WriteBool">
+          <prop name="meta" val="-1659174911"/>
+        </comp>
+        <!-- /App/CTA_31/Mode/isEte -->
+        <comp name="isEte" id="66" type="types::WriteBool">
+          <prop name="meta" val="-1658585087"/>
+        </comp>
+      </comp>
+    </comp>
+    <!-- /App/CTA_32 -->
+    <comp name="CTA_32" id="95" type="sys::Folder">
+      <prop name="meta" val="50528257"/>
+      <!-- /App/CTA_32/Entrees -->
+      <comp name="Entrees" id="96" type="sys::Folder">
+        <prop name="meta" val="134676481"/>
+        <!-- /App/CTA_32/Entrees/TRep -->
+        <comp name="TRep" id="97" type="SysMikPlatScc41xm::IoAI">
+          <prop name="meta" val="117833729"/>
+          <prop name="channel" val="1"/>
+          <prop name="sensorType" val="9"/>
+        </comp>
+        <!-- /App/CTA_32/Entrees/SynDef -->
+        <comp name="SynDef" id="98" type="SysMikPlatScc41xm::IoDI">
+          <prop name="meta" val="118161409"/>
+          <prop name="channel" val="9"/>
+        </comp>
+        <!-- /App/CTA_32/Entrees/AntiGel -->
+        <comp name="AntiGel" id="99" type="SysMikPlatScc41xm::IoDI">
+          <prop name="meta" val="118489089"/>
+          <prop name="channel" val="10"/>
+        </comp>
+      </comp>
+      <!-- /App/CTA_32/Sorties -->
+      <comp name="Sorties" id="100" type="sys::Folder">
+        <prop name="meta" val="134938625"/>
+        <!-- /App/CTA_32/Sorties/VBatCh -->
+        <comp name="VBatCh" id="101" type="SysMikPlatScc41xm::IoAO">
+          <prop name="meta" val="1342504961"/>
+          <prop name="channel" val="2"/>
+        </comp>
+        <!-- /App/CTA_32/Sorties/VBatFr -->
+        <comp name="VBatFr" id="102" type="SysMikPlatScc41xm::IoAO">
+          <prop name="meta" val="1343160321"/>
+          <prop name="channel" val="3"/>
+        </comp>
+        <!-- /App/CTA_32/Sorties/CdeRAN -->
+        <comp name="CdeRAN" id="103" type="SysMikPlatScc41xm::IoDO">
+          <prop name="meta" val="1344208897"/>
+          <prop name="channel" val="2"/>
+        </comp>
+        <!-- /App/CTA_32/Sorties/CdeVent -->
+        <comp name="CdeVent" id="104" type="SysMikPlatScc41xm::IoDO">
+          <prop name="meta" val="1344536577"/>
+          <prop name="channel" val="3"/>
+        </comp>
+        <!-- /App/CTA_32/Sorties/Div2 -->
+        <comp name="Div2" id="105" type="math::Div2">
+          <prop name="meta" val="1074069505"/>
+        </comp>
+        <!-- /App/CTA_32/Sorties/Div1 -->
+        <comp name="Div1" id="106" type="math::Div2">
+          <prop name="meta" val="1074724865"/>
+        </comp>
+        <!-- /App/CTA_32/Sorties/ConsDiv -->
+        <comp name="ConsDiv" id="107" type="types::ConstFloat">
+          <prop name="meta" val="822804481"/>
+          <prop name="out" val="10.0"/>
+        </comp>
+        <!-- /App/CTA_32/Sorties/BatCh -->
+        <comp name="BatCh" id="108" type="types::WriteFloat">
+          <prop name="meta" val="386203649"/>
+        </comp>
+        <!-- /App/CTA_32/Sorties/BatFr -->
+        <comp name="BatFr" id="109" type="types::WriteFloat">
+          <prop name="meta" val="386859009"/>
+        </comp>
+      </comp>
+      <!-- /App/CTA_32/Ete -->
+      <comp name="Ete" id="110" type="sys::Folder">
+        <prop name="meta" val="135200769"/>
+        <!-- /App/CTA_32/Ete/ConsEte -->
+        <comp name="ConsEte" id="111" type="types::ConstFloat">
+          <prop name="meta" val="117964801"/>
+          <prop name="out" val="25.0"/>
+        </comp>
+        <!-- /App/CTA_32/Ete/Kp -->
+        <comp name="Kp" id="113" type="types::ConstFloat">
+          <prop name="meta" val="118882305"/>
+          <prop name="out" val="10.0"/>
+        </comp>
+        <!-- /App/CTA_32/Ete/Ki -->
+        <comp name="Ki" id="114" type="types::ConstFloat">
+          <prop name="meta" val="119209985"/>
+          <prop name="out" val="0.5"/>
+        </comp>
+        <!-- /App/CTA_32/Ete/TRep -->
+        <comp name="TRep" id="115" type="types::WriteFloat">
+          <prop name="meta" val="118292481"/>
+          <prop name="in" val="152.09769"/>
+        </comp>
+        <!-- /App/CTA_32/Ete/LP -->
+        <comp name="LP" id="116" type="func::LP">
+          <prop name="meta" val="554172417"/>
+          <prop name="sp" val="25.0"/>
+          <prop name="kp" val="10.0"/>
+          <prop name="ki" val="0.5"/>
+        </comp>
+        <!-- /App/CTA_32/Ete/VFr -->
+        <comp name="VFr" id="117" type="types::WriteFloat">
+          <prop name="meta" val="822738945"/>
+          <prop name="in" val="100.0"/>
+        </comp>
+      </comp>
+      <!-- /App/CTA_32/Hiver -->
+      <comp name="Hiver" id="118" type="sys::Folder">
+        <prop name="meta" val="135462913"/>
+        <!-- /App/CTA_32/Hiver/ConsHiv -->
+        <comp name="ConsHiv" id="119" type="types::ConstFloat">
+          <prop name="meta" val="269025281"/>
+          <prop name="out" val="19.0"/>
+        </comp>
+        <!-- /App/CTA_32/Hiver/TRep -->
+        <comp name="TRep" id="120" type="types::WriteFloat">
+          <prop name="meta" val="269352961"/>
+          <prop name="in" val="152.09769"/>
+        </comp>
+        <!-- /App/CTA_32/Hiver/LP -->
+        <comp name="LP" id="121" type="func::LP">
+          <prop name="meta" val="621346817"/>
+          <prop name="sp" val="19.0"/>
+          <prop name="kp" val="10.0"/>
+          <prop name="ki" val="0.5"/>
+          <prop name="direct" val="false"/>
+        </comp>
+        <!-- /App/CTA_32/Hiver/Kp -->
+        <comp name="Kp" id="122" type="types::ConstFloat">
+          <prop name="meta" val="269746177"/>
+          <prop name="out" val="10.0"/>
+        </comp>
+        <!-- /App/CTA_32/Hiver/Ki -->
+        <comp name="Ki" id="123" type="types::ConstFloat">
+          <prop name="meta" val="270073857"/>
+          <prop name="out" val="0.5"/>
+        </comp>
+        <!-- /App/CTA_32/Hiver/VCh -->
+        <comp name="VCh" id="124" type="types::WriteFloat">
+          <prop name="meta" val="889913345"/>
+        </comp>
+      </comp>
+      <!-- /App/CTA_32/Fctmnt -->
+      <comp name="Fctmnt" id="125" type="sys::Folder">
+        <prop name="meta" val="137035777"/>
+        <!-- /App/CTA_32/Fctmnt/VBatCh -->
+        <comp name="VBatCh" id="126" type="types::WriteFloat">
+          <prop name="meta" val="2081161217"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/VBatFr -->
+        <comp name="VBatFr" id="127" type="types::WriteFloat">
+          <prop name="meta" val="2081685505"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/CdeRAN -->
+        <comp name="CdeRAN" id="128" type="types::WriteBool">
+          <prop name="meta" val="2082209793"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/CdeVent -->
+        <comp name="CdeVent" id="129" type="types::WriteBool">
+          <prop name="meta" val="2082734081"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/isHiver -->
+        <comp name="isHiver" id="130" type="types::WriteBool">
+          <prop name="meta" val="84279297"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/isEte -->
+        <comp name="isEte" id="131" type="types::WriteBool">
+          <prop name="meta" val="85917697"/>
+          <prop name="in" val="true"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/VCh -->
+        <comp name="VCh" id="132" type="types::WriteFloat">
+          <prop name="meta" val="84672513"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/VFr -->
+        <comp name="VFr" id="133" type="types::WriteFloat">
+          <prop name="meta" val="86310913"/>
+          <prop name="in" val="100.0"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/SyntDef -->
+        <comp name="SyntDef" id="134" type="types::WriteBool">
+          <prop name="meta" val="87097345"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/AntiGel -->
+        <comp name="AntiGel" id="135" type="types::WriteBool">
+          <prop name="meta" val="85065729"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/AntGelV -->
+        <comp name="AntGelV" id="136" type="types::ConstFloat">
+          <prop name="meta" val="85458945"/>
+          <prop name="out" val="100.0"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/ASW -->
+        <comp name="ASW" id="137" type="logic::ASW">
+          <prop name="meta" val="1510473729"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/And2 -->
+        <comp name="And2" id="138" type="logic::And2">
+          <prop name="meta" val="689897473"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/Occup -->
+        <comp name="Occup" id="139" type="types::WriteBool">
+          <prop name="meta" val="87490561"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/Not -->
+        <comp name="Not" id="140" type="logic::Not">
+          <prop name="meta" val="271646721"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/And1 -->
+        <comp name="And1" id="141" type="logic::And2">
+          <prop name="meta" val="540147713"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/Or2 -->
+        <comp name="Or2" id="142" type="logic::Or2">
+          <prop name="meta" val="892207105"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/And3 -->
+        <comp name="And3" id="143" type="logic::And2">
+          <prop name="meta" val="539688961"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/ASW1 -->
+        <comp name="ASW1" id="144" type="logic::ASW">
+          <prop name="meta" val="1796472833"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/ConstFl -->
+        <comp name="ConstFl" id="145" type="types::ConstFloat">
+          <prop name="meta" val="957546497"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/And4 -->
+        <comp name="And4" id="146" type="logic::And2">
+          <prop name="meta" val="654704641"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/ASW2 -->
+        <comp name="ASW2" id="147" type="logic::ASW">
+          <prop name="meta" val="1258815489"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/Not1 -->
+        <comp name="Not1" id="148" type="logic::Not">
+          <prop name="meta" val="756219905"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/And5 -->
+        <comp name="And5" id="149" type="logic::And2">
+          <prop name="meta" val="974979073"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/And6 -->
+        <comp name="And6" id="150" type="logic::And2">
+          <prop name="meta" val="1276903425"/>
+        </comp>
+        <!-- /App/CTA_32/Fctmnt/ASW3 -->
+        <comp name="ASW3" id="151" type="logic::ASW">
+          <prop name="meta" val="1745354753"/>
+        </comp>
+      </comp>
+      <!-- /App/CTA_32/Mode -->
+      <comp name="Mode" id="152" type="sys::Folder">
+        <!-- /App/CTA_32/Mode/TRep -->
+        <comp name="TRep" id="153" type="types::WriteFloat">
+          <prop name="meta" val="203685889"/>
+          <prop name="in" val="152.09769"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/Hyste1 -->
+        <comp name="Hyste1" id="154" type="func::Hysteresis">
+          <prop name="meta" val="806879233"/>
+          <prop name="risingEdge" val="18.5"/>
+          <prop name="fallingEdge" val="19.5"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/ConsHiv -->
+        <comp name="ConsHiv" id="155" type="types::WriteFloat">
+          <prop name="meta" val="202964993"/>
+          <prop name="in" val="19.0"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/ConsEte -->
+        <comp name="ConsEte" id="156" type="types::WriteFloat">
+          <prop name="meta" val="204865537"/>
+          <prop name="in" val="25.0"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/Const -->
+        <comp name="Const" id="157" type="types::ConstFloat">
+          <prop name="meta" val="204144641"/>
+          <prop name="out" val="0.5"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/Add2 -->
+        <comp name="Add2" id="158" type="math::Add2">
+          <prop name="meta" val="504758273"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/Sub2 -->
+        <comp name="Sub2" id="159" type="math::Sub2">
+          <prop name="meta" val="505217025"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/Add1 -->
+        <comp name="Add1" id="160" type="math::Add2">
+          <prop name="meta" val="506527745"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/Sub1 -->
+        <comp name="Sub1" id="161" type="math::Sub2">
+          <prop name="meta" val="506986497"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/Hyste2 -->
+        <comp name="Hyste2" id="162" type="func::Hysteresis">
+          <prop name="meta" val="808714241"/>
+          <prop name="risingEdge" val="25.5"/>
+          <prop name="fallingEdge" val="24.5"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/Or2 -->
+        <comp name="Or2" id="163" type="logic::Or2">
+          <prop name="meta" val="992346113"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/Not -->
+        <comp name="Not" id="164" type="logic::Not">
+          <prop name="meta" val="1160052737"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/ISW -->
+        <comp name="ISW" id="165" type="logic::ISW">
+          <prop name="meta" val="956497921"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/ModeNul -->
+        <comp name="ModeNul" id="166" type="types::ConstInt">
+          <prop name="meta" val="553910273"/>
+          <prop name="out" val="-1"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/ModeHiv -->
+        <comp name="ModeHiv" id="167" type="types::ConstInt">
+          <prop name="meta" val="554237953"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/ISW1 -->
+        <comp name="ISW1" id="168" type="logic::ISW">
+          <prop name="meta" val="1241710593"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/ModeEte -->
+        <comp name="ModeEte" id="169" type="types::ConstInt">
+          <prop name="meta" val="554565633"/>
+          <prop name="out" val="1"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/ISW2 -->
+        <comp name="ISW2" id="170" type="logic::ISW">
+          <prop name="meta" val="1543700481"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/Forcage -->
+        <comp name="Forcage" id="171" type="types::WriteInt">
+          <prop name="meta" val="206241793"/>
+          <prop name="in" val="-1"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/Cmpr -->
+        <comp name="Cmpr" id="172" type="func::Cmpr">
+          <prop name="meta" val="675938305"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/SRLatch -->
+        <comp name="SRLatch" id="173" type="func::SRLatch">
+          <prop name="meta" val="1345060865"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/B2F -->
+        <comp name="B2F" id="174" type="types::B2F">
+          <prop name="meta" val="1512701953"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/F2I -->
+        <comp name="F2I" id="175" type="types::F2I">
+          <prop name="meta" val="1680474113"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/ISW3 -->
+        <comp name="ISW3" id="176" type="logic::ISW">
+          <prop name="meta" val="1795358721"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/I2F -->
+        <comp name="I2F" id="177" type="types::I2F">
+          <prop name="meta" val="407633921"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/ConstFl -->
+        <comp name="ConstFl" id="178" type="types::ConstFloat">
+          <prop name="meta" val="408027137"/>
+          <prop name="out" val="-1.0"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/ModeReg -->
+        <comp name="ModeReg" id="179" type="types::WriteInt">
+          <prop name="meta" val="1981743105"/>
+          <prop name="in" val="1"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/DemuxI2 -->
+        <comp name="DemuxI2" id="180" type="logic::DemuxI2B4">
+          <prop name="meta" val="-2078343167"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/And2 -->
+        <comp name="And2" id="181" type="logic::And2">
+          <prop name="meta" val="-1860501503"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/And1 -->
+        <comp name="And1" id="182" type="logic::And2">
+          <prop name="meta" val="-1859911679"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/isHiver -->
+        <comp name="isHiver" id="183" type="types::WriteBool">
+          <prop name="meta" val="-1659174911"/>
+        </comp>
+        <!-- /App/CTA_32/Mode/isEte -->
+        <comp name="isEte" id="184" type="types::WriteBool">
+          <prop name="meta" val="-1658585087"/>
+          <prop name="in" val="true"/>
+        </comp>
+      </comp>
+    </comp>
+  </comp>
+</app>
+<links>
+  <link from="/App/CTA_31/Sorties/Div2.out" to="/App/CTA_31/Sorties/VBatCh.in"/>
+  <link from="/App/CTA_31/Sorties/Div1.out" to="/App/CTA_31/Sorties/VBatFr.in"/>
+  <link from="/App/CTA_31/Fctmnt/CdeRAN.out" to="/App/CTA_31/Sorties/CdeRAN.in"/>
+  <link from="/App/CTA_31/Fctmnt/CdeVent.out" to="/App/CTA_31/Sorties/CdeVent.in"/>
+  <link from="/App/CTA_31/Ete/ConsEte.out" to="/App/CTA_31/Ete/LP.sp"/>
+  <link from="/App/CTA_31/Ete/TRep.out" to="/App/CTA_31/Ete/LP.cv"/>
+  <link from="/App/CTA_31/Ete/Kp.out" to="/App/CTA_31/Ete/LP.kp"/>
+  <link from="/App/CTA_31/Ete/Ki.out" to="/App/CTA_31/Ete/LP.ki"/>
+  <link from="/App/CTA_31/Entrees/TRep.out" to="/App/CTA_31/Ete/TRep.in"/>
+  <link from="/App/CTA_31/Entrees/TRep.out" to="/App/CTA_31/Hiver/TRep.in"/>
+  <link from="/App/CTA_31/Hiver/Kp.out" to="/App/CTA_31/Hiver/LP.kp"/>
+  <link from="/App/CTA_31/Hiver/Ki.out" to="/App/CTA_31/Hiver/LP.ki"/>
+  <link from="/App/CTA_31/Hiver/TRep.out" to="/App/CTA_31/Hiver/LP.cv"/>
+  <link from="/App/CTA_31/Hiver/ConsHiv.out" to="/App/CTA_31/Hiver/LP.sp"/>
+  <link from="/App/CTA_31/Fctmnt/ASW3.out" to="/App/CTA_31/Fctmnt/VBatCh.in"/>
+  <link from="/App/CTA_31/Fctmnt/ASW1.out" to="/App/CTA_31/Fctmnt/VBatFr.in"/>
+  <link from="/App/CTA_31/Fctmnt/Or2.out" to="/App/CTA_31/Fctmnt/CdeRAN.in"/>
+  <link from="/App/CTA_31/Fctmnt/Or2.out" to="/App/CTA_31/Fctmnt/CdeVent.in"/>
+  <link from="/App/CTA_31/Entrees/TRep.out" to="/App/CTA_31/Mode/TRep.in"/>
+  <link from="/App/CTA_31/Mode/TRep.out" to="/App/CTA_31/Mode/Hyste1.in"/>
+  <link from="/App/CTA_31/Mode/Add2.out" to="/App/CTA_31/Mode/Hyste1.fallingEdge"/>
+  <link from="/App/CTA_31/Mode/Sub2.out" to="/App/CTA_31/Mode/Hyste1.risingEdge"/>
+  <link from="/App/CTA_31/Hiver/ConsHiv.out" to="/App/CTA_31/Mode/ConsHiv.in"/>
+  <link from="/App/CTA_31/Ete/ConsEte.out" to="/App/CTA_31/Mode/ConsEte.in"/>
+  <link from="/App/CTA_31/Mode/ConsHiv.out" to="/App/CTA_31/Mode/Add2.in1"/>
+  <link from="/App/CTA_31/Mode/Const.out" to="/App/CTA_31/Mode/Add2.in2"/>
+  <link from="/App/CTA_31/Mode/ConsHiv.out" to="/App/CTA_31/Mode/Sub2.in1"/>
+  <link from="/App/CTA_31/Mode/Const.out" to="/App/CTA_31/Mode/Sub2.in2"/>
+  <link from="/App/CTA_31/Mode/Const.out" to="/App/CTA_31/Mode/Add1.in2"/>
+  <link from="/App/CTA_31/Mode/ConsEte.out" to="/App/CTA_31/Mode/Add1.in1"/>
+  <link from="/App/CTA_31/Mode/Const.out" to="/App/CTA_31/Mode/Sub1.in2"/>
+  <link from="/App/CTA_31/Mode/ConsEte.out" to="/App/CTA_31/Mode/Sub1.in1"/>
+  <link from="/App/CTA_31/Mode/TRep.out" to="/App/CTA_31/Mode/Hyste2.in"/>
+  <link from="/App/CTA_31/Mode/Sub1.out" to="/App/CTA_31/Mode/Hyste2.fallingEdge"/>
+  <link from="/App/CTA_31/Mode/Add1.out" to="/App/CTA_31/Mode/Hyste2.risingEdge"/>
+  <link from="/App/CTA_31/Mode/Hyste2.out" to="/App/CTA_31/Mode/Or2.in2"/>
+  <link from="/App/CTA_31/Mode/Hyste1.out" to="/App/CTA_31/Mode/Or2.in1"/>
+  <link from="/App/CTA_31/Mode/Or2.out" to="/App/CTA_31/Mode/Not.in"/>
+  <link from="/App/CTA_31/Mode/ModeNul.out" to="/App/CTA_31/Mode/ISW.in1"/>
+  <link from="/App/CTA_31/Mode/ModeHiv.out" to="/App/CTA_31/Mode/ISW.in2"/>
+  <link from="/App/CTA_31/Mode/Hyste1.out" to="/App/CTA_31/Mode/ISW.s1"/>
+  <link from="/App/CTA_31/Mode/ModeEte.out" to="/App/CTA_31/Mode/ISW1.in2"/>
+  <link from="/App/CTA_31/Mode/ISW.out" to="/App/CTA_31/Mode/ISW1.in1"/>
+  <link from="/App/CTA_31/Mode/Hyste2.out" to="/App/CTA_31/Mode/ISW1.s1"/>
+  <link from="/App/CTA_31/Mode/F2I.out" to="/App/CTA_31/Mode/ISW2.in2"/>
+  <link from="/App/CTA_31/Mode/Not.out" to="/App/CTA_31/Mode/ISW2.s1"/>
+  <link from="/App/CTA_31/Mode/ISW1.out" to="/App/CTA_31/Mode/ISW2.in1"/>
+  <link from="/App/CTA_31/Mode/ConstFl.out" to="/App/CTA_31/Mode/Cmpr.y"/>
+  <link from="/App/CTA_31/Mode/I2F.out" to="/App/CTA_31/Mode/Cmpr.x"/>
+  <link from="/App/CTA_31/Mode/Forcage.out" to="/App/CTA_31/Mode/I2F.in"/>
+  <link from="/App/CTA_31/Mode/Hyste1.out" to="/App/CTA_31/Mode/SRLatch.r"/>
+  <link from="/App/CTA_31/Mode/Hyste2.out" to="/App/CTA_31/Mode/SRLatch.s"/>
+  <link from="/App/CTA_31/Mode/SRLatch.out" to="/App/CTA_31/Mode/B2F.in1"/>
+  <link from="/App/CTA_31/Mode/B2F.out" to="/App/CTA_31/Mode/F2I.in"/>
+  <link from="/App/CTA_31/Mode/Cmpr.xgy" to="/App/CTA_31/Mode/ISW3.s1"/>
+  <link from="/App/CTA_31/Mode/Forcage.out" to="/App/CTA_31/Mode/ISW3.in2"/>
+  <link from="/App/CTA_31/Mode/ISW2.out" to="/App/CTA_31/Mode/ISW3.in1"/>
+  <link from="/App/CTA_31/Mode/ISW3.out" to="/App/CTA_31/Mode/ModeReg.in"/>
+  <link from="/App/CTA_31/Mode/ModeReg.in" to="/App/CTA_31/Mode/DemuxI2.in"/>
+  <link from="/App/CTA_31/Mode/Or2.out" to="/App/CTA_31/Mode/And2.in2"/>
+  <link from="/App/CTA_31/Mode/DemuxI2.out1" to="/App/CTA_31/Mode/And2.in1"/>
+  <link from="/App/CTA_31/Mode/Or2.out" to="/App/CTA_31/Mode/And1.in2"/>
+  <link from="/App/CTA_31/Mode/DemuxI2.out2" to="/App/CTA_31/Mode/And1.in1"/>
+  <link from="/App/CTA_31/Mode/And2.out" to="/App/CTA_31/Mode/isHiver.in"/>
+  <link from="/App/CTA_31/Mode/And1.out" to="/App/CTA_31/Mode/isEte.in"/>
+  <link from="/App/CTA_31/Sorties/ConsDiv.out" to="/App/CTA_31/Sorties/Div2.in2"/>
+  <link from="/App/CTA_31/Sorties/BatCh.out" to="/App/CTA_31/Sorties/Div2.in1"/>
+  <link from="/App/CTA_31/Sorties/ConsDiv.out" to="/App/CTA_31/Sorties/Div1.in2"/>
+  <link from="/App/CTA_31/Sorties/BatFr.out" to="/App/CTA_31/Sorties/Div1.in1"/>
+  <link from="/App/CTA_31/Ete/LP.out" to="/App/CTA_31/Ete/VFr.in"/>
+  <link from="/App/CTA_31/Hiver/LP.out" to="/App/CTA_31/Hiver/VCh.in"/>
+  <link from="/App/CTA_31/Fctmnt/AntGelV.out" to="/App/CTA_31/Fctmnt/ASW.in2"/>
+  <link from="/App/CTA_31/Fctmnt/ASW2.out" to="/App/CTA_31/Fctmnt/ASW.in1"/>
+  <link from="/App/CTA_31/Fctmnt/AntiGel.out" to="/App/CTA_31/Fctmnt/ASW.s1"/>
+  <link from="/App/CTA_31/Fctmnt/isEte.out" to="/App/CTA_31/Fctmnt/And2.in1"/>
+  <link from="/App/CTA_31/Fctmnt/Occup.out" to="/App/CTA_31/Fctmnt/And2.in2"/>
+  <link from="/App/CTA_31/Fctmnt/SyntDef.out" to="/App/CTA_31/Fctmnt/And1.in1"/>
+  <link from="/App/CTA_31/Fctmnt/Occup.out" to="/App/CTA_31/Fctmnt/And1.in2"/>
+  <link from="/App/CTA_31/Fctmnt/And1.out" to="/App/CTA_31/Fctmnt/Or2.in2"/>
+  <link from="/App/CTA_31/Fctmnt/And3.out" to="/App/CTA_31/Fctmnt/Or2.in1"/>
+  <link from="/App/CTA_31/Fctmnt/SyntDef.out" to="/App/CTA_31/Fctmnt/And3.in2"/>
+  <link from="/App/CTA_31/Fctmnt/AntiGel.out" to="/App/CTA_31/Fctmnt/And3.in1"/>
+  <link from="/App/CTA_31/Fctmnt/ConstFl.out" to="/App/CTA_31/Fctmnt/ASW1.in1"/>
+  <link from="/App/CTA_31/Fctmnt/ASW5.out" to="/App/CTA_31/Fctmnt/ASW1.in2"/>
+  <link from="/App/CTA_31/Fctmnt/And6.out" to="/App/CTA_31/Fctmnt/ASW1.s1"/>
+  <link from="/App/CTA_31/Fctmnt/Occup.out" to="/App/CTA_31/Fctmnt/And4.in2"/>
+  <link from="/App/CTA_31/Fctmnt/isHiver.out" to="/App/CTA_31/Fctmnt/And4.in1"/>
+  <link from="/App/CTA_31/Fctmnt/ConstFl.out" to="/App/CTA_31/Fctmnt/ASW2.in1"/>
+  <link from="/App/CTA_31/Fctmnt/ASW4.out" to="/App/CTA_31/Fctmnt/ASW2.in2"/>
+  <link from="/App/CTA_31/Fctmnt/And4.out" to="/App/CTA_31/Fctmnt/ASW2.s1"/>
+  <link from="/App/CTA_31/Fctmnt/AntiGel.out" to="/App/CTA_31/Fctmnt/Not1.in"/>
+  <link from="/App/CTA_31/Fctmnt/And2.out" to="/App/CTA_31/Fctmnt/And5.in2"/>
+  <link from="/App/CTA_31/Fctmnt/Not1.out" to="/App/CTA_31/Fctmnt/And5.in1"/>
+  <link from="/App/CTA_31/Fctmnt/And5.out" to="/App/CTA_31/Fctmnt/And6.in1"/>
+  <link from="/App/CTA_31/Fctmnt/Or2.out" to="/App/CTA_31/Fctmnt/And6.in2"/>
+  <link from="/App/CTA_31/Fctmnt/SyntDef.out" to="/App/CTA_31/Fctmnt/ASW3.s1"/>
+  <link from="/App/CTA_31/Fctmnt/ConstFl.out" to="/App/CTA_31/Fctmnt/ASW3.in1"/>
+  <link from="/App/CTA_31/Fctmnt/ASW.out" to="/App/CTA_31/Fctmnt/ASW3.in2"/>
+  <link from="/App/CTA_31/Fctmnt/VBatCh.out" to="/App/CTA_31/Sorties/BatCh.in"/>
+  <link from="/App/CTA_31/Fctmnt/VBatFr.out" to="/App/CTA_31/Sorties/BatFr.in"/>
+  <link from="/App/CTA_32/Sorties/Div2.out" to="/App/CTA_32/Sorties/VBatCh.in"/>
+  <link from="/App/CTA_32/Sorties/Div1.out" to="/App/CTA_32/Sorties/VBatFr.in"/>
+  <link from="/App/CTA_32/Fctmnt/CdeRAN.out" to="/App/CTA_32/Sorties/CdeRAN.in"/>
+  <link from="/App/CTA_32/Fctmnt/CdeVent.out" to="/App/CTA_32/Sorties/CdeVent.in"/>
+  <link from="/App/CTA_32/Sorties/ConsDiv.out" to="/App/CTA_32/Sorties/Div2.in2"/>
+  <link from="/App/CTA_32/Sorties/BatCh.out" to="/App/CTA_32/Sorties/Div2.in1"/>
+  <link from="/App/CTA_32/Sorties/ConsDiv.out" to="/App/CTA_32/Sorties/Div1.in2"/>
+  <link from="/App/CTA_32/Sorties/BatFr.out" to="/App/CTA_32/Sorties/Div1.in1"/>
+  <link from="/App/CTA_32/Fctmnt/VBatCh.out" to="/App/CTA_32/Sorties/BatCh.in"/>
+  <link from="/App/CTA_32/Fctmnt/VBatFr.out" to="/App/CTA_32/Sorties/BatFr.in"/>
+  <link from="/App/CTA_32/Entrees/TRep.out" to="/App/CTA_32/Ete/TRep.in"/>
+  <link from="/App/CTA_32/Ete/ConsEte.out" to="/App/CTA_32/Ete/LP.sp"/>
+  <link from="/App/CTA_32/Ete/Kp.out" to="/App/CTA_32/Ete/LP.kp"/>
+  <link from="/App/CTA_32/Ete/Ki.out" to="/App/CTA_32/Ete/LP.ki"/>
+  <link from="/App/CTA_32/Ete/TRep.out" to="/App/CTA_32/Ete/LP.cv"/>
+  <link from="/App/CTA_32/Ete/LP.out" to="/App/CTA_32/Ete/VFr.in"/>
+  <link from="/App/CTA_32/Entrees/TRep.out" to="/App/CTA_32/Hiver/TRep.in"/>
+  <link from="/App/CTA_32/Hiver/ConsHiv.out" to="/App/CTA_32/Hiver/LP.sp"/>
+  <link from="/App/CTA_32/Hiver/TRep.out" to="/App/CTA_32/Hiver/LP.cv"/>
+  <link from="/App/CTA_32/Hiver/Ki.out" to="/App/CTA_32/Hiver/LP.ki"/>
+  <link from="/App/CTA_32/Hiver/Kp.out" to="/App/CTA_32/Hiver/LP.kp"/>
+  <link from="/App/CTA_32/Hiver/LP.out" to="/App/CTA_32/Hiver/VCh.in"/>
+  <link from="/App/CTA_32/Fctmnt/ASW3.out" to="/App/CTA_32/Fctmnt/VBatCh.in"/>
+  <link from="/App/CTA_32/Fctmnt/ASW1.out" to="/App/CTA_32/Fctmnt/VBatFr.in"/>
+  <link from="/App/CTA_32/Fctmnt/Or2.out" to="/App/CTA_32/Fctmnt/CdeRAN.in"/>
+  <link from="/App/CTA_32/Fctmnt/Or2.out" to="/App/CTA_32/Fctmnt/CdeVent.in"/>
+  <link from="/App/CTA_32/Mode/isHiver.out" to="/App/CTA_32/Fctmnt/isHiver.in"/>
+  <link from="/App/CTA_32/Mode/isEte.out" to="/App/CTA_32/Fctmnt/isEte.in"/>
+  <link from="/App/CTA_32/Hiver/VCh.out" to="/App/CTA_32/Fctmnt/VCh.in"/>
+  <link from="/App/CTA_32/Ete/VFr.out" to="/App/CTA_32/Fctmnt/VFr.in"/>
+  <link from="/App/CTA_32/Entrees/SynDef.out" to="/App/CTA_32/Fctmnt/SyntDef.in"/>
+  <link from="/App/CTA_32/Entrees/AntiGel.out" to="/App/CTA_32/Fctmnt/AntiGel.in"/>
+  <link from="/App/CTA_32/Fctmnt/AntiGel.out" to="/App/CTA_32/Fctmnt/ASW.s1"/>
+  <link from="/App/CTA_32/Fctmnt/AntGelV.out" to="/App/CTA_32/Fctmnt/ASW.in2"/>
+  <link from="/App/CTA_32/Fctmnt/ASW2.out" to="/App/CTA_32/Fctmnt/ASW.in1"/>
+  <link from="/App/CTA_32/Fctmnt/isEte.out" to="/App/CTA_32/Fctmnt/And2.in1"/>
+  <link from="/App/CTA_32/Fctmnt/Occup.out" to="/App/CTA_32/Fctmnt/And2.in2"/>
+  <link from="/App/CTA_32/Fctmnt/SyntDef.out" to="/App/CTA_32/Fctmnt/Not.in"/>
+  <link from="/App/CTA_32/Fctmnt/Occup.out" to="/App/CTA_32/Fctmnt/And1.in2"/>
+  <link from="/App/CTA_32/Fctmnt/Not.out" to="/App/CTA_32/Fctmnt/And1.in1"/>
+  <link from="/App/CTA_32/Fctmnt/And1.out" to="/App/CTA_32/Fctmnt/Or2.in2"/>
+  <link from="/App/CTA_32/Fctmnt/And3.out" to="/App/CTA_32/Fctmnt/Or2.in1"/>
+  <link from="/App/CTA_32/Fctmnt/AntiGel.out" to="/App/CTA_32/Fctmnt/And3.in1"/>
+  <link from="/App/CTA_32/Fctmnt/Not.out" to="/App/CTA_32/Fctmnt/And3.in2"/>
+  <link from="/App/CTA_32/Fctmnt/VFr.out" to="/App/CTA_32/Fctmnt/ASW1.in2"/>
+  <link from="/App/CTA_32/Fctmnt/ConstFl.out" to="/App/CTA_32/Fctmnt/ASW1.in1"/>
+  <link from="/App/CTA_32/Fctmnt/And6.out" to="/App/CTA_32/Fctmnt/ASW1.s1"/>
+  <link from="/App/CTA_32/Fctmnt/isHiver.out" to="/App/CTA_32/Fctmnt/And4.in1"/>
+  <link from="/App/CTA_32/Fctmnt/Occup.out" to="/App/CTA_32/Fctmnt/And4.in2"/>
+  <link from="/App/CTA_32/Fctmnt/VCh.out" to="/App/CTA_32/Fctmnt/ASW2.in2"/>
+  <link from="/App/CTA_32/Fctmnt/ConstFl.out" to="/App/CTA_32/Fctmnt/ASW2.in1"/>
+  <link from="/App/CTA_32/Fctmnt/And4.out" to="/App/CTA_32/Fctmnt/ASW2.s1"/>
+  <link from="/App/CTA_32/Fctmnt/AntiGel.out" to="/App/CTA_32/Fctmnt/Not1.in"/>
+  <link from="/App/CTA_32/Fctmnt/And2.out" to="/App/CTA_32/Fctmnt/And5.in2"/>
+  <link from="/App/CTA_32/Fctmnt/Not1.out" to="/App/CTA_32/Fctmnt/And5.in1"/>
+  <link from="/App/CTA_32/Fctmnt/Or2.out" to="/App/CTA_32/Fctmnt/And6.in2"/>
+  <link from="/App/CTA_32/Fctmnt/And5.out" to="/App/CTA_32/Fctmnt/And6.in1"/>
+  <link from="/App/CTA_32/Fctmnt/ASW.out" to="/App/CTA_32/Fctmnt/ASW3.in2"/>
+  <link from="/App/CTA_32/Fctmnt/Not.out" to="/App/CTA_32/Fctmnt/ASW3.s1"/>
+  <link from="/App/CTA_32/Fctmnt/ConstFl.out" to="/App/CTA_32/Fctmnt/ASW3.in1"/>
+  <link from="/App/CTA_32/Entrees/TRep.out" to="/App/CTA_32/Mode/TRep.in"/>
+  <link from="/App/CTA_32/Mode/TRep.out" to="/App/CTA_32/Mode/Hyste1.in"/>
+  <link from="/App/CTA_32/Mode/Sub2.out" to="/App/CTA_32/Mode/Hyste1.risingEdge"/>
+  <link from="/App/CTA_32/Mode/Add2.out" to="/App/CTA_32/Mode/Hyste1.fallingEdge"/>
+  <link from="/App/CTA_32/Hiver/ConsHiv.out" to="/App/CTA_32/Mode/ConsHiv.in"/>
+  <link from="/App/CTA_32/Ete/ConsEte.out" to="/App/CTA_32/Mode/ConsEte.in"/>
+  <link from="/App/CTA_32/Mode/ConsHiv.out" to="/App/CTA_32/Mode/Add2.in1"/>
+  <link from="/App/CTA_32/Mode/Const.out" to="/App/CTA_32/Mode/Add2.in2"/>
+  <link from="/App/CTA_32/Mode/ConsHiv.out" to="/App/CTA_32/Mode/Sub2.in1"/>
+  <link from="/App/CTA_32/Mode/Const.out" to="/App/CTA_32/Mode/Sub2.in2"/>
+  <link from="/App/CTA_32/Mode/ConsEte.out" to="/App/CTA_32/Mode/Add1.in1"/>
+  <link from="/App/CTA_32/Mode/Const.out" to="/App/CTA_32/Mode/Add1.in2"/>
+  <link from="/App/CTA_32/Mode/ConsEte.out" to="/App/CTA_32/Mode/Sub1.in1"/>
+  <link from="/App/CTA_32/Mode/Const.out" to="/App/CTA_32/Mode/Sub1.in2"/>
+  <link from="/App/CTA_32/Mode/TRep.out" to="/App/CTA_32/Mode/Hyste2.in"/>
+  <link from="/App/CTA_32/Mode/Add1.out" to="/App/CTA_32/Mode/Hyste2.risingEdge"/>
+  <link from="/App/CTA_32/Mode/Sub1.out" to="/App/CTA_32/Mode/Hyste2.fallingEdge"/>
+  <link from="/App/CTA_32/Mode/Hyste1.out" to="/App/CTA_32/Mode/Or2.in1"/>
+  <link from="/App/CTA_32/Mode/Hyste2.out" to="/App/CTA_32/Mode/Or2.in2"/>
+  <link from="/App/CTA_32/Mode/Or2.out" to="/App/CTA_32/Mode/Not.in"/>
+  <link from="/App/CTA_32/Mode/Hyste1.out" to="/App/CTA_32/Mode/ISW.s1"/>
+  <link from="/App/CTA_32/Mode/ModeHiv.out" to="/App/CTA_32/Mode/ISW.in2"/>
+  <link from="/App/CTA_32/Mode/ModeNul.out" to="/App/CTA_32/Mode/ISW.in1"/>
+  <link from="/App/CTA_32/Mode/Hyste2.out" to="/App/CTA_32/Mode/ISW1.s1"/>
+  <link from="/App/CTA_32/Mode/ISW.out" to="/App/CTA_32/Mode/ISW1.in1"/>
+  <link from="/App/CTA_32/Mode/ModeEte.out" to="/App/CTA_32/Mode/ISW1.in2"/>
+  <link from="/App/CTA_32/Mode/Not.out" to="/App/CTA_32/Mode/ISW2.s1"/>
+  <link from="/App/CTA_32/Mode/ISW1.out" to="/App/CTA_32/Mode/ISW2.in1"/>
+  <link from="/App/CTA_32/Mode/F2I.out" to="/App/CTA_32/Mode/ISW2.in2"/>
+  <link from="/App/CTA_32/Mode/I2F.out" to="/App/CTA_32/Mode/Cmpr.x"/>
+  <link from="/App/CTA_32/Mode/ConstFl.out" to="/App/CTA_32/Mode/Cmpr.y"/>
+  <link from="/App/CTA_32/Mode/Hyste1.out" to="/App/CTA_32/Mode/SRLatch.r"/>
+  <link from="/App/CTA_32/Mode/Hyste2.out" to="/App/CTA_32/Mode/SRLatch.s"/>
+  <link from="/App/CTA_32/Mode/SRLatch.out" to="/App/CTA_32/Mode/B2F.in1"/>
+  <link from="/App/CTA_32/Mode/B2F.out" to="/App/CTA_32/Mode/F2I.in"/>
+  <link from="/App/CTA_32/Mode/ISW2.out" to="/App/CTA_32/Mode/ISW3.in1"/>
+  <link from="/App/CTA_32/Mode/Forcage.out" to="/App/CTA_32/Mode/ISW3.in2"/>
+  <link from="/App/CTA_32/Mode/Cmpr.xgy" to="/App/CTA_32/Mode/ISW3.s1"/>
+  <link from="/App/CTA_32/Mode/Forcage.out" to="/App/CTA_32/Mode/I2F.in"/>
+  <link from="/App/CTA_32/Mode/ISW3.out" to="/App/CTA_32/Mode/ModeReg.in"/>
+  <link from="/App/CTA_32/Mode/ModeReg.in" to="/App/CTA_32/Mode/DemuxI2.in"/>
+  <link from="/App/CTA_32/Mode/Or2.out" to="/App/CTA_32/Mode/And2.in2"/>
+  <link from="/App/CTA_32/Mode/DemuxI2.out1" to="/App/CTA_32/Mode/And2.in1"/>
+  <link from="/App/CTA_32/Mode/Or2.out" to="/App/CTA_32/Mode/And1.in2"/>
+  <link from="/App/CTA_32/Mode/DemuxI2.out2" to="/App/CTA_32/Mode/And1.in1"/>
+  <link from="/App/CTA_32/Mode/And2.out" to="/App/CTA_32/Mode/isHiver.in"/>
+  <link from="/App/CTA_32/Mode/And1.out" to="/App/CTA_32/Mode/isEte.in"/>
+  <link from="/App/CTA_31/Fctmnt/TRForCh.out" to="/App/CTA_31/Fctmnt/ASW4.in2"/>
+  <link from="/App/CTA_31/Fctmnt/TCForCh.out" to="/App/CTA_31/Fctmnt/ASW4.s1"/>
+  <link from="/App/CTA_31/Fctmnt/VCh.out" to="/App/CTA_31/Fctmnt/ASW4.in1"/>
+  <link from="/App/CTA_31/Fctmnt/VFr.out" to="/App/CTA_31/Fctmnt/ASW5.in1"/>
+  <link from="/App/CTA_31/Fctmnt/TCForC1.out" to="/App/CTA_31/Fctmnt/ASW5.s1"/>
+  <link from="/App/CTA_31/Fctmnt/TRForC1.out" to="/App/CTA_31/Fctmnt/ASW5.in2"/>
+</links>
+</sedonaApp>

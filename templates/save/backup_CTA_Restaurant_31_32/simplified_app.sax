@@ -1,0 +1,119 @@
+<?xml version='1.0'?>
+<sedonaApp>
+<schema>
+  <kit name="sys" checksum="d3984c51" />
+  <kit name="SysMikBaActuator" checksum="6a7c4482" />
+  <kit name="SysMikBaAppGeneral" checksum="0271d417" />
+  <kit name="SysMikBaAppHvac" checksum="a02c6c4c" />
+  <kit name="SysMikBaAppLighting" checksum="df3c99ca" />
+  <kit name="SysMikBaAppShading" checksum="d929a2e0" />
+  <kit name="SysMikBaOperator" checksum="77247d50" />
+  <kit name="SysMikBaSensor" checksum="43f651c0" />
+  <kit name="SysMikIntesaNet" checksum="6a64c832" />
+  <kit name="SysMikModbusClient" checksum="2cd715ea" />
+  <kit name="SysMikModbusServer" checksum="c4064f4f" />
+  <kit name="SysMikPlatScc41xm" checksum="52590f64" />
+  <kit name="datetime" checksum="3a280dce" />
+  <kit name="datetimeStd" checksum="fc5628d7" />
+  <kit name="func" checksum="821b7396" />
+  <kit name="hvac" checksum="7264c67c" />
+  <kit name="inet" checksum="25648ba7" />
+  <kit name="logic" checksum="9fe95ce1" />
+  <kit name="math" checksum="c22b255c" />
+  <kit name="pricomp" checksum="b5cd6698" />
+  <kit name="sox" checksum="397a84dd" />
+  <kit name="timing" checksum="aeaac82a" />
+  <kit name="types" checksum="10936551" />
+</schema>
+<app>
+  <prop name="deviceName" val="SCC-410"/>
+  <prop name="appName" val="CTA_Restaurant"/>
+  <prop name="scanPeriod" val="100"/>
+  <!-- /service -->
+  <comp name="service" id="1" type="sys::Folder">
+    <prop name="meta" val="33685505"/>
+    <!-- /service/plat -->
+    <comp name="plat" id="2" type="SysMikPlatScc41xm::SccPlatformService">
+      <prop name="meta" val="33685505"/>
+      <prop name="modbusRtuEnabled" val="true"/>
+      <prop name="modbusRtuBaud" val="3"/>
+    </comp>
+    <!-- /service/users -->
+    <comp name="users" id="3" type="sys::UserService">
+      <prop name="meta" val="34144257"/>
+      <!-- /service/users/admin -->
+      <comp name="admin" id="4" type="sys::User">
+        <prop name="cred" val="hE49ksThgAeLkWB3NUU1NWeDO54="/>
+        <prop name="perm" val="2147483647"/>
+        <prop name="prov" val="255"/>
+      </comp>
+    </comp>
+    <!-- /service/sox -->
+    <comp name="sox" id="5" type="sox::SoxService">
+      <prop name="meta" val="34471937"/>
+      <prop name="eventsPerSec" val="10"/>
+    </comp>
+  </comp>
+  <!-- /App -->
+  <comp name="App" id="6" type="sys::Folder">
+    ...
+    <!-- Programme App -->
+    ...
+    <!-- /App/CTA_31 -->
+    <comp name="CTA_31" id="11" type="sys::Folder">
+      <prop name="meta" val="33685505"/>
+      <!-- /App/CTA_31/Hiver -->
+      <comp name="Hiver" id="24" type="sys::Folder">
+        <prop name="meta" val="135462913"/>
+        <!-- /App/CTA_31/Hiver/ConsHiv -->
+        <comp name="ConsHiv" id="18" type="types::ConstFloat">
+          <prop name="meta" val="269025281"/>
+          <prop name="out" val="19.0"/>
+        </comp>
+        <!-- /App/CTA_31/Hiver/TRep -->
+        <comp name="TRep" id="25" type="types::WriteFloat">
+          <prop name="meta" val="269352961"/>
+          <prop name="in" val="23.582907"/>
+        </comp>
+        <!-- /App/CTA_31/Hiver/LP -->
+        <comp name="LP" id="26" type="func::LP">
+          <prop name="meta" val="621346817"/>
+          <prop name="sp" val="19.0"/>
+          <prop name="kp" val="10.0"/>
+          <prop name="ki" val="0.5"/>
+          <prop name="direct" val="false"/>
+        </comp>
+        <!-- /App/CTA_31/Hiver/Kp -->
+        <comp name="Kp" id="27" type="types::ConstFloat">
+          <prop name="meta" val="269746177"/>
+          <prop name="out" val="10.0"/>
+        </comp>
+        <!-- /App/CTA_31/Hiver/Ki -->
+        <comp name="Ki" id="28" type="types::ConstFloat">
+          <prop name="meta" val="270073857"/>
+          <prop name="out" val="0.5"/>
+        </comp>
+        <!-- /App/CTA_31/Hiver/VCh -->
+        <comp name="VCh" id="72" type="types::WriteFloat">
+          <prop name="meta" val="889913345"/>
+        </comp>
+      </comp>
+      ...
+      <!-- Suite du programme de la CTA 31 -->
+      ...
+    </comp>
+    ...
+    <!-- Suite du programme de App -->
+    ...
+  </comp>
+</app>
+<!-- Liens entre les blocs de programmation -->
+<links>
+  ...
+  <link from="/App/CTA_31/Hiver/Kp.out" to="/App/CTA_31/Hiver/LP.kp"/>
+  <link from="/App/CTA_31/Hiver/Ki.out" to="/App/CTA_31/Hiver/LP.ki"/>
+  <link from="/App/CTA_31/Hiver/TRep.out" to="/App/CTA_31/Hiver/LP.cv"/>
+  <link from="/App/CTA_31/Hiver/ConsHiv.out" to="/App/CTA_31/Hiver/LP.sp"/>
+  <link from="/App/CTA_31/Hiver/ConsHiv.out" to="/App/CTA_31/Mode/ConsHiv.in"/>
+  ...
+</links>
