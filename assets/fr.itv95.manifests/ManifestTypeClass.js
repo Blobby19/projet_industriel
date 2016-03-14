@@ -64,11 +64,11 @@ ManifestTypeClass.prototype.makeSlots = function(slots){
     if(slots!=undefined && slots.length>0){
         for(var i = 0; i<slots.length; i++){
             var thisSlot = new ManifestSlotClass(
-                slots[0].attr.name,
-                slots[0].attr.id,
-                slots[0].attr.default != undefined ? slots[0].attr.default : undefined,
-                slots[0].attr.flags != undefined ? slots[0].attr.flags : undefined,
-                slots[0].attr.type
+                slots[i].attr.name,
+                slots[i].attr.id,
+                slots[i].attr.default != undefined ? slots[i].attr.default : undefined,
+                slots[i].attr.flags != undefined ? slots[i].attr.flags : undefined,
+                slots[i].attr.type
             );
             retour.push(thisSlot);
         }
