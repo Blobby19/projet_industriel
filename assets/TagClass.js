@@ -5,7 +5,6 @@
 */
 
 var Logger = require('./logger')('TagClass');
-var builder = require('./XMLBuilderClass');
 
 
 module.exports = {MainTag: MainTag, FolderTag: FolderTag};

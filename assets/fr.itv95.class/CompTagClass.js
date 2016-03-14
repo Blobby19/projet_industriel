@@ -5,8 +5,17 @@
  */
 
 var TagClass = require('./TagClass');
+var Logger = require('..\\fr.itv95.logger\\LoggerClass.js')('CompTagClass');
 
+/**
+ * Constructeur de la classe
+ * @param name
+ * @param type
+ * @param id
+ * @constructor
+ */
 var CompTagClass = function(name, type, id){
+    Logger.info("Creation CompTagClass");
     TagClass.call(this, "comp");
     if(name.length < 0){
         //TODO: Vérifie si le name est supérieur à 7 caractères.
@@ -30,22 +39,42 @@ CompTagClass.prototype.constructor = CompTagClass;
 
 CompTagClass.prototype = new TagClass("comp");
 
+/**
+ * getName
+ * @returns {*}
+ */
 CompTagClass.prototype.getName = function(){
     return this.name;
 };
 
+/**
+ * setName
+ * @param name
+ */
 CompTagClass.prototype.setName = function(name){
     this.name = name;
 };
 
+/**
+ * getType
+ * @returns {*}
+ */
 CompTagClass.prototype.getType = function(){
     return this.type;
 };
 
+/**
+ * setType
+ * @param type
+ */
 CompTagClass.prototype.setType = function(type){
     this.type = type;
 };
 
+/**
+ * Permet de générer le tag de l'objet comp
+ * @returns {string}
+ */
 CompTagClass.prototype.generateTag = function(){
     var startTag = "<comp ";
     if(this.name!=null && this.name != "")
@@ -58,7 +87,6 @@ CompTagClass.prototype.generateTag = function(){
     var inTag = "";
     if(this.childrens != undefined || this.childrens.length>0){
         for(key in this.childrens){
-            console.log(this.childrens[key]);
             if(this.childrens[key] instanceof TagClass)
                 inTag += this.childrens[key].generateTag();
         }

@@ -6,6 +6,12 @@
 
 var TagClass = require('./TagClass');
 
+/**
+ * Constructeur de la classe KitTagClass
+ * @param name
+ * @param checksum
+ * @constructor
+ */
 var KitTagClass = function(name, checksum){
     TagClass.call(this, "kit");
     this.name = name;
@@ -15,23 +21,36 @@ var KitTagClass = function(name, checksum){
 KitTagClass.prototype = Object.create(TagClass.prototype);
 KitTagClass.prototype.constructor = KitTagClass;
 
-KitTagClass.prototype.name = "";
-KitTagClass.prototype.checksum = "";
-
 KitTagClass.prototype = new TagClass("kit");
 
+/**
+ * getName
+ * @returns {*}
+ */
 KitTagClass.prototype.getName = function(){
     return this.name;
 };
 
+/**
+ * setName
+ * @param name
+ */
 KitTagClass.prototype.setName = function(name){
     this.name = name;
 };
 
+/**
+ * getChecksum
+ * @returns {*}
+ */
 KitTagClass.prototype.getChecksum = function(){
     return this.checksum;
 };
 
+/**
+ * setChecksum
+ * @param checksum
+ */
 KitTagClass.prototype.setChecksum = function(checksum){
     this.checksum = checksum;
 };

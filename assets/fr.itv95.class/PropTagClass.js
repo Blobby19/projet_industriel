@@ -4,13 +4,15 @@
 
 var TagClass = require('./TagClass');
 
+/**
+ * Constructeur de la classe PropTagClass
+ * @param name
+ * @param val
+ * @constructor
+ */
 var PropTagClass = function(name, val){
     TagClass.call(this, "prop");
-    if(name.length > 7){
-        //TODO: Vérifie si le nom est inférieur à 7 caractères
-    }
-    else
-        this.name = name;
+    this.name = name;
 
     this.val = val;
 };
@@ -20,22 +22,42 @@ PropTagClass.prototype.constructor = PropTagClass;
 
 PropTagClass.prototype = new TagClass("prop");
 
+/**
+ * getName
+ * @returns {*}
+ */
 PropTagClass.prototype.getName = function(){
     return this.name;
 };
 
+/**
+ * setName
+ * @param name
+ */
 PropTagClass.prototype.setName = function(name){
     this.name = name;
 };
 
+/**
+ * getVal
+ * @returns {*}
+ */
 PropTagClass.prototype.getVal = function(){
     return this.val;
 };
 
+/**
+ * setVal
+ * @param val
+ */
 PropTagClass.prototype.setVal = function(val){
     this.val = val;
 };
 
+/**
+ * Permet de générer le tag de l'objet
+ * @returns {string}
+ */
 PropTagClass.prototype.generateTag = function(){
     var string = "<prop ";
     if(this.name!=null && this.name!="")

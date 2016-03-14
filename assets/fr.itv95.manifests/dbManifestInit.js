@@ -28,7 +28,6 @@ dbManifestInit.prototype.parseManifests = function(){
         Logger.error(ex.message);
         return;
     }
-
 };
 
 var verifyDir = function(url){

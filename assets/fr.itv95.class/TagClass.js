@@ -45,7 +45,6 @@ TagClass.prototype.generateTag = function(){
     var inTag = "";
     if(this.childrens != undefined || this.childrens.length>0){
         for(key in this.childrens){
-            console.log(this.childrens[key]);
             if(this.childrens[key] instanceof TagClass)
                 inTag += this.childrens[key].generateTag();
         }
