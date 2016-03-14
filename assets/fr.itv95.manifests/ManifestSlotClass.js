@@ -8,7 +8,7 @@ var ManifestSlotClass = function(name, id, _default, flags, type, facets){
     this._default = _default;
     this.flags = flags;
     this.type = type;
-    this.listOfFacets = (facets!=undefined&&facets!=null)?facets:new Array;
+    //this.listOfFacets = (facets!=undefined&&facets!=null)?facets:new Array;
 };
 
 ManifestSlotClass.prototype.getName = function(){

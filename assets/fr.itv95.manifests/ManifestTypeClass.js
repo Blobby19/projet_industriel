@@ -2,12 +2,16 @@
  * Created by Fedora on 11/03/2016.
  */
 
-var ManifestTypeClass = function(name, base, sizeof, id) {
+var ManifestSlotClass = require(__dirname+'\\ManifestSlotClass.js');
+
+var ManifestTypeClass = function(name, base, sizeof, id, slots) {
     this.name = name;
     this.base = base;
     this.sizeof = sizeof;
     this.id = id;
-    this.listOfSlots = (slots!=undefined && slot != null)?slots:new Array;
+    //console.log(slots);
+    this.listOfSlots = this.makeSlots(slots);
+    //this.listOfSlots = (slots!=undefined && slot != null)?slots:new Array;
 };
 
 
@@ -53,6 +57,23 @@ ManifestTypeClass.prototype.setSlots = function(slots){
 
 ManifestTypeClass.prototype.addSlot = function(slot){
     this.listOfSlots.push(slot);
+};
+
+ManifestTypeClass.prototype.makeSlots = function(slots){
+    var retour = new Array;
+    if(slots!=undefined && slots.length>0){
+        for(var i = 0; i<slots.length; i++){
+            var thisSlot = new ManifestSlotClass(
+                slots[0].attr.name,
+                slots[0].attr.id,
+                slots[0].attr.default != undefined ? slots[0].attr.default : undefined,
+                slots[0].attr.flags != undefined ? slots[0].attr.flags : undefined,
+                slots[0].attr.type
+            );
+            retour.push(thisSlot);
+        }
+    }
+    return retour;
 };
 
 module.exports = ManifestTypeClass;

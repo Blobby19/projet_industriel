@@ -43,5 +43,9 @@ var Logger = require('./assets/logger')('index');
 //server.listen(port, function(){
 //  Logger.info('Server is listening on port '+port);
 //});
-var ApplicationClass = require(__dirname+'\\assets\\Application.js');
-var Application = new ApplicationClass("TestLuc");
+
+
+//var ApplicationClass = require(__dirname+'\\assets\\Application.js');
+//var Application = new ApplicationClass("TestLuc");
+var dbManifestInit = require(__dirname+'\\assets\\fr.itv95.manifests\\dbManifestInit.js');
+var dbManifest = new dbManifestInit();

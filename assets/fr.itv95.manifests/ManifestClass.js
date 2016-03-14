@@ -2,6 +2,9 @@
  * Created by Fedora on 11/03/2016.
  */
 
+var ManifestTypeClass = require(__dirname+'\\ManifestTypeCLass.js');
+
+var fs = require('fs');
 
 var ManifestClass = function(name, description, vendor, version, hasNatives, checksum, depends, types){
     this.name = name;
@@ -11,7 +14,8 @@ var ManifestClass = function(name, description, vendor, version, hasNatives, che
     this.hasNatives = hasNatives;
     this.checksum = checksum;
     this.listOfDependencies = ((depends!==undefined && depends!== null && depends instanceof Array) && depends.length>0)?depends:new Array;
-    this.listOfTypes = ((types!==undefined && types!==null && types instanceof Array) && types.length>0)?types:new Array;
+    //On sait que les données que l'on reçoit dans types ne sont pas bon donc on les convertis
+    this.listOfTypes = this.makeTypes(types);
 };
 
 ManifestClass.prototype.getName = function(){
@@ -76,6 +80,23 @@ ManifestClass.prototype.setTypes = function(types){
 
 ManifestClass.prototype.addType = function(type){
     this.listOfTypes.push(type);
+};
+
+ManifestClass.prototype.makeTypes = function(types){
+    var retour = new Array;
+    if(types != undefined){
+        //fs.writeFileSync(__dirname+"\\test.json", JSON.stringify(types));
+        for(var i =0; i<types.length; i++){
+            var thisType = new ManifestTypeClass(
+                types[i].attr.name,
+                types[i].attr.base,
+                types[i].attr.sizeof,
+                types[i].attr.id,
+                (types[i].slot!=undefined)?types[i].slot:undefined);
+            retour.push(thisType);
+        }
+    }
+    return retour;
 };
 
 module.exports = ManifestClass;
