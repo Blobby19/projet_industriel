@@ -49,6 +49,8 @@ var CompTagClass = require(__dirname+'\\assets\\fr.itv95.class\\CompTagClass.js'
 var PropTagClass = require(__dirname+'\\assets\\fr.itv95.class\\PropTagClass.js');
 var LinkTagClass = require(__dirname+'\\assets\\fr.itv95.class\\LinkTagClass.js');
 var KitTagClass = require(__dirname+'\\assets\\fr.itv95.class\\KitTagClass.js');
+var dbManifestInit = require(__dirname+'\\assets\\fr.itv95.manifests\\dbManifestInit.js');
+var dbManifestObject = new dbManifestInit();
 
 var sedonaApp = new SedonaAppTagClass();
 
@@ -56,7 +58,14 @@ var schemaTag = sedonaApp.getSchemaTag();
 var appTag = sedonaApp.getAppTag();
 var linkTag = sedonaApp.getLinksTag();
 
-var comp = new CompTagClass("name");
-var prop = new PropTagClass("prop");
+var compId = 0;
+
+var comp = new CompTagClass("LP", "sys::Std", ++compId);
+var comp1 = new CompTagClass("comp1", "sys::Std", ++compId);
+var prop = new PropTagClass("meta", "32515155");
+
+comp.addChildren(prop);
+comp.addChildren(comp1);
+appTag.addChildren(comp);
 
 console.log(sedonaApp.generateTag());

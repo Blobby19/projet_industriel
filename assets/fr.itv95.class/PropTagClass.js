@@ -18,9 +18,6 @@ var PropTagClass = function(name, val){
 PropTagClass.prototype = Object.create(TagClass.prototype);
 PropTagClass.prototype.constructor = PropTagClass;
 
-PropTagClass.prototype.name = "";
-PropTagClass.prototype.val = "";
-
 PropTagClass.prototype = new TagClass("prop");
 
 PropTagClass.prototype.getName = function(){
@@ -40,7 +37,13 @@ PropTagClass.prototype.setVal = function(val){
 };
 
 PropTagClass.prototype.generateTag = function(){
-    return "<prop>";
+    var string = "<prop ";
+    if(this.name!=null && this.name!="")
+        string+="name=\""+this.name+"\" ";
+    if(this.val!=null && this.val!="")
+        string+="val=\""+this.val+"\"";
+    string+="/>\n";
+    return string;
 };
 
 module.exports = PropTagClass;
