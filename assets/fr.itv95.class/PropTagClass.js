@@ -13,7 +13,6 @@ var TagClass = require('./TagClass');
 var PropTagClass = function(name, val){
     TagClass.call(this, "prop");
     this.name = name;
-
     this.val = val;
 };
 

@@ -10,6 +10,10 @@ var PropTagClass = require(__dirname+'\\fr.itv95.class\\PropTagClass.js');
 var LinkTagClass = require(__dirname+'\\fr.itv95.class\\LinkTagClass.js');
 var KitTagClass = require(__dirname+'\\fr.itv95.class\\KitTagClass.js');
 
+var TemplateClass = require(__dirname+'\\fr.itv95.template\\TemplateClass.js');
+
+var fs = require('fs');
+
 /**
  * Constructeur de la classe
  * @param appName
@@ -25,7 +29,7 @@ var Application = function(appName, jsonProperties){
     this.linksTag = this.sedonaApp.getLinksTag();
     this.createApp(appName);
     this.createService();
-    this.createApplication(jsonProperties);
+    this.createApplication(__dirname+"\\..\\templates\\template_input.js");
     var tag = this.sedonaApp.generateTag();
     console.log(tag);
 };
@@ -63,16 +67,33 @@ Application.prototype.createService = function(){
 };
 
 /**
+ * Permet de rajouter un service (ex. ModBus)
+ */
+Application.prototype.addService = function(){
+    //TODO: Prévoir l'ajout de services
+};
+
+/**
  * Ajoute tout les éléments de la CTA
  * @param jsonProperties
  */
 Application.prototype.createApplication = function(jsonProperties){
+    //TODO: le jsonProperties doit contenir tout les templates à utiliser. Actuellement ne contient qu'un seul template
     Logger.info("createApplication");
+    var file = JSON.parse(fs.readFileSync(jsonProperties));
     var appFolder = new CompTagClass("App", "sys::Folder", ++this.compId);
-
-
-
+    var template = new TemplateClass(file.name, file.description, file.objects, this.compId);
+    appFolder.addChildren(template);
     this.appTag.addChildren(appFolder);
 };
+
+/**
+ * Permet d'ajouter un template dans le AppTag
+ */
+Application.prototype.addChildrenToAppTag = function(){
+    //TODO: Prévoir l'ajout d'un template dans le AppTag
+};
+
+//TODO: Prévoir l'ajout des links et des kits
 
 module.exports = Application;

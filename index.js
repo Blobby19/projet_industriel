@@ -45,10 +45,10 @@ var Logger = require('./assets/logger')('index');
 //});
 
 
-//var ApplicationClass = require(__dirname+'\\assets\\Application.js');
-//var Application = new ApplicationClass("TestLuc");
+var ApplicationClass = require(__dirname+'\\assets\\Application.js');
+var Application = new ApplicationClass("TestLuc");
 
-var db = require(__dirname+'\\assets\\fr.itv95.db\\RecoverManifest.js')();
+//var db = require(__dirname+'\\assets\\fr.itv95.db\\RecoverManifest.js')();
 
 //var dbManifestInit = require(__dirname+'\\assets\\fr.itv95.manifests\\dbManifestInit.js');
-//var dbManifest = new dbManifestInit();
+//var dbManifest = new dbManifestInit("C:\\sedona\\manifests", "C:\\Users\\Luc\\WebstormProjects\\CTAMaker\\app\\assets\\fr.itv95.db");

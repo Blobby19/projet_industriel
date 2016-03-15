@@ -28,13 +28,14 @@ dbManifestInit.prototype.parseManifests = function(){
                 var files = getFilesInDirectory(dirs[i]);
                 for(var j = 0; j<files.length; j++){
                     var file = fs.readFileSync(files[j]);
-                    console.log(files[j]);
                     if(file != ""){
                         // On parse le fichier xml pour récupérer les informations du manifest
+                        var thisManifest = null;
+                        var name = null;
                         parser.parseString(file, function(err, data){
                             //On enregistre l'objet
                             //console.log(data.kitManifest.depends[0].depend);
-                            var thisManifest = new ManifestClass(
+                            thisManifest = new ManifestClass(
                                 data.kitManifest.attr.name,
                                 data.kitManifest.attr.description,
                                 data.kitManifest.attr.vendor,
@@ -44,10 +45,10 @@ dbManifestInit.prototype.parseManifests = function(){
                                 data.kitManifest.depends[0].depend,
                                 data.kitManifest.type
                             );
-                            var fileSaved = fs.writeFileSync(__dirname+
-                                '\\..\\fr.itv95.db\\'+data.kitManifest.attr.name+'.json',
-                                JSON.stringify(thisManifest));
+                            name = data.kitManifest.attr.name;
                         });
+                        var fileSaved = fs.writeFileSync(this.destDir+'\\'+name+'.json',
+                            JSON.stringify(thisManifest));
                     }
                 }
             }

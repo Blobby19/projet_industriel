@@ -90,3 +90,12 @@
 {"name":"dbManifest","hostname":"Fedora-PC","pid":780,"level":50,"msg":"slot is not defined","time":"2016-03-14T16:52:13.494Z","v":0}
 {"name":"dbManifest","hostname":"Fedora-PC","pid":1496,"level":50,"msg":"slot is not defined","time":"2016-03-14T16:52:42.474Z","v":0}
 {"name":"dbManifest","hostname":"Fedora-PC","pid":1188,"level":50,"msg":"Cannot read property 'length' of undefined","time":"2016-03-14T17:06:45.378Z","v":0}
+{"name":"dbManifest","hostname":"PC-Luc","pid":1264,"level":50,"msg":"ENOENT: no such file or directory, open 'C:\\Users\\Luc\\WebstormProjects\\CTAMaker\\app\\undefined\\basicSchedule.json'","time":"2016-03-15T08:49:31.588Z","v":0}
+{"name":"dbManifest","hostname":"PC-Luc","pid":7664,"level":50,"msg":"ENOENT: no such file or directory, open 'C:\\Users\\Luc\\WebstormProjects\\CTAMaker\\app\\undefined\\basicSchedule.json'","time":"2016-03-15T08:51:15.999Z","v":0}
+{"name":"dbManifest","hostname":"PC-Luc","pid":9908,"level":50,"msg":"ENOENT: no such file or directory, open 'C:\\Users\\Luc\\WebstormProjects\\CTAMaker\\app\\undefined\\basicSchedule.json'","time":"2016-03-15T08:51:52.181Z","v":0}
+{"name":"dbManifest","hostname":"PC-Luc","pid":8920,"level":50,"msg":"ENOENT: no such file or directory, open 'C:\\Users\\Luc\\WebstormProjects\\CTAMaker\\app\\undefined\\basicSchedule.json'","time":"2016-03-15T08:52:12.203Z","v":0}
+{"name":"dbManifest","hostname":"PC-Luc","pid":12096,"level":50,"msg":"ENOENT: no such file or directory, open 'C:\\Users\\Luc\\WebstormProjects\\CTAMaker\\app\\undefined\\basicSchedule.json'","time":"2016-03-15T08:52:40.499Z","v":0}
+{"name":"dbManifest","hostname":"PC-Luc","pid":9728,"level":50,"msg":"ENOENT: no such file or directory, open 'C:\\Users\\Luc\\WebstormProjects\\CTAMaker\\app\\undefined\\basicSchedule.json'","time":"2016-03-15T08:53:02.103Z","v":0}
+{"name":"dbManifest","hostname":"PC-Luc","pid":9536,"level":50,"msg":"Cannot read property 'destDir' of undefined","time":"2016-03-15T08:53:21.334Z","v":0}
+{"name":"dbManifest","hostname":"PC-Luc","pid":8432,"level":50,"msg":"Cannot read property 'destDir' of undefined","time":"2016-03-15T08:54:09.428Z","v":0}
+{"name":"dbManifest","hostname":"PC-Luc","pid":7216,"level":50,"msg":"data is not defined","time":"2016-03-15T08:54:15.796Z","v":0}
