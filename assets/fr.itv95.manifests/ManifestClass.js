@@ -2,6 +2,7 @@
  * Created by Fedora on 11/03/2016.
  */
 
+var Logger = require(__dirname+"\\..\\fr.itv95.logger\\LoggerClass.js")("ManifestClass");
 var ManifestTypeClass = require(__dirname+'\\ManifestTypeCLass.js');
 
 var fs = require('fs');
@@ -83,20 +84,26 @@ ManifestClass.prototype.addType = function(type){
 };
 
 ManifestClass.prototype.makeTypes = function(types){
-    var retour = new Array;
-    if(types != undefined){
-        //fs.writeFileSync(__dirname+"\\test.json", JSON.stringify(types));
-        for(var i =0; i<types.length; i++){
-            var thisType = new ManifestTypeClass(
-                types[i].attr.name,
-                types[i].attr.base,
-                types[i].attr.sizeof,
-                types[i].attr.id,
-                (types[i].slot!=undefined)?types[i].slot:undefined);
-            retour.push(thisType);
+    try{
+        var retour = new Array;
+        if(types != undefined){
+            //fs.writeFileSync(__dirname+"\\test.json", JSON.stringify(types));
+            for(var i =0; i<types.length; i++){
+                var thisType = new ManifestTypeClass(
+                    types[i].attr.name,
+                    types[i].attr.base,
+                    types[i].attr.sizeof,
+                    types[i].attr.id,
+                    (types[i].slot!=undefined)?types[i].slot:undefined);
+                retour.push(thisType);
+            }
         }
+        return retour;
     }
-    return retour;
+    catch(ex){
+        Logger.error(ex.message);
+        return;
+    }
 };
 
 module.exports = ManifestClass;

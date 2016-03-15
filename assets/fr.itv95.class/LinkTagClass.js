@@ -2,6 +2,7 @@
  * Created by Fedora on 10/03/2016.
  */
 
+var Logger = require('..\\fr.itv95.logger\\LoggerClass.js')('LinkTagClass');
 var TagClass = require('./TagClass');
 
 /**

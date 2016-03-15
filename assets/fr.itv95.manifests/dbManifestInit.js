@@ -12,9 +12,15 @@ var ManifestClass = require(__dirname+'\\ManifestClass.js');
 var Logger = require('..\\fr.itv95.logger\\LoggerClass.js')('dbManifest');
 
 var dbManifestInit = function(srcDir, destDir){
-    this.srcDir = (srcDir!=null && srcDir!="")?srcDir:"C:\\Users\\Fedora\\Documents\\Developpement\\projet_industriel\\manifests";
-    this.destDir = (destDir!=null && destDir!="")?destDir:"C:\\Users\\Fedora\\Documents\\Developpement\\projet_industriel\\app\\assets\\fr.itv95.db";
-    this.parseManifests();
+    try{
+        this.srcDir = (srcDir!=null && srcDir!="")?srcDir:"C:\\Users\\Fedora\\Documents\\Developpement\\projet_industriel\\manifests";
+        this.destDir = (destDir!=null && destDir!="")?destDir:"C:\\Users\\Fedora\\Documents\\Developpement\\projet_industriel\\app\\assets\\fr.itv95.db";
+        this.parseManifests();
+    }
+    catch(ex){
+        Logger.error(ex.message);
+        return;
+    }
 };
 
 dbManifestInit.prototype.parseManifests = function(){
