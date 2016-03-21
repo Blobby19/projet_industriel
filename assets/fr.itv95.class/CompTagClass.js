@@ -76,25 +76,32 @@ CompTagClass.prototype.setType = function(type){
  * @returns {string}
  */
 CompTagClass.prototype.generateTag = function(){
-    var startTag = "<comp ";
-    if(this.name!=null && this.name != "")
-        startTag+="name=\""+this.name+"\" ";
-    if(this.type!=null && this.type!="")
-        startTag+="type=\""+this.type+"\" ";
-    if(this.id!=null && this.id!="")
-        startTag+="id=\""+this.id+"\"";
-    startTag+=">\n";
-    var inTag = "";
-    if(this.childrens != undefined || this.childrens.length>0){
-        for(key in this.childrens){
-            if(this.childrens[key] instanceof TagClass)
-                inTag += this.childrens[key].generateTag();
+    Logger.info("generateTag");
+    try{
+        var startTag = "<comp ";
+        if(this.name!=null && this.name != "")
+            startTag+="name=\""+this.name+"\" ";
+        if(this.type!=null && this.type!="")
+            startTag+="type=\""+this.type+"\" ";
+        if(this.id!=null && this.id!="")
+            startTag+="id=\""+this.id+"\"";
+        startTag+=">\n";
+        var inTag = "";
+        if(this.childrens != undefined || this.childrens.length>0){
+            for(key in this.childrens){
+                if(this.childrens[key] instanceof TagClass)
+                    inTag += this.childrens[key].generateTag();
+            }
         }
-    }
 
-    var stopTag = "</"+this.tagName+">\n";
-    var tag = startTag+inTag+stopTag;
-    return tag;
+        var stopTag = "</"+this.tagName+">\n";
+        var tag = startTag+inTag+stopTag;
+        return tag;
+    }
+    catch(ex){
+        Logger.error(ex.message);
+        return;
+    }
 };
 
 module.exports = CompTagClass;

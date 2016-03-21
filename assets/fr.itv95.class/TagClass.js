@@ -2,6 +2,8 @@
  * Created by Fedora on 10/03/2016.
  */
 
+var Logger = require('..\\fr.itv95.logger\\LoggerClass.js')('TagClass');
+
 var TagClass = function(tagName, listOfAttributes, childrens){
     this.tagName = tagName;
     this.listOfAttributes = (listOfAttributes != undefined)?listOfAttributes: new Array;
@@ -41,18 +43,24 @@ TagClass.prototype.addChildren = function(children){
 };
 
 TagClass.prototype.generateTag = function(){
-    var startTag = "<"+this.tagName+">\n";
-    var inTag = "";
-    if(this.childrens != undefined || this.childrens.length>0){
-        for(key in this.childrens){
-            if(this.childrens[key] instanceof TagClass)
-                inTag += this.childrens[key].generateTag();
+    try{
+        var startTag = "<"+this.tagName+">\n";
+        var inTag = "";
+        if(this.childrens != undefined || this.childrens.length>0){
+            for(key in this.childrens){
+                if(this.childrens[key] instanceof TagClass)
+                    inTag += this.childrens[key].generateTag();
+            }
         }
-    }
 
-    var stopTag = "</"+this.tagName+">\n";
-    var tag = startTag+inTag+stopTag;
-    return tag;
+        var stopTag = "</"+this.tagName+">\n";
+        var tag = startTag+inTag+stopTag;
+        return tag;
+    }
+    catch(ex){
+        Logger.error(ex.message);
+        return;
+    }
 };
 
 module.exports = TagClass;

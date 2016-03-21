@@ -4,6 +4,7 @@
  * Classe Principale du programme Sedona
  */
 
+var Logger = require('..\\fr.itv95.logger\\LoggerClass.js')('SedonaAppTagClass');
 var TagClass = require('./TagClass');
 
 /**
@@ -73,13 +74,19 @@ SedonaAppTagClass.prototype.setLinksTag = function(linksTag){
  * @returns {string}
  */
 SedonaAppTagClass.prototype.generateTag = function(){
-    var startTag = "<"+this.tagName+">\n";
-    var inTag = "";
-    inTag += this.schemaTag.generateTag();
-    inTag += this.appTag.generateTag();
-    inTag += this.linksTag.generateTag();
-    var stopTag = "</"+this.tagName+">";
-    return startTag+inTag+stopTag;
+    try{
+        var startTag = "<"+this.tagName+">\n";
+        var inTag = "";
+        inTag += this.schemaTag.generateTag();
+        inTag += this.appTag.generateTag();
+        inTag += this.linksTag.generateTag();
+        var stopTag = "</"+this.tagName+">";
+        return startTag+inTag+stopTag;
+    }
+    catch(ex.message){
+        Logger.error(ex.message);
+        return;
+    }
 }
 
 module.exports = SedonaAppTagClass;

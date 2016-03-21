@@ -4,6 +4,7 @@
  *
  */
 
+var Logger = require('..\\fr.itv95.logger\\LoggerClass.js')('KitTagClass');
 var TagClass = require('./TagClass');
 
 /**

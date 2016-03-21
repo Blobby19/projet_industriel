@@ -30,29 +30,35 @@ var TemplateClass = function(name, description, objects, compId){
  */
 TemplateClass.prototype.generateTemplate = function(objects){
     Logger.info("generateTemplate");
-    var thisComp = null;
-    //On vérifie que le 'objects' soit un tableau
-    if(objects instanceof Array && objects.length>0){
-        //On regarde tout ce que contient le tableau 'objects'
-        for(var i = 0; i<objects.length; i++){
-            if(objects[i].type !== undefined && objects[i].type!== ""){
-                //On créer le CompTagClass
-                thisComp = this.makeComp(objects[i]);
-            }
-            if(objects[i].childrens !== undefined && objects[i].childrens.length>0){
-                for(var j = 0; j<objects[i].childrens.length; j++)
-                    thisComp.addChildren(this.generateTemplate(objects[i].childrens[j]));
+    try{
+        var thisComp = null;
+        //On vérifie que le 'objects' soit un tableau
+        if(objects instanceof Array && objects.length>0){
+            //On regarde tout ce que contient le tableau 'objects'
+            for(var i = 0; i<objects.length; i++){
+                if(objects[i].type !== undefined && objects[i].type!== ""){
+                    //On créer le CompTagClass
+                    thisComp = this.makeComp(objects[i]);
+                }
+                if(objects[i].childrens !== undefined && objects[i].childrens.length>0){
+                    for(var j = 0; j<objects[i].childrens.length; j++)
+                        thisComp.addChildren(this.generateTemplate(objects[i].childrens[j]));
+                }
             }
         }
-    }
-    //Si 'objects' n'est pas un tableau alors on créer directement le CompTagClass
-    else{
-        if(objects.type !== undefined && objects.type !== ""){
-            console.log(objects);
-            thisComp = this.makeComp(objects);
+        //Si 'objects' n'est pas un tableau alors on créer directement le CompTagClass
+        else{
+            if(objects.type !== undefined && objects.type !== ""){
+                console.log(objects);
+                thisComp = this.makeComp(objects);
+            }
         }
+        return thisComp;
     }
-    return thisComp;
+    catch(ex){
+        Logger.error(ex.message);
+        return;
+    }
 };
 
 /**
@@ -62,24 +68,29 @@ TemplateClass.prototype.generateTemplate = function(objects){
  */
 TemplateClass.prototype.makeComp = function(object){
     Logger.info("makeComp");
-    // Créer le CompTagClass de l'objet
-    var thisComp = new CompTagClass(object.name, object.type, ++this.compId);
-    // On récupère les PropTagClass de l'objet grâce au manifest associé
-    var thisSlots = this.findObjectSlotsInManifests(object.type, object);
-    console.log(thisSlots);
-    if(thisSlots instanceof Array && thisSlots.length>0){
-        //On parcours tout les slots de l'objet
-        for(var i = 0; i<thisSlots.length; i++){
-            var value;
-            if(thisSlots[i]._default !== undefined) value=thisSlots[i]._default;
-            //TODO: Prévoir l'utilisation de la fonction makeProp
-            //Si le slot possede le flag 'c' alors on le prend
-            if(thisSlots[i].flags !== undefined && thisSlots[i].flags.match(/c/))
-                thisComp.addChildren(new PropTagClass(thisSlots[i].name, value));
+    try{
+        // Créer le CompTagClass de l'objet
+        var thisComp = new CompTagClass(object.name, object.type, ++this.compId);
+        // On récupère les PropTagClass de l'objet grâce au manifest associé
+        var thisSlots = this.findObjectSlotsInManifests(object.type, object);
+        console.log(thisSlots);
+        if(thisSlots instanceof Array && thisSlots.length>0){
+            //On parcours tout les slots de l'objet
+            for(var i = 0; i<thisSlots.length; i++){
+                var value;
+                if(thisSlots[i]._default !== undefined) value=thisSlots[i]._default;
+                //TODO: Prévoir l'utilisation de la fonction makeProp
+                //Si le slot possede le flag 'c' alors on le prend
+                if(thisSlots[i].flags !== undefined && thisSlots[i].flags.match(/c/))
+                    thisComp.addChildren(new PropTagClass(thisSlots[i].name, value));
+            }
         }
+        return thisComp;
     }
-
-    return thisComp;
+    catch(ex){
+        Logger.error(ex.message);
+        return;
+    }
 };
 
 /**
