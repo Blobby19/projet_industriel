@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="assets/materialize/css/materialize.min.css">
+	<script src="assets/angular-wizard/css/angular-wizard.min.css"></script>
+	<title>Configuration | CTA Maker</title>
+</head>
+<body ng-app="new_project">
+
+	<div class="container" ng-controller="ConfigurationCtrl">
+		<h3>Entrées</h3>
+		<div class="row">
+			<form class="col s12">
+				<div class="row">
+					<div class="col s6">
+						<div class="input-field">
+							<input type="number" value="8" min="0" max="8">
+							<label>Nombre d'entrées analogiques</label>
+						</div>	
+					</div>
+					<div class="col s6">
+						<div class="input-field">
+							<input type="number" value="4" min="0" max="8">
+							<label>Nombre d'entrées numériques</label>
+						</div>
+					</div>
+				</div>
+				<input type="submit" class="btn" value="Envoyer">
+			</form>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+	<script src="assets/angular-wizard/js/angular-wizard.min.js"></script>
+	<script src="js/new_project/app.js"></script>
+	<script src="js/app.js"></script>
+	<script src="assets/materialize/js/materialize.min.js"></script>
+</body>
+</html>
