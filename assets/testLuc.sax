@@ -1,92 +1,105 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <sedonaApp>
-  <schema>
-    <kit name="basicSchedule" checksum="7fdca638"/>
-    <kit name="control" checksum="808b7db3"/>
-    <kit name="datetime" checksum="3a280dce"/>
-    <kit name="datetimeStd" checksum="fc5628d7"/>
-    <kit name="driver" checksum="b4cc82ce"/>
-    <kit name="func" checksum="821b7396"/>
-    <kit name="hvac" checksum="7264c67c"/>
-    <kit name="inet" checksum="25648ba7"/>
-    <kit name="logic" checksum="9fe95ce1"/>
-    <kit name="logManager" checksum="da7714f6"/>
-    <kit name="math" checksum="c22b255c"/>
-    <kit name="platUnix" checksum="751711ab"/>
-    <kit name="platWin32" checksum="3746c8c1"/>
-    <kit name="pricomp" checksum="b5cd6698"/>
-    <kit name="pstore" checksum="7ea2cb06"/>
-    <kit name="serial" checksum="87314b6e"/>
-    <kit name="sox" checksum="397a84dd"/>
-    <kit name="soxcert" checksum="69ef332c"/>
-    <kit name="sys" checksum="d3984c51"/>
-    <kit name="SysMikAlarm" checksum="39ab7535"/>
-    <kit name="SysMikBaActuator" checksum="6a7c4482"/>
-    <kit name="SysMikBaAppGeneral" checksum="271d417"/>
-    <kit name="SysMikBaAppHvac" checksum="a02c6c4c"/>
-    <kit name="SysMikBaAppLighting" checksum="df3c99ca"/>
-    <kit name="SysMikBaAppShading" checksum="d929a2e0"/>
-    <kit name="SysMikBaOperator" checksum="77247d50"/>
-    <kit name="SysMikBaSensor" checksum="43f651c0"/>
-    <kit name="SysMikHistory" checksum="e4efc46c"/>
-    <kit name="SysMikIcsManualCtrl" checksum="1bcf7e2a"/>
-    <kit name="SysMikInlineIo" checksum="67ec948"/>
-    <kit name="SysMikIntesaNet" checksum="6a64c832"/>
-    <kit name="SysMikLocalIo" checksum="ad4f131b"/>
-    <kit name="SysMikModbusClient" checksum="2cd715ea"/>
-    <kit name="SysMikModbusClientStat" checksum="3c1e7cf"/>
-    <kit name="SysMikModbusServer" checksum="c4064f4f"/>
-    <kit name="SysMikMp" checksum="87047161"/>
-    <kit name="SysMikMpBus" checksum="4e06d802"/>
-    <kit name="SysMikNativeLib" checksum="324911d8"/>
-    <kit name="SysMikPlatIcs" checksum="b0a638d8"/>
-    <kit name="SysMikPlatScc41x" checksum="d8945fa7"/>
-    <kit name="SysMikPlatScc41xm" checksum="8babb598"/>
-    <kit name="SysMikPlatScc52x" checksum="7955ba73"/>
-    <kit name="SysMikPlatSccFb" checksum="f37abcb8"/>
-    <kit name="SysMikSchedule" checksum="a93107af"/>
-    <kit name="timing" checksum="aeaac82a"/>
-    <kit name="tutorial" checksum="89858e3e"/>
-    <kit name="types" checksum="10936551"/>
-    <kit name="web" checksum="462d43e"/>
-  </schema>
-  <app>
-    <prop name="deviceName" val="SCC-410"/>
-    <prop name="appName" val="Test"/>
-    <prop name="scanPeriod" val="100"/>
-  </app>
-  <app>
-    <comp name="service" id="1" type="sys::Folder">
-      <prop name="meta" val="33685505"/>
-      <comp name="plat" id="2" type="SysMikPlatScc41xm::SccPlatformService">
-        <prop name="meta" val="33685505"/>
-        <prop name="modbusRtuEnabled" val="{{modbusActivation}}"/>
-        <prop name="modbusRtuBaud" val="3"/>
-      </comp>
-      <comp name="users" id="3" type="sys::UserService">
-        <prop name="meta" val="34144257"/>
-        <comp name="admin" id="4" type="sys::User">
-          <prop name="cred" val="hE49ksThgAeLkWB3NUU1NWeDO54="/>
-          <prop name="perm" val="2147483647"/>
-          <prop name="prov" val="255"/>
-        </comp>
-      </comp>
-      <comp name="sox" id="5" type="sox::SoxService">
-        <prop name="meta" val="34471937"/>
-        <prop name="eventsPerSec" val="10"/>
-      </comp>
-    </comp>
-  </app>
-  <app>
-    <comp name="inputs" id="8" type="sys::Folder">
-      <prop name="meta" val="33685505"/>
-    </comp>
-  </app>
-  <app>
-    <comp name="ouputs" id="8" type="sys::Folder">
-      <prop name="meta" val="33685505"/>
-    </comp>
-  </app>
-  <links>&#xD;
+<schema>
+<kit name="basicSchedule" checksum="7fdca638"/>
+<kit name="control" checksum="808b7db3"/>
+<kit name="datetime" checksum="3a280dce"/>
+<kit name="datetimeStd" checksum="fc5628d7"/>
+<kit name="driver" checksum="b4cc82ce"/>
+<kit name="func" checksum="821b7396"/>
+<kit name="hvac" checksum="7264c67c"/>
+<kit name="inet" checksum="25648ba7"/>
+<kit name="logic" checksum="9fe95ce1"/>
+<kit name="logManager" checksum="da7714f6"/>
+<kit name="math" checksum="c22b255c"/>
+<kit name="platUnix" checksum="751711ab"/>
+<kit name="platWin32" checksum="3746c8c1"/>
+<kit name="pricomp" checksum="b5cd6698"/>
+<kit name="pstore" checksum="7ea2cb06"/>
+<kit name="serial" checksum="87314b6e"/>
+<kit name="sox" checksum="397a84dd"/>
+<kit name="soxcert" checksum="69ef332c"/>
+<kit name="sys" checksum="d3984c51"/>
+<kit name="SysMikAlarm" checksum="39ab7535"/>
+<kit name="SysMikBaActuator" checksum="6a7c4482"/>
+<kit name="SysMikBaAppGeneral" checksum="271d417"/>
+<kit name="SysMikBaAppHvac" checksum="a02c6c4c"/>
+<kit name="SysMikBaAppLighting" checksum="df3c99ca"/>
+<kit name="SysMikBaAppShading" checksum="d929a2e0"/>
+<kit name="SysMikBaOperator" checksum="77247d50"/>
+<kit name="SysMikBaSensor" checksum="43f651c0"/>
+<kit name="SysMikHistory" checksum="e4efc46c"/>
+<kit name="SysMikIcsManualCtrl" checksum="1bcf7e2a"/>
+<kit name="SysMikInlineIo" checksum="67ec948"/>
+<kit name="SysMikIntesaNet" checksum="6a64c832"/>
+<kit name="SysMikLocalIo" checksum="ad4f131b"/>
+<kit name="SysMikModbusClient" checksum="2cd715ea"/>
+<kit name="SysMikModbusClientStat" checksum="3c1e7cf"/>
+<kit name="SysMikModbusServer" checksum="c4064f4f"/>
+<kit name="SysMikMp" checksum="87047161"/>
+<kit name="SysMikMpBus" checksum="4e06d802"/>
+<kit name="SysMikNativeLib" checksum="324911d8"/>
+<kit name="SysMikPlatIcs" checksum="b0a638d8"/>
+<kit name="SysMikPlatScc41x" checksum="d8945fa7"/>
+<kit name="SysMikPlatScc41xm" checksum="8babb598"/>
+<kit name="SysMikPlatScc52x" checksum="7955ba73"/>
+<kit name="SysMikPlatSccFb" checksum="f37abcb8"/>
+<kit name="SysMikSchedule" checksum="a93107af"/>
+<kit name="timing" checksum="aeaac82a"/>
+<kit name="tutorial" checksum="89858e3e"/>
+<kit name="types" checksum="10936551"/>
+<kit name="web" checksum="462d43e"/>
+</schema>
+<app>
+<prop name="deviceName" val="SCC410"/>
+<prop name="appName" val="TestLuc"/>
+<prop name="scanPeriod" val="100"/>
+<comp name="service" type="sys::Folder" id="1">
+<comp name="plat" type="SysMikPlatScc41xm::SccPlatformService" id="2">
+</comp>
+<comp name="users" type="sys::UserService" id="3">
+<comp name="admin" type="sys::User" id="4">
+<prop name="cred" val="hE49ksThgAeLkWB3NUU1NWeDO54="/>
+<prop name="perm" val="2147483647"/>
+<prop name="prov" val="255"/>
+</comp>
+</comp>
+<comp name="sox" type="sox::SoxService" id="5">
+</comp>
+</comp>
+<comp name="App" type="sys::Folder" id="6">
+<comp name="Ete" type="sys::Folder" id="7">
+<comp name="ConsEte" type="types::ConstFloat" id="8">
+<prop name="out" val="0"/>
+</comp>
+<comp name="Kp" type="types::ConstFloat" id="9">
+<prop name="out" val="0"/>
+</comp>
+<comp name="Ki" type="types::ConstFloat" id="10">
+<prop name="out" val="0"/>
+</comp>
+<comp name="TRep" type="types::WriteFloat" id="11">
+<prop name="in" val="0"/>
+</comp>
+<comp name="LP" type="func::LP" id="12">
+<prop name="enable" val="true"/>
+<prop name="sp" val="0.0"/>
+<prop name="kp" val="1.0"/>
+<prop name="ki" val="0.0"/>
+<prop name="kd" val="0.0"/>
+<prop name="max" val="100.0"/>
+<prop name="min" val="0.0"/>
+<prop name="bias" val="0.0"/>
+<prop name="maxDelta" val="0.0"/>
+<prop name="direct" val="true"/>
+<prop name="exTime" val="1000"/>
+</comp>
+<comp name="VFr" type="types::WriteFloat" id="13">
+<prop name="in" val="0"/>
+</comp>
+</comp>
+</comp>
+</app>
+<links>
 </links>
 </sedonaApp>

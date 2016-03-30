@@ -83,7 +83,7 @@ SedonaAppTagClass.prototype.generateTag = function(){
         var stopTag = "</"+this.tagName+">";
         return startTag+inTag+stopTag;
     }
-    catch(ex.message){
+    catch(ex){
         Logger.error(ex.message);
         return;
     }

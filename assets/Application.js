@@ -29,7 +29,7 @@ var Application = function(appName, jsonProperties){
     this.linksTag = this.sedonaApp.getLinksTag();
     this.createApp(appName);
     this.createService();
-    this.createApplication(__dirname+"\\..\\templates\\template_input.js");
+    this.createApplication(__dirname+"\\..\\templates\\template_ete.js");
     var tag = this.sedonaApp.generateTag();
     console.log(tag);
 };
@@ -55,10 +55,12 @@ Application.prototype.createService = function(){
     Logger.info("createService");
     var service = new CompTagClass("service", "sys::Folder", ++this.compId);
     var platService = new CompTagClass("plat", "SysMikPlatScc41xm::SccPlatformService", ++this.compId);
-    var userService = new CompTagClass("users", "sys::User", ++this.compId);
-    userService.addChildren(new PropTagClass("cred", "hE49ksThgAeLkWB3NUU1NWeDO54="));
-    userService.addChildren(new PropTagClass("perm", "2147483647"));
-    userService.addChildren(new PropTagClass("prov", "255"));
+    var userService = new CompTagClass("users", "sys::UserService", ++this.compId);
+    var user = new CompTagClass("admin", "sys::User", ++this.compId);
+    user.addChildren(new PropTagClass("cred", "hE49ksThgAeLkWB3NUU1NWeDO54="));
+    user.addChildren(new PropTagClass("perm", "2147483647"));
+    user.addChildren(new PropTagClass("prov", "255"));
+    userService.addChildren(user);
     var soxService = new CompTagClass("sox", "sox::SoxService", ++this.compId);
     service.addChildren(platService);
     service.addChildren(userService);
@@ -71,6 +73,7 @@ Application.prototype.createService = function(){
  */
 Application.prototype.addService = function(){
     //TODO: Prévoir l'ajout de services
+
 };
 
 /**
@@ -90,8 +93,10 @@ Application.prototype.createApplication = function(jsonProperties){
 /**
  * Permet d'ajouter un template dans le AppTag
  */
-Application.prototype.addChildrenToAppTag = function(){
+Application.prototype.addChildrenToAppTag = function(children){
     //TODO: Prévoir l'ajout d'un template dans le AppTag
+    if(children !== undefined && children !== null)
+        this.appTag.addChildren(children);
 };
 
 //TODO: Prévoir l'ajout des links et des kits

@@ -5,12 +5,21 @@
 var fs = require('fs');
 var ManifestClass = require(__dirname+'\\..\\fr.itv95.manifests\\ManifestClass.js');
 
+var Logger = require(__dirname+'\\..\\fr.itv95.logger\\LoggerClass.js')('RecoverManifest');
+
 var RecoverManifest = function(){
-    var retour = new Array;
-    var files = fs.readdirSync(__dirname);
-    for(var i = 0; i<files.length; i++){
-        if(files !== "RecoverManifest")
-        var file = fs.readFileSync(folder)
+    Logger.info('RecoverManifest');
+    try{
+        var retour = new Array;
+        var files = fs.readdirSync(__dirname);
+        for(var i = 0; i<files.length; i++){
+            if(files !== "RecoverManifest") {
+                var file = fs.readFileSync(__dirname + "\\" + files[i]);
+            }
+        }
+    }
+    catch(ex) {
+        Logger.error(ex.message);
     }
 };
 

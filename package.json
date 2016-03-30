@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon . | bunyan",
+    "start": "nodemon . --ignore assets/fr.itv95.db | bunyan",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

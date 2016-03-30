@@ -65,10 +65,11 @@ PropTagClass.prototype.generateTag = function(){
             string+="name=\""+this.name+"\" ";
         if(this.val!=null && this.val!="")
             string+="val=\""+this.val+"\"";
+        else string+="val=\"0\"";
         string+="/>\n";
         return string;
     }
-    catch(ex.message){
+    catch(ex){
         Logger.error(ex.message);
     }
 };

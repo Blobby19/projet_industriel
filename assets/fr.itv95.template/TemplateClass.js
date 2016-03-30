@@ -72,8 +72,8 @@ TemplateClass.prototype.makeComp = function(object){
         // Créer le CompTagClass de l'objet
         var thisComp = new CompTagClass(object.name, object.type, ++this.compId);
         // On récupère les PropTagClass de l'objet grâce au manifest associé
+        console.log(object);
         var thisSlots = this.findObjectSlotsInManifests(object.type, object);
-        console.log(thisSlots);
         if(thisSlots instanceof Array && thisSlots.length>0){
             //On parcours tout les slots de l'objet
             for(var i = 0; i<thisSlots.length; i++){
