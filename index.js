@@ -5,17 +5,8 @@
 * Author: Luc Viala
 */
 
-//var express = require('express');
-//var app = express();
-//var server = require('http').createServer(app);
-//var io = require('socket.io')(server);
-
-var morgan = require('morgan');
-
-var port = process.env.port || 1337;
-
 // Import & déclaration du logger
-var Logger = require('./assets/logger')('index');
+var Logger = require('./assets/logger')('Index');
 
 var dbManifestInit = require(__dirname+'\\assets\\fr.itv95.manifests\\dbManifestInit.js');
 var dbManifest = new dbManifestInit("C:\\sedona\\manifests", "C:\\Users\\Luc\\WebstormProjects\\CTAMaker\\app\\assets\\fr.itv95.db");
@@ -26,5 +17,5 @@ var Application = new ApplicationClass("TestLuc");
 
 var db = require(__dirname+'\\assets\\fr.itv95.db\\RecoverManifest.js')();
 
-//var server = app().listen(1337);
+//var client = app().listen(1337);
 //Logger.info('Server is listening on port: '+1337);

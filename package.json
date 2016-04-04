@@ -11,12 +11,24 @@
   "license": "ISC",
   "devDependencies": {
     "bunyan": "^1.5.1",
-    "morgan": "^1.6.1"
+    "chai": "^3.5.0",
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.0",
+    "gulp-mocha": "^2.2.0",
+    "gulp-watch": "^4.3.5",
+    "jshint": "^2.9.1",
+    "jsonlint": "^1.6.2",
+    "mocha": "^2.4.5",
+    "morgan": "^1.6.1",
+    "request": "^2.69.0"
   },
   "dependencies": {
+    "body-parser": "^1.15.0",
     "bunyan": "^1.7.1",
     "ejs": "^2.4.1",
     "express": "^4.13.4",
+    "express-json": "^1.0.0",
     "socket.io": "^1.4.5",
     "xml2js": "^0.4.16"
   }
