@@ -12,6 +12,7 @@ var SedonaAppTagClass = require(__dirname+'/../../assets/fr.itv95.class/SedonaAp
 var compTag = null;
 var propTag = null;
 var sedonaAppTag = null;
+
 describe('Test Tags Class', function(){
     it('create comp tag should return name, type & id', function(){
         compTag = new CompTagClass("input", "sys::User", 0);

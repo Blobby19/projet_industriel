@@ -28,10 +28,10 @@ var Application = function(appName, jsonProperties){
     this.appTag = this.sedonaApp.getAppTag();
     this.linksTag = this.sedonaApp.getLinksTag();
     this.createApp(appName);
-    this.createService();
-    this.createApplication(__dirname+"\\..\\templates\\template_ete.js");
+    //this.createService();
+    //this.createApplication(__dirname+"\\..\\templates\\template_ete.json");
     var tag = this.sedonaApp.generateTag();
-    console.log(tag);
+    //console.log(tag);
 };
 
 /**

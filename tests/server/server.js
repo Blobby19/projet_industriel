@@ -24,13 +24,27 @@ describe('Server', function(){
         it('should be a html page', function(done){
             request(url, function(error, response, body){
                 expect(response.headers).to.have.property('content-type').and.equal('text/html; charset=utf-8');
-                expect(body).to.contain('<title>test</title>');
+                expect(body).to.contain('<title>CTA Maker</title>');
                 done();
             });
         });
     });
 
-    describe('Api page', function(){
+    describe('Api', function(){
+
+        it('should return application object', function(done){
+           request.post({
+               uri: url+'/api/create_application',
+               form:{
+                   name: 'TestLuc'
+               }
+           }, function(err, res, body){
+               expect(res.statusCode).to.equal(200);
+               expect(JSON.parse(body)).to.be.a('object');
+               done();
+           });
+        });
+
         it('should be a json object', function(done){
             request(url+'/api/templates', function(error, response, body){
                 expect(response.headers).to.have.property('content-type').and.equal('application/json; charset=utf-8');
@@ -40,7 +54,43 @@ describe('Server', function(){
 
         it('should be return templates configuration file', function(done){
             request(url+'/api/templates', function(err, res, body){
-                expect(JSON.parse(body)).to.have.property('templates').to.be.array;
+                expect(JSON.parse(body)).to.have.property('templates').to.be.a('array');
+                done();
+            });
+        });
+
+        it('should add template to applicationTag', function(done){
+            var templates = ['test'];
+            request.put({
+                uri: url+'/api/templates',
+                form:{
+                    templates: templates
+                }
+            }, function(err, res, body){
+                expect(res.statusCode).to.equal(200);
+                expect(JSON.parse(body)).to.have.property('message').to.equal('templates added correctly');
+                done();
+            })
+        });
+
+        it('should return detail of ete template', function(done){
+            request(url+'/api/template/detail/template_ete', function(err, res, body){
+                expect(JSON.parse(body)).to.have.property('name').to.equal('template_mode_ete');
+                done();
+            });
+        });
+
+        it('should return detail of input template', function(done){
+            request(url+'/api/template/detail/template_input', function(err, res, body){
+                expect(JSON.parse(body)).to.have.property('name').to.equal('template_input_scc410');
+                done();
+            });
+        });
+
+        it('should return 503 error because of an unknown template', function(done){
+            request(url+'/api/template/detail/test', function(err, res, body){
+                expect(res.statusCode).to.equal(503);
+                expect(JSON.parse(body)).to.have.property('message');
                 done();
             });
         });
@@ -54,7 +104,7 @@ describe('Server', function(){
 
         it('should be return configuration file', function(done){
             request(url+'/api/config', function(err, res, body){
-                expect(JSON.parse(body)).to.have.property('name');
+                expect(JSON.parse(body)).to.have.property('app').to.have.property('title');
                 done();
             });
         });
@@ -84,26 +134,30 @@ describe('Server', function(){
                 request.post({
                     uri: url+'/api/config',
                     form: {
-                        name: 'test'
+                        app:{
+                            title: 'CTA Maker'
+                        }
                     }
                 },function(err, res, body){
-                    expect(JSON.parse(body)).to.have.property('name').to.equal('test');
+                    expect(JSON.parse(body)).to.have.property('app').to.have.property('title').to.equal('CTA Maker');
                     done();
                 });
             });
+
             it('should return updated property in config file', function(done){
                 request(url+'/api/config',function(err, res, body){
-                    expect(JSON.parse(body)).to.have.property('name').to.equal('test');
+                    expect(JSON.parse(body)).to.have.property('app').to.have.property('title').to.equal('CTA Maker');
                     done();
                 });
             });
         });
 
         describe('Make CTA file', function(){
+
             var inputs = JSON.stringify([{"inputs":"inputs"}]);
             var outputs = JSON.stringify([{"outputs":"outputs"}]);
             var templates = JSON.stringify([{"templates":"templates"}]);
-           it('should return 503 error in case of malformed value', function(done){
+            it('should return 503 error in case of malformed value', function(done){
                request.post({
                    uri: url+'/api/make_cta',
                    form:{
@@ -115,7 +169,8 @@ describe('Server', function(){
                   expect(res.statusCode).to.equal(503);
                    done();
                });
-           });
+            });
+
             it('should return 200 and should return json', function(done){
                 request.post({
                     uri: url+'/api/make_cta',

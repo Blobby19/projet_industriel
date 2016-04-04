@@ -17,12 +17,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan('dev'));
 app.set('views engine', 'ejs');
 
+var application = null;
+
 var public = express.Router();
 require('./client/app/server/routes/public.js')(public, configuration);
 app.use('/', public);
 
 var api = express.Router();
-require('./client/app/server/routes/api.js')(api);
+require('./client/app/server/routes/api.js')(api, application);
 app.use('/api', api);
 
 app.use('/', express.static('public'));
