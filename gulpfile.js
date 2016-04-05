@@ -10,7 +10,7 @@ var mocha = require('gulp-mocha');
 var bunyan = require('bunyan');
 
 var paths = {
-    scripts: ['tests/**/*.js', 'assets/**/*.js', 'index.js', './server.js', 'client/app/**/*.js']
+    scripts: ['tests/**/*.js', 'assets/**/*.js', 'index.js', './server.js', 'server/app/**/*.js']
 };
 
 gulp.task('clean', function(){

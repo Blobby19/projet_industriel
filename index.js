@@ -17,5 +17,5 @@ var Application = new ApplicationClass("TestLuc");
 
 var db = require(__dirname+'\\assets\\fr.itv95.db\\RecoverManifest.js')();
 
-//var client = app().listen(1337);
+//var server = app().listen(1337);
 //Logger.info('Server is listening on port: '+1337);

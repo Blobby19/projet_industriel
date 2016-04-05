@@ -5,12 +5,15 @@
 var request = require('request');
 var expect = require('chai').expect;
 var server;
+var port = process.env.PORT || 1337;
 
 describe('Server', function(){
     var url = 'http://localhost:1337';
 
     before(function(){
-        server = require('../../server.js');
+        server = require('../../server.js')();
+        server.listen(port);
+        console.log('Server is listening on port: '+port);
     });
 
     it('Server available on port 1337', function(done){
@@ -190,8 +193,4 @@ describe('Server', function(){
         });
     });
 
-    after(function(){
-        server.closeServer();
-
-    });
 });

@@ -10,31 +10,25 @@ var Logger = require('./assets/fr.itv95.logger/LoggerClass.js')('Server');
 var port = process.env.PORT || 1337;
 var configuration = require('./configuration/application.json');
 
-var app = express();
+module.exports = function(){
+    var app = express();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(morgan('dev'));
-app.set('views engine', 'ejs');
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({extended: true}));
+    app.use(morgan('dev'));
+    app.set('views engine', 'ejs');
 
-var application = null;
+    var application = null;
 
-var public = express.Router();
-require('./client/app/server/routes/public.js')(public, configuration);
-app.use('/', public);
+    var public = express.Router();
+    require('./server/app/server/routes/public.js')(public, configuration);
+    app.use('/', public);
 
-var api = express.Router();
-require('./client/app/server/routes/api.js')(api, application);
-app.use('/api', api);
+    var api = express.Router();
+    require('./server/app/server/routes/api.js')(api, application);
+    app.use('/api', api);
 
-app.use('/', express.static('public'));
+    app.use('/', express.static('public'));
 
-var server = app.listen(port, function(){
-    Logger.info('Server is running on port '+ port);
-});
-
-server.closeServer = function(){
-    server.close();
+    return app;
 };
-
-module.exports = server;
