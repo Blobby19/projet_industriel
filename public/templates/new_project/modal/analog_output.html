@@ -1,0 +1,38 @@
+<h3>Sortie Analogique</h3>
+<form form-step-validity>
+    <div class="row">
+        <div class="col s4 input-field">
+            <input type="text" id="output_name" ng-model="model.name" required ng-maxlength="7" length="7"/>
+            <label for="output_name">Nom de la sortie</label>
+        </div>
+        <div class="col s4 input-field">
+            <select ng-model="model.type">
+                <option value="" disabled selected>Choisissez le type</option>
+                <option value="0">Régulation</option>
+                <option value="1">Valeur</option>
+            </select>
+            <label>Choisissez le type de sortie</label>
+        </div>
+        <div class="col s4 input-field">
+            <select ng-model="model.channel">
+                <option value="" disabled selected>Choisissez le channel</option>
+                <option value="0">AO1</option>
+                <option value="1">AO2</option>
+                <option value="2">AO3</option>
+                <option value="3">AO4</option>
+                <option value="4">AO5</option>
+                <option value="5">AO6</option>
+                <option value="6">AO7</option>
+                <option value="7">AO8</option>
+                <option value="8">AO9</option>
+                <option value="9">AO10</option>
+            </select>
+        </div>
+    </div>
+</form>
+<script>
+    $(document).ready(function(){
+        $('select').material_select();
+        $('input#output_name').characterCounter();
+    });
+</script>

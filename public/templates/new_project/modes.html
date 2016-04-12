@@ -1,0 +1,82 @@
+<h3><a href="#/" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">skip_previous</i></a> Régulation</h3>
+<form action="">
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card lime darken-1" style="height: 300px">
+                <div class="card-content white-text">
+                    <span class="card-title">Modes de fonctionnement</span>
+                    <div class="input-field">
+                        <input type="checkbox" ng-model="modes.ete" id="mode_ete"/>
+                        <label for="mode_ete">Mode été</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="checkbox" ng-model="modes.hiver" id="mode_hiver"/>
+                        <label for="mode_hiver">Mode hiver</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="checkbox" ng-model="modes.freecooling" id="mode_freecooling"/>
+                        <label for="mode_freecooling">Mode freecooling</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6">
+            <div class="card lime darken-1" style="height: 300px">
+                <div class="card-content white-text">
+                    <span class="card-title">Régulations</span>
+                    <div class="input-field">
+                        <input type="checkbox" ng-model="regulation.roue_recuperation" id="roue_recuperation"/>
+                        <label for="roue_recuperation">Roue de récupération</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="checkbox" ng-model="regulation.vanne_froide" id="vanne_froide"/>
+                        <label for="vanne_froide">Vanne Froide</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="checkbox" ng-model="regulation.vanne_chaude" id="vanne_chaude"/>
+                        <label for="vanne_chaude">Vanne Chaude</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="checkbox" ng-model="regulation.registre_an" id="registre_an"/>
+                        <label for="registre_an">Registre air neuf</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="checkbox" ng-model="regulation.registre_melange" id="registre_melange"/>
+                        <label for="registre_melange">Registre mélange</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn waves-effect" ng-click="createModal()">
+        Valider <i class="material-icons right">send</i>
+    </button>
+</form>
+
+<ng-include src="template.modal" ng-controller="ModeModalCtrl" ng-if="showModal"></ng-include>
+
+<script type="text/ng-template" id="modal.html">
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <multi-step-container steps="modesSteps" on-cancel="cancel()" on-finish="finish()">
+                <header>
+                    <button ng-disabled="$isFirst()" class="btn btn-default" ng-click="$previousStep()">
+                        <span class="fa fa-chevron-left"></span>
+                        Previous
+                    </button>
+                    <strong ng-bind-template="{{$getActiveIndex()}} / {{$getSteps().length}}"></strong>
+
+                    <button ng-disabled="$isLast() || ($getActiveStep().hasForm && !$getActiveStep().valid)" class="btn btn-default" ng-click="$nextStep()">
+                        Next
+                        <span class="fa fa-chevron-right"></span>
+                    </button>
+                </header>
+                <main step-container></main>
+                <footer class="modal-footer">
+                    <button ng-click="$cancel()" class="modal-action modal-close white-text red btn-flat waves-effect waves-red">Annuler</button>
+                    <button ng-if="$isLast()" ng-click="$finish()" class="modal-action green modal-close waves-effect waves-green btn-flat">Valider</button>
+                </footer>
+            </multi-step-container>
+        </div>
+    </div>
+</script>

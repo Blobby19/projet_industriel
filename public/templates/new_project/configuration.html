@@ -1,0 +1,46 @@
+<h3><a href="#/" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">skip_previous</i></a> Configuration</h3>
+<form>
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card lime darken-1">
+                <div class="card-content white-text">
+                    <span class="card-title">Nom de l'application</span>
+                    <p>Donnez le nom de votre application</p>
+                    <div class="input-field">
+                        <input type="text" class="validate" ng-model="application_name" id="application_name"/>
+                        <label for="application_name">Nom de l'application</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6">
+            <div class="card lime darken-1">
+                <div class="card-content white-text">
+                    <span class="card-title">Nom de l'équipement</span>
+                    <p>Donnez le nom de votre équipement</p>
+                    <div class="input-field">
+                        <input type="text" class="validate" ng-model="device_name" id="device_name"/>
+                        <label for="device_name">Nom de l'equipement</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card lime darken-1">
+                <div class="card-content white-text">
+                    <span class="card-title">Modbus</span>
+                    <p>
+                        <input type="checkbox" ng-model="modbus_enable" id="modbus"/>
+                        <label for="modbus">Modbus</label>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn waves-effect" ng-click="createConfiguration()">
+        Valider
+        <i class="material-icons right">send</i>
+    </button>
+</form>

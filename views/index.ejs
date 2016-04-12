@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title><%= title %></title>
-    <% include includes/css_include.ejs %>
+    <meta charset="UTF-8">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/Materialize/dist/css/materialize.min.css">
+    <link rel="stylesheet" href="css/style.css"/>
+    <title>CTA Maker</title>
 </head>
-  <body>
 
+<body ng-app="app">
 
-  <% include includes/scripts_include.ejs %>
-  </body>
+    <main>
+        <div class="container" ng-view></div>
+    </main>
+
+    <script type="text/javascript" src="/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/vendor/Materialize/dist/js/materialize.min.js"></script>
+    <script src="/vendor/angular/angular.min.js"></script>
+    <script src="/vendor/angular-route/angular-route.min.js"></script>
+    <script src="/vendor/angular-multi-step-form/dist/browser/angular-multi-step-form.min.js"></script>
+    <script src="/js/new_project/app.js"></script>
+    <script src="/js/new_project/services.js"></script>
+    <script src="/js/new_project/controllers.js"></script>
+</body>
 </html>

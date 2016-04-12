@@ -1,0 +1,61 @@
+<h3><a href="#/" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">skip_previous</i></a> Entrées</h3>
+<form>
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                    <span class="card-title">Entrées analogiques</span>
+                    <p>Sélectionnez le nombre d'entrées analogiques</p>
+                    <div class="input-field">
+                        <input id="numberAI" type="number" ng-model="inputs.numberAI" min="0" max="8"/>
+                        <label for="numberAI">Rentrer le nombre d'entrées analogiques</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6">
+            <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                    <span class="card-title">Entrées digitales</span>
+                    <p>Sélectionnez le nombre d'entrées digitales</p>
+                    <div class="input-field">
+                        <input id="numberDI" type="number" ng-model="inputs.numberDI" min="0" max="4"/>
+                        <label for="numberDI">Rentrer le nombre d'entrées numériques</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn waves-effect" ng-click="createModal()">
+        Valider
+        <i class="material-icons right">send</i>
+    </button>
+</form>
+
+<ng-include src="template.modal" ng-controller="InputModalCtrl" ng-if="showModal"></ng-include>
+
+<script type="text/ng-template" id="modal.html" >
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <multi-step-container steps="inputSteps" on-cancel="cancel()" on-finish="finish()">
+                <header>
+                    <button ng-disabled="$isFirst()" class="btn btn-default" ng-click="$previousStep()">
+                        <span class="fa fa-chevron-left"></span>
+                        Previous
+                    </button>
+                    <strong ng-bind-template="{{$getActiveIndex()}} / {{$getSteps().length}}"></strong>
+
+                    <button ng-disabled="$isLast() || ($getActiveStep().hasForm && !$getActiveStep().valid)" class="btn btn-default" ng-click="$nextStep()">
+                        Next
+                        <span class="fa fa-chevron-right"></span>
+                    </button>
+                </header>
+                <main step-container></main>
+                <footer class="modal-footer">
+                    <button ng-click="$cancel()" class="modal-action modal-close white-text red btn-flat waves-effect waves-red">Annuler</button>
+                    <button ng-if="$isLast()" ng-click="$finish()" class="modal-action green modal-close waves-effect waves-green btn-flat">Valider</button>
+                </footer>
+            </multi-step-container>
+        </div>
+    </div>
+</script>

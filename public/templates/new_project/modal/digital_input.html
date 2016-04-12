@@ -1,0 +1,42 @@
+<h3>Entrée Digitale</h3>
+<form form-step-validity>
+    <div class="row">
+        <div class="col s4 input-field">
+            <input type="text" id="input_name" ng-model="model.name" required ng-maxlength="7" length="7"/>
+            <label for="input_name">Nom de l'entrée</label>
+        </div>
+        <div class="col s4 input-field">
+            <select ng-model="model.type">
+                <option value="" disabled selected>Choisissez le type</option>
+                <option value="0">Chaine de sécurité</option>
+                <option value="1">Alarme</option>
+            </select>
+            <label>Choisissez le type d'entrée</label>
+        </div>
+        <div class="col s4 input-field">
+            <select ng-model="model.channel">
+                <option value="" disabled selected>Choisissez le channel</option>
+                <option value="0">UI1</option>
+                <option value="1">UI2</option>
+                <option value="2">UI3</option>
+                <option value="3">UI4</option>
+                <option value="4">UI5</option>
+                <option value="5">UI6</option>
+                <option value="6">UI7</option>
+                <option value="7">UI8</option>
+                <option value="8">UI9</option>
+                <option value="9">UI10</option>
+                <option value="10">UI11</option>
+                <option value="11">UI12</option>
+                <option value="12">UI13</option>
+                <option value="13">UI14</option>
+            </select>
+        </div>
+    </div>
+</form>
+<script>
+    $(document).ready(function(){
+        $('select').material_select();
+        $('input#input_name').characterCounter();
+    })
+</script>
