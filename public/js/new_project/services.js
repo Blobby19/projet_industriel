@@ -64,3 +64,21 @@ app.factory('TemplateFactory', [function(){
         }
     }
 }]);
+
+app.factory('ServerCommunication', ['$http',function($http){
+    return{
+        sendConfiguration: function(template, successCallback, errorCallback){
+            $http({
+                method: 'POST',
+                url: '/api/create_application',
+                data: template
+            }).then(successCallback, errorCallback);
+        },
+        getTemplate: function(successCallback, errorCallback){
+            $http({
+                method: 'GET',
+                url: '/api/templates'
+            }).then(successCallback, errorCallback);
+        }
+    }
+}]);

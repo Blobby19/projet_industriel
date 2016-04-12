@@ -12,8 +12,9 @@ var Application = require(__dirname+'/../../../../assets/Application.js');
 module.exports = function(router, application){
 
     router.post('/create_application', function(req, res){
-        if(req.body.name !== undefined)
-            application = new Application(req.body.name);
+        console.log(req.body.configuration);
+        //if(req.body.configuration.name !== undefined)
+        //    application = new Application(req.body.name);
         res.status(200).send(application);
     });
 

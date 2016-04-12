@@ -7,7 +7,7 @@
 /**
  * Controller de la page d'index de nouveau projet
  */
-app.controller('IndexCtrl', ['$scope', '$rootScope', 'TemplateFactory', function($scope, $rootScope, TemplateFactory){
+app.controller('IndexCtrl', ['$scope', '$rootScope', 'TemplateFactory', 'ServerCommunication', function($scope, $rootScope, TemplateFactory, ServerCommunication){
     $scope.controller = "IndexCtrl";
     $scope.generate = function(){
         console.log("Génération en cours...");
@@ -24,9 +24,17 @@ app.controller('IndexCtrl', ['$scope', '$rootScope', 'TemplateFactory', function
         console.log($rootScope.inputsArray);
         console.log($rootScope.outputsArray);
 
-        //TODO: Faire appel à un service afin de mettre en place la génération du pré-template
         $rootScope.template = TemplateFactory.makeTemplate($rootScope.configurationArray, $rootScope.inputsArray, $rootScope.outputsArray, null);
         console.log($rootScope.template);
+
+        //TODO: Vérifier la configuration a envoyer, configuration, inputs, outputs & regulation
+        ServerCommunication.sendConfiguration($rootScope.template,
+            function(res){
+                console.log(res);
+            }, function(err){
+                console.log(err);
+            }
+        );
     };
 }]);
 
@@ -275,13 +283,19 @@ app.controller('ConfigCtrl', ['$scope', '$rootScope', '$location', function($sco
     $scope.controller = 'ConfigCtrl';
 
     $rootScope.configurationArray = [];
+    var configuration = {
+        application_name:"",
+        device_name:"",
+        modbus_enabled: false
+    };
 
     $scope.createConfiguration = function(){
         if($scope.application_name === "") alert('Pas de nom');
         if($scope.device_name === "") alert("Pas de nom!");
-        $rootScope.configurationArray.application_name = angular.copy($scope.application_name);
-        $rootScope.configurationArray.device_name = angular.copy($scope.device_name);
-        $rootScope.configurationArray.modbus_enable = angular.copy($scope.modbus_enable);
+        configuration.application_name = $scope.application_name;
+        configuration.device_name =$scope.device_name;
+        configuration.modbus_enabled = $scope.modbus_enable;
+        $rootScope.configurationArray.push(configuration);
         $location.path('/new_project');
     };
 }]);
@@ -318,6 +332,6 @@ app.controller('ModesCtrl', ['$scope', '$rootScope', function($scope, $rootScope
 }]);
 
 
-app.controller('RecapGeneralCtrl', ['$scope', '$rootScope', function($scope, $rootScope){
+app.controller('RecapGeneralCtrl', ['$scope', '$rootScope', 'ServerCommunication', function($scope, $rootScope, ServerCommunication){
     console.log($rootScope.template.configuration);
 }]);
