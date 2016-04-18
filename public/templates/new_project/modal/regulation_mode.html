@@ -1,22 +1,14 @@
 <h3>{{regulation_mode}}</h3>
 <form form-step-validity>
     <div class="row">
-        <div class="col s4 input-field">
+        <div class="col s6 input-field">
             <select ng-repeat="input in inputsArray">
                 <option value="{{input.name}}">{{input.name}}</option>
             </select>
         </div>
-        <div class="col s4 input-field">
+        <div class="col s6 input-field">
             <select ng-repeat="">
             </select>
-        </div>
-        <div class="col s2 input-field">
-            <input type="number" id="kp" name="kp"/>
-            <label for="kp">Kp</label>
-        </div>
-        <div class="col s2 input-field">
-            <input type="number" id="ki" name="ki"/>
-            <label for="ki">Ki</label>
         </div>
     </div>
 </form>

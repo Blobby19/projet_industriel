@@ -359,7 +359,7 @@ app.controller('ModesCtrl', ['$scope', '$rootScope', function($scope, $rootScope
 
         if(okInput && okOutput && okModes && okRegulation){
             for(var regul in $scope.regulation){
-                if(regul = true){
+                if(regul){
                     $rootScope.regulationSteps.push(regulation_Template);
                     console.log($rootScope.regulationSteps);
                 }
