@@ -39,7 +39,36 @@ describe('Server', function(){
            request.post({
                uri: url+'/api/create_application',
                form:{
-                   name: 'TestLuc'
+                   configuration:[{
+                       application_name: 'TestLuc',
+                       device_name: 'SCC-410M',
+                       modbus_enabled: true
+                   }],
+                   inputs:[
+                       {
+                           channel:'',
+                           name:'Test',
+                           type:''
+                       },
+                       {
+                           channel:'',
+                           name:'Temp',
+                           type:''
+                       }
+                   ],
+                   outputs:[
+                       {
+                           channel:'',
+                           name:'out1',
+                           type:''
+                       },
+                       {
+                           channel:'',
+                           name:'out2',
+                           type:''
+                       }
+                   ],
+                   regulation:null
                }
            }, function(err, res, body){
                expect(res.statusCode).to.equal(200);

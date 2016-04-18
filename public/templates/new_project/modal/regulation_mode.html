@@ -2,7 +2,8 @@
 <form form-step-validity>
     <div class="row">
         <div class="col s4 input-field">
-            <select ng-repeat="">
+            <select ng-repeat="input in inputsArray">
+                <option value="{{input.name}}">{{input.name}}</option>
             </select>
         </div>
         <div class="col s4 input-field">
@@ -11,11 +12,11 @@
         </div>
         <div class="col s2 input-field">
             <input type="number" id="kp" name="kp"/>
-            <label for="kp">Coef. de Proportionalité</label>
+            <label for="kp">Kp</label>
         </div>
         <div class="col s2 input-field">
             <input type="number" id="ki" name="ki"/>
-            <label for="ki">Coef. d'Intégration</label>
+            <label for="ki">Ki</label>
         </div>
     </div>
 </form>

@@ -10,7 +10,7 @@
 app.controller('IndexCtrl', ['$scope', '$rootScope', 'TemplateFactory', 'ServerCommunication', function($scope, $rootScope, TemplateFactory, ServerCommunication){
     $scope.controller = "IndexCtrl";
     $scope.generate = function(){
-        console.log("Génération en cours...");
+        console.log("GÃ©nÃ©ration en cours...");
         var inputs = angular.copy($rootScope.inputsArray);
         if(inputs === undefined || inputs.length<1){
             alert('erreur inputs');
@@ -27,7 +27,7 @@ app.controller('IndexCtrl', ['$scope', '$rootScope', 'TemplateFactory', 'ServerC
         $rootScope.template = TemplateFactory.makeTemplate($rootScope.configurationArray, $rootScope.inputsArray, $rootScope.outputsArray, null);
         console.log($rootScope.template);
 
-        //TODO: Vérifier la configuration a envoyer, configuration, inputs, outputs & regulation
+        //TODO: VÃ©rifier la configuration a envoyer, configuration, inputs, outputs & regulation
         ServerCommunication.sendConfiguration($rootScope.template,
             function(res){
                 console.log(res);
@@ -39,7 +39,7 @@ app.controller('IndexCtrl', ['$scope', '$rootScope', 'TemplateFactory', 'ServerC
 }]);
 
 /**
- * Controller de la page de configuration des entrées
+ * Controller de la page de configuration des entrÃ©es
  */
 app.controller('InputCtrl', ['$scope', '$rootScope', function($scope, $rootScope){
     $scope.controller = "InputCtrl";
@@ -93,7 +93,7 @@ app.controller('InputCtrl', ['$scope', '$rootScope', function($scope, $rootScope
 }]);
 
 /**
- * Controller des entrées analogiques
+ * Controller des entrÃ©es analogiques
  */
 app.controller('AnalogInputFormCtrl', ['$scope', 'multiStepFormScope', 'InputFactory', function($scope, multiStepFormScope, InputFactory){
     $scope.model = angular.copy(multiStepFormScope.model);
@@ -107,7 +107,7 @@ app.controller('AnalogInputFormCtrl', ['$scope', 'multiStepFormScope', 'InputFac
 }]);
 
 /**
- * Controller des entrées digitales
+ * Controller des entrÃ©es digitales
  */
 app.controller('DigitalInputFormCtrl', ['$scope', 'multiStepFormScope', 'InputFactory', function($scope, multiStepFormScope, InputFactory){
     $scope.model = angular.copy(multiStepFormScope.model);
@@ -121,7 +121,7 @@ app.controller('DigitalInputFormCtrl', ['$scope', 'multiStepFormScope', 'InputFa
 }]);
 
 /**
- * Controller de la fenêtre modale de configuration des entrées
+ * Controller de la fenÃªtre modale de configuration des entrÃ©es
  */
 app.controller('InputModalCtrl', ['$scope', '$rootScope', '$location', function($scope, $rootScope, $location){
     $scope.$on('$includeContentLoaded', function(event){
@@ -151,7 +151,7 @@ app.controller('InputModalCtrl', ['$scope', '$rootScope', '$location', function(
 }]);
 
 /**
- * Controller de récapitulation des entrées
+ * Controller de rÃ©capitulation des entrÃ©es
  */
 app.controller('RecapInputCtrl', ['$scope', '$rootScope', function($scope, $rootScope){
     $scope.inputs = $rootScope.inputsFormattedArray;
@@ -270,7 +270,7 @@ app.controller('DigitalOutputFormCtrl', ['$scope', 'multiStepFormScope', 'Output
 }]);
 
 /**
- * Controller de récapitulation des sorties
+ * Controller de rÃ©capitulation des sorties
  */
 app.controller('RecapOutputCtrl', ['$scope', '$rootScope', function($scope, $rootScope){
     $scope.outputs = $rootScope.outputsFormattedArray;
@@ -301,7 +301,7 @@ app.controller('ConfigCtrl', ['$scope', '$rootScope', '$location', function($sco
 }]);
 
 /**
- * Controller de la page de modes de régulation
+ * Controller de la page de modes de rÃ©gulation
  */
 app.controller('ModesCtrl', ['$scope', '$rootScope', function($scope, $rootScope){
     $scope.controller = "ModesCtrl";
@@ -312,6 +312,8 @@ app.controller('ModesCtrl', ['$scope', '$rootScope', function($scope, $rootScope
         freecooling: false
     };
 
+    $rootScope.regulationSteps = [];
+
     $scope.regulation = {
         roue_recuperation: false,
         vanne_froide: false,
@@ -320,17 +322,72 @@ app.controller('ModesCtrl', ['$scope', '$rootScope', function($scope, $rootScope
         registre_melange: false
     };
 
+    var regulation_Template = {
+        templateUrl: '/templates/new_project/modal/regulation_mode.html',
+        controller: 'RegulModalCtrl'
+    };
+
     $scope.createModal = function(){
         console.log($scope.regulation);
         console.log($rootScope.inputsArray);
+        var okInput = false;
+        var okOutput = false;
+        var okModes = false;
+        var okRegulation = false;
+
+        $rootScope.regulationSteps = [];
+
         if($rootScope.inputsArray === undefined)
-            alert('Vous n\'avez pas choisi d\'entrées');
+            alert('Vous n\'avez pas choisi d\'entrÃ©es');
+        else okInput = true;
+
         if($rootScope.outputsArray === undefined)
             alert('Vous n\'avez pas choisi de sorties');
+        else okOutput = true;
+
+        if(!$scope.modes.ete && !$scope.modes.freecooling && !$scope.modes.hiver){
+            alert('Vous n\'avez pas choisi de mode de rÃ©gulation!');
+        }
+        else okModes = true;
+
+        if(!$scope.regulation.roue_recuperation && !$scope.regulation.vanne_chaude
+            && !$scope.regulation.vanne_froide && !$scope.regulation.registre_an
+            && !$scope.regulation.registre_melange){
+            alert('Vous n\'avez pas choisi de rÃ©gulation!');
+        }
+        else okRegulation = true;
+
+        if(okInput && okOutput && okModes && okRegulation){
+            for(var regul in $scope.regulation){
+                if(regul = true){
+                    $rootScope.regulationSteps.push(regulation_Template);
+                    console.log($rootScope.regulationSteps);
+                }
+            }
+            
+        }
+
+        if(!$scope.showModal){
+            $scope.showModal = true;
+            $scope.template = {
+                modal: 'modal.html'
+            };
+        }
+        else{
+            $('#modal').openModal();
+        }
 
     };
 }]);
 
+app.controller('RegulModalCtrl', ['$scope', '$rootScope', function($scope, $rootScope){
+    $scope.inputs = $rootScope.inputsArray;
+    $scope.outputs = $rootScope.outputsArray;
+    $scope.$on('$includeContentLoaded', function(event){
+        if($rootScope.regulationSteps.length>0)
+            $('#modal').openModal();
+    });
+}]);
 
 app.controller('RecapGeneralCtrl', ['$scope', '$rootScope', 'ServerCommunication', function($scope, $rootScope, ServerCommunication){
     console.log($rootScope.template.configuration);

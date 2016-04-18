@@ -53,12 +53,12 @@
     </button>
 </form>
 
-<ng-include src="template.modal" ng-controller="ModeModalCtrl" ng-if="showModal"></ng-include>
+<ng-include src="template.modal" ng-controller="RegulModalCtrl" ng-if="showModal"></ng-include>
 
 <script type="text/ng-template" id="modal.html">
     <div class="modal" id="modal">
         <div class="modal-content">
-            <multi-step-container steps="modesSteps" on-cancel="cancel()" on-finish="finish()">
+            <multi-step-container steps="regulationSteps" on-cancel="cancel()" on-finish="finish()">
                 <header>
                     <button ng-disabled="$isFirst()" class="btn btn-default" ng-click="$previousStep()">
                         <span class="fa fa-chevron-left"></span>

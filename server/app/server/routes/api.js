@@ -13,8 +13,9 @@ module.exports = function(router, application){
 
     router.post('/create_application', function(req, res){
         console.log(req.body.configuration);
-        //if(req.body.configuration.name !== undefined)
-        //    application = new Application(req.body.name);
+        var application;
+        if(req.body.configuration.length > 0)
+            application = new Application(req.body.configuration[0].application_name);
         res.status(200).send(application);
     });
 
