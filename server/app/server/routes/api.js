@@ -15,7 +15,7 @@ module.exports = function(router, application){
         console.log(req.body.configuration);
         var application;
         if(req.body.configuration.length > 0)
-            application = new Application(req.body.configuration[0].application_name);
+            application = new Application(req.body.configuration[0].application_name, req.body.configuration[0].device_name);
         res.status(200).send(application);
     });
 

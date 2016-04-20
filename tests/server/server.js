@@ -77,6 +77,51 @@ describe('Server', function(){
            });
         });
 
+        it('should return a valid formed object', function(done){
+            request.post({
+                uri: url+'/api/create_application',
+                form:{
+                    configuration:[{
+                        application_name: 'TestLuc',
+                        device_name: 'SCC-410M',
+                        modbus_enabled: true
+                    }],
+                    inputs:[
+                        {
+                            channel:'',
+                            name:'Test',
+                            type:''
+                        },
+                        {
+                            channel:'',
+                            name:'Temp',
+                            type:''
+                        }
+                    ],
+                    outputs:[
+                        {
+                            channel:'',
+                            name:'out1',
+                            type:''
+                        },
+                        {
+                            channel:'',
+                            name:'out2',
+                            type:''
+                        }
+                    ],
+                    regulation:null
+                }
+            }, function(err, res, body){
+                expect(res.statusCode).to.equal(200);
+                expect(JSON.parse(body)).to.be.a('object');
+                expect(JSON.parse(body)).to.have.deep.property('appTag.childrens').with.length(4);
+                expect(JSON.parse(body)).to.have.deep.property('appTag.childrens[0].val').to.equal('SCC-410M');
+                expect(JSON.parse(body)).to.have.deep.property('appTag.childrens[1].val').to.equal('TestLuc');
+                done();
+            });
+        });
+
         it('should be a json object', function(done){
             request(url+'/api/templates', function(error, response, body){
                 expect(response.headers).to.have.property('content-type').and.equal('application/json; charset=utf-8');

@@ -20,27 +20,27 @@ var fs = require('fs');
  * @param jsonProperties
  * @constructor
  */
-var Application = function(appName, jsonProperties){
+var Application = function(appName, deviceName){
     Logger.info("Creation de l'application");
     this.compId = 0;
     this.sedonaApp = new SedonaAppTagClass();
     this.schemaTag = this.sedonaApp.getSchemaTag();
     this.appTag = this.sedonaApp.getAppTag();
     this.linksTag = this.sedonaApp.getLinksTag();
-    this.createApp(appName);
-    //this.createService();
+    this.createApp(appName, deviceName);
+    this.createService();
     //this.createApplication(__dirname+"\\..\\templates\\template_ete.json");
-    var tag = this.sedonaApp.generateTag();
+    //var tag = this.sedonaApp.generateTag();
     //console.log(tag);
 };
 
 /**
- * Ajoute les paramètres de l'application
+ * Ajoute les paramÃ¨tres de l'application
  * @param appName
  */
-Application.prototype.createApp = function(appName){
+Application.prototype.createApp = function(appName, deviceName){
     Logger.info("createApp");
-    var deviceNameProp = new PropTagClass("deviceName", "SCC410");
+    var deviceNameProp = new PropTagClass("deviceName", deviceName);
     var appNameProp = new PropTagClass("appName", appName);
     var scanPeriod = new PropTagClass("scanPeriod", "100");
     this.appTag.addChildren(deviceNameProp);
@@ -49,7 +49,7 @@ Application.prototype.createApp = function(appName){
 };
 
 /**
- * Ajoute les différents services indispensables
+ * Ajoute les diffÃ©rents services indispensables
  */
 Application.prototype.createService = function(){
     Logger.info("createService");
@@ -72,16 +72,16 @@ Application.prototype.createService = function(){
  * Permet de rajouter un service (ex. ModBus)
  */
 Application.prototype.addService = function(){
-    //TODO: Prévoir l'ajout de services
+    //TODO: PrÃ©voir l'ajout de services
 
 };
 
 /**
- * Ajoute tout les éléments de la CTA
+ * Ajoute tout les Ã©lÃ©ments de la CTA
  * @param jsonProperties
  */
 Application.prototype.createApplication = function(jsonProperties){
-    //TODO: le jsonProperties doit contenir tout les templates à utiliser. Actuellement ne contient qu'un seul template
+    //TODO: le jsonProperties doit contenir tout les templates Ã  utiliser. Actuellement ne contient qu'un seul template
     Logger.info("createApplication");
     var file = JSON.parse(fs.readFileSync(jsonProperties));
     var appFolder = new CompTagClass("App", "sys::Folder", ++this.compId);
@@ -94,11 +94,11 @@ Application.prototype.createApplication = function(jsonProperties){
  * Permet d'ajouter un template dans le AppTag
  */
 Application.prototype.addChildrenToAppTag = function(children){
-    //TODO: Prévoir l'ajout d'un template dans le AppTag
+    //TODO: PrÃ©voir l'ajout d'un template dans le AppTag
     if(children !== undefined && children !== null)
         this.appTag.addChildren(children);
 };
 
-//TODO: Prévoir l'ajout des links et des kits
+//TODO: PrÃ©voir l'ajout des links et des kits
 
 module.exports = Application;
