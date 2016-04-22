@@ -1,19 +1,11 @@
 <h3>Entrée Digitale</h3>
 <form form-step-validity>
     <div class="row">
-        <div class="col s4 input-field">
+        <div class="col s6 input-field">
             <input type="text" id="input_name" ng-model="model.name" required ng-maxlength="7" length="7"/>
             <label for="input_name">Nom de l'entrée</label>
         </div>
-        <div class="col s4 input-field">
-            <select ng-model="model.type">
-                <option value="" disabled selected>Choisissez le type</option>
-                <option value="0">Chaine de sécurité</option>
-                <option value="1">Alarme</option>
-            </select>
-            <label>Choisissez le type d'entrée</label>
-        </div>
-        <div class="col s4 input-field">
+        <div class="col s6 input-field">
             <select ng-model="model.channel">
                 <option value="" disabled selected>Choisissez le channel</option>
                 <option value="0">UI1</option>

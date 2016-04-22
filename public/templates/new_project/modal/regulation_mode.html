@@ -1,14 +1,19 @@
-<h3>{{regulation_mode}}</h3>
+<h3>{{$getActiveStep().title}}</h3>
 <form form-step-validity>
     <div class="row">
+        {{inputs}}
         <div class="col s6 input-field">
-            <select ng-repeat="input in inputsArray">
-                <option value="{{input.name}}">{{input.name}}</option>
+            <select ng-options="input.name for input in inputs | analogFilter:input.type" ng-model="model.input">
+                <option value="" disabled selected>Choisissez l'entrée</option>
             </select>
         </div>
         <div class="col s6 input-field">
-            <select ng-repeat="">
-            </select>
         </div>
     </div>
 </form>
+
+<script>
+    $(document).ready(function() {
+        $('select').material_select();
+    });
+</script>
