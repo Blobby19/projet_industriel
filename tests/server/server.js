@@ -39,36 +39,29 @@ describe('Server', function(){
            request.post({
                uri: url+'/api/create_application',
                form:{
-                   configuration:[{
-                       application_name: 'TestLuc',
-                       device_name: 'SCC-410M',
-                       modbus_enabled: true
+                   "configuration":[{
+                       "application_name":"Name",
+                       "device_name":"SCC-410M",
+                       "modbus_enabled":true
                    }],
-                   inputs:[
-                       {
-                           channel:'',
-                           name:'Test',
-                           type:''
-                       },
-                       {
-                           channel:'',
-                           name:'Temp',
-                           type:''
-                       }
-                   ],
-                   outputs:[
-                       {
-                           channel:'',
-                           name:'out1',
-                           type:''
-                       },
-                       {
-                           channel:'',
-                           name:'out2',
-                           type:''
-                       }
-                   ],
-                   regulation:null
+                   "inputs":[{
+                       "channel":"0",
+                       "name":"Entree1",
+                       "type":"analog"
+                   },{
+                       "channel":"1",
+                       "name":"Entree2",
+                       "type":"digital"
+                   }],
+                   "outputs":[{
+                       "channel":"0",
+                       "name":"Sortie1",
+                       "type":"analog"
+                   },{
+                       "channel":"1",
+                       "name":"Sortie2",
+                       "type":"digital"
+                   }]
                }
            }, function(err, res, body){
                expect(res.statusCode).to.equal(200);
@@ -81,43 +74,34 @@ describe('Server', function(){
             request.post({
                 uri: url+'/api/create_application',
                 form:{
-                    configuration:[{
-                        application_name: 'TestLuc',
-                        device_name: 'SCC-410M',
-                        modbus_enabled: true
+                    "configuration":[{
+                        "application_name":"Name",
+                        "device_name":"SCC-410M",
+                        "modbus_enabled":true
                     }],
-                    inputs:[
-                        {
-                            channel:'',
-                            name:'Test',
-                            type:''
-                        },
-                        {
-                            channel:'',
-                            name:'Temp',
-                            type:''
-                        }
-                    ],
-                    outputs:[
-                        {
-                            channel:'',
-                            name:'out1',
-                            type:''
-                        },
-                        {
-                            channel:'',
-                            name:'out2',
-                            type:''
-                        }
-                    ],
-                    regulation:null
+                    "inputs":[{
+                        "channel":"0",
+                        "name":"Entree1",
+                        "type":"analog"
+                    },{
+                        "channel":"1",
+                        "name":"Entree2",
+                        "type":"digital"
+                    }],
+                    "outputs":[{
+                        "channel":"0",
+                        "name":"Sortie1",
+                        "type":"analog"
+                    },{
+                        "channel":"1",
+                        "name":"Sortie2",
+                        "type":"digital"
+                    }]
                 }
             }, function(err, res, body){
                 expect(res.statusCode).to.equal(200);
                 expect(JSON.parse(body)).to.be.a('object');
-                expect(JSON.parse(body)).to.have.deep.property('appTag.childrens').with.length(4);
-                expect(JSON.parse(body)).to.have.deep.property('appTag.childrens[0].val').to.equal('SCC-410M');
-                expect(JSON.parse(body)).to.have.deep.property('appTag.childrens[1].val').to.equal('TestLuc');
+                console.log(JSON.parse(body));
                 done();
             });
         });
@@ -151,8 +135,8 @@ describe('Server', function(){
         });
 
         it('should return detail of ete template', function(done){
-            request(url+'/api/template/detail/template_ete', function(err, res, body){
-                expect(JSON.parse(body)).to.have.property('name').to.equal('template_mode_ete');
+            request(url+'/api/template/detail/template_regulation', function(err, res, body){
+                expect(JSON.parse(body)).to.have.property('name').to.equal('template_regulation');
                 done();
             });
         });

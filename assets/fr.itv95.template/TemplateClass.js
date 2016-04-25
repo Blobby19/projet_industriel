@@ -17,6 +17,7 @@ var TemplateClass = function(name, description, objects, compId){
     this.name = name;
     this.description = description;
     this.objects = objects;
+    console.log(objects);
     this.compId = compId;
     var test = this.generateTemplate(this.objects);
     return test;
@@ -49,7 +50,7 @@ TemplateClass.prototype.generateTemplate = function(objects){
         //Si 'objects' n'est pas un tableau alors on créer directement le CompTagClass
         else{
             if(objects.type !== undefined && objects.type !== ""){
-                console.log(objects);
+                //console.log(objects);
                 thisComp = this.makeComp(objects);
             }
         }
@@ -72,7 +73,6 @@ TemplateClass.prototype.makeComp = function(object){
         // Créer le CompTagClass de l'objet
         var thisComp = new CompTagClass(object.name, object.type, ++this.compId);
         // On récupère les PropTagClass de l'objet grâce au manifest associé
-        console.log(object);
         var thisSlots = this.findObjectSlotsInManifests(object.type, object);
         if(thisSlots instanceof Array && thisSlots.length>0){
             //On parcours tout les slots de l'objet
@@ -82,7 +82,7 @@ TemplateClass.prototype.makeComp = function(object){
                 //TODO: Prévoir l'utilisation de la fonction makeProp
                 //Si le slot possede le flag 'c' alors on le prend
                 if(thisSlots[i].flags !== undefined && thisSlots[i].flags.match(/c/))
-                    thisComp.addChildren(new PropTagClass(thisSlots[i].name, value));
+                    thisComp.addChildren(this.makeProp(thisSlots[i].name, value));
             }
         }
         return thisComp;
@@ -96,9 +96,10 @@ TemplateClass.prototype.makeComp = function(object){
 /**
  * Permet de Créer le PropTagClass de l'objet
  */
-TemplateClass.prototype.makeProp = function(){
+TemplateClass.prototype.makeProp = function(name, value){
     Logger.info("makeProp");
     //TODO: Prévoir la création du PropTagClass grâce à cette fonction
+    return new PropTagClass(name, value);
 };
 
 /**
@@ -106,6 +107,7 @@ TemplateClass.prototype.makeProp = function(){
  */
 TemplateClass.prototype.makeLink = function(){
     Logger.info("makeLink");
+
 };
 
 /**

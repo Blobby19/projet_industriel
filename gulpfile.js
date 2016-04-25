@@ -17,6 +17,11 @@ gulp.task('clean', function(){
     return del(['build']);
 });
 
+gulp.task('mocha_application', function(){
+    return gulp.src('tests/application/application.js', {read: false})
+        .pipe(mocha());
+});
+
 gulp.task('app-jshint', function(){
     return gulp.src(paths.appScripts)
         .pipe(jshint())
@@ -30,6 +35,10 @@ gulp.task('mocha', function(){
 
 gulp.task('watch', function(){
     gulp.watch(paths.scripts, ['mocha']);
+});
+
+gulp.task('watch_application', function(){
+    gulp.watch(paths.scripts, ['mocha_application']);
 });
 
 gulp.task('default', ['clean', 'scripts']);

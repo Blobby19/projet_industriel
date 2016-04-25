@@ -20,18 +20,25 @@ var fs = require('fs');
  * @param jsonProperties
  * @constructor
  */
-var Application = function(appName, deviceName){
+var Application = function(){
     Logger.info("Creation de l'application");
-    this.compId = 0;
-    this.sedonaApp = new SedonaAppTagClass();
-    this.schemaTag = this.sedonaApp.getSchemaTag();
-    this.appTag = this.sedonaApp.getAppTag();
-    this.linksTag = this.sedonaApp.getLinksTag();
-    this.createApp(appName, deviceName);
-    this.createService();
-    //this.createApplication(__dirname+"\\..\\templates\\template_ete.json");
-    //var tag = this.sedonaApp.generateTag();
-    //console.log(tag);
+    try{
+        this.compId = 0;
+        this.sedonaApp = new SedonaAppTagClass();
+        this.linksArray = new Array();
+        /*console.log(configuration);
+        this.createApp(configuration.configuration[0].application_name, configuration.configuration[0].device_name);
+        this.createService();
+        if(configuration.inputs.length>0 && configuration.outputs.length>0){
+            this.createApplication(configuration.inputs, configuration.outputs, templates);
+            //this.createApplication(__dirname+"\\..\\templates\\template_regulation.json");
+        }
+        var tag = this.sedonaApp.generateTag();
+        console.log(tag);*/
+    }
+    catch(ex){
+        Logger.error(ex.message);
+    }
 };
 
 /**
@@ -43,9 +50,9 @@ Application.prototype.createApp = function(appName, deviceName){
     var deviceNameProp = new PropTagClass("deviceName", deviceName);
     var appNameProp = new PropTagClass("appName", appName);
     var scanPeriod = new PropTagClass("scanPeriod", "100");
-    this.appTag.addChildren(deviceNameProp);
-    this.appTag.addChildren(appNameProp);
-    this.appTag.addChildren(scanPeriod);
+    this.sedonaApp.appTag.addChildren(deviceNameProp);
+    this.sedonaApp.appTag.addChildren(appNameProp);
+    this.sedonaApp.appTag.addChildren(scanPeriod);
 };
 
 /**
@@ -65,40 +72,92 @@ Application.prototype.createService = function(){
     service.addChildren(platService);
     service.addChildren(userService);
     service.addChildren(soxService);
-    this.appTag.addChildren(service);
+    this.sedonaApp.appTag.addChildren(service);
+};
+
+Application.prototype.createFolder = function(name){
+    if(name !== undefined){
+        return new CompTagClass(name, "sys::Folder", ++this.compId);
+    }
 };
 
 /**
- * Permet de rajouter un service (ex. ModBus)
+ * Create Input Folder and inputs variables
+ * @param inputs
  */
-Application.prototype.addService = function(){
-    //TODO: Prévoir l'ajout de services
+Application.prototype.addInputsFolder = function(inputs){
+    var folder = this.createFolder("Inputs");
+    var self = this;
+    if(inputs instanceof Array){
+        inputs.forEach(function(input){
+            var channel = null;
+            var object = null;
 
+            if(input.channel === "")
+                channel = new PropTagClass("channel", 0);
+            else
+                channel = new PropTagClass("channel", input.channel);
+
+            if(input.type === 'analog')
+                object = new CompTagClass(input.name, "SysMikPlatScc41xm::IoAI", ++self.compId);
+            else
+                object = new CompTagClass(input.name, "SysMikPlatScc41xm::IoDI", ++self.compId);
+
+            object.addChildren(channel);
+            folder.addChildren(object);
+        });
+    }
+    this.sedonaApp.appTag.addChildren(folder);
 };
 
 /**
- * Ajoute tout les éléments de la CTA
- * @param jsonProperties
+ * Create Output Folder and outputs variables
+ * @param outputs
  */
-Application.prototype.createApplication = function(jsonProperties){
-    //TODO: le jsonProperties doit contenir tout les templates à utiliser. Actuellement ne contient qu'un seul template
-    Logger.info("createApplication");
-    var file = JSON.parse(fs.readFileSync(jsonProperties));
-    var appFolder = new CompTagClass("App", "sys::Folder", ++this.compId);
-    var template = new TemplateClass(file.name, file.description, file.objects, this.compId);
-    appFolder.addChildren(template);
-    this.appTag.addChildren(appFolder);
+Application.prototype.addOutputsFolder = function(outputs){
+    var folder = this.createFolder('Outputs');
+    var self = this;
+    if(outputs instanceof Array){
+        outputs.forEach(function(output){
+            var channel = null;
+            var object = null;
+
+            if(output.channel === "")
+                channel = new PropTagClass("channel", 0);
+            else
+                channel = new PropTagClass("channel", output.channel);
+
+            if(output.type === 'analog')
+                object = new CompTagClass(output.name, "SysMikPlatScc41xm::IoAO", ++self.compId);
+            else
+                object = new CompTagClass(output.name, "SysMikPlatScc41xm::IoDO", ++self.compId);
+
+            object.addChildren(channel);
+            folder.addChildren(object);
+        });
+    }
+    this.sedonaApp.appTag.addChildren(folder);
 };
 
 /**
- * Permet d'ajouter un template dans le AppTag
+ * Add Template to appTag
+ * @param name
+ *
  */
-Application.prototype.addChildrenToAppTag = function(children){
-    //TODO: Prévoir l'ajout d'un template dans le AppTag
-    if(children !== undefined && children !== null)
-        this.appTag.addChildren(children);
+Application.prototype.addTemplate = function(template){
+    var folder = this.createFolder(template.folder_name);
+    var file = JSON.parse(fs.readFileSync(__dirname+'\\..\\templates\\'+template.name+'.json'));
+    //console.log(file.objects.childrens);
+    var templateObject = new TemplateClass(file.name, file.description, file.objects.childrens, this.compId);
+    console.log(templateObject);
+    folder.addChildren(templateObject);
+    this.sedonaApp.appTag.addChildren(folder);
+    this.makeInternalLinks(folder, file.objects.links);
 };
 
-//TODO: Prévoir l'ajout des links et des kits
+Application.prototype.makeInternalLinks = function(folder, links){
+    "/app/Hiver/Output.out";
+    console.log(this.sedonaApp.generateTag());
+};
 
 module.exports = Application;

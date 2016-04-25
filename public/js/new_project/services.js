@@ -52,6 +52,7 @@ app.factory('TemplateFactory', [function(){
             template.inputs = inputs;
             template.outputs = outputs;
             template.regulation = regulation;
+            console.log(template);
             return template;
         }
     }

@@ -1,13 +1,13 @@
 {
-  "name": "template_mode_ete",
+  "name": "template_regulation",
   "description": "Template du mode de régulation Ete",
-  "objects":[{
-    "name":"Ete",
+  "objects":{
+    "name":"Regulation",
     "type":"sys::Folder",
     "childrens":[
       {
-        "name":"ConsEte",
-        "type":"types::ConstFloat"
+        "name":"SetPt",
+        "type":"types::WriteFloat"
       },
       {
         "name":"Kp",
@@ -18,21 +18,25 @@
         "type":"types::ConstFloat"
       },
       {
-        "name":"TRep",
+        "name":"Input",
         "type":"types::WriteFloat"
+      },
+      {
+        "name": "Enable",
+        "type":"types::WriteBool"
       },
       {
         "name":"LP",
         "type":"func::LP"
       },
       {
-        "name":"VFr",
+        "name":"Output",
         "type":"types::WriteFloat"
       }
     ],
     "links":[
       {
-        "from":"ConsEte.out",
+        "from":"SetPt.out",
         "to":"LP.sp"
       },
       {
@@ -44,13 +48,31 @@
         "to":"LP.ki"
       },
       {
-        "from":"TRep.out",
+        "from":"Input.out",
         "to":"LP.cv"
+      },
+      {
+        "from":"Enable.out",
+        "to":"LP.enable"
       },
       {
         "from":"ConsEte.out",
         "to": "LP.cv"
       }
     ]
-  }]
+  },
+  "externalLinks":[
+    {
+      "to":"Input.in",
+      "type": "float"
+    },
+    {
+      "to":"Enable.in",
+      "type": "bool"
+    },
+    {
+      "from":"Output.out",
+      "type":"float"
+    }
+  ]
 }

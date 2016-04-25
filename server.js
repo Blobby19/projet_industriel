@@ -20,6 +20,7 @@ module.exports = function(){
 
     var application = null;
 
+    //Appel du router des 
     var public = express.Router();
     require('./server/app/server/routes/public.js')(public, configuration);
     app.use('/', public);

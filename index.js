@@ -13,7 +13,7 @@ var dbManifest = new dbManifestInit("C:\\sedona\\manifests", "C:\\Users\\Luc\\We
 //var dbManifest = new dbManifestInit(__dirname+"\\..\\manifests", __dirname+"\\assets\\fr.itv95.db");
 
 var ApplicationClass = require(__dirname+'\\assets\\Application.js');
-var Application = new ApplicationClass("TestLuc");
+var Application = new ApplicationClass();
 
 var db = require(__dirname+'\\assets\\fr.itv95.db\\RecoverManifest.js')();
 
