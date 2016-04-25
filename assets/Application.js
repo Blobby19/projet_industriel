@@ -151,11 +151,14 @@ Application.prototype.addTemplate = function(template){
     var templateObject = new TemplateClass(file.name, file.description, file.objects.childrens, this.compId);
     console.log(templateObject);
     folder.addChildren(templateObject);
+    //TODO: Modifier le parsing des templates de façon a récupérer les objets et non uniquement le dernier objet
     this.sedonaApp.appTag.addChildren(folder);
     this.makeInternalLinks(folder, file.objects.links);
 };
 
 Application.prototype.makeInternalLinks = function(folder, links){
+
+    //TODO: Ajouter la création des templates
     "/app/Hiver/Output.out";
     console.log(this.sedonaApp.generateTag());
 };
