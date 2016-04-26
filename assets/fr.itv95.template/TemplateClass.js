@@ -13,15 +13,13 @@ var fs = require('fs');
  * Constructeur de la classe Template
  * @constructor
  */
-var TemplateClass = function(name, description, objects, compId){
+var TemplateClass = function(name, description, objects, links, compId){
+    console.log(objects);
     this.name = name;
     this.description = description;
     this.objects = objects;
-    console.log(objects);
+    this.links = links;
     this.compId = compId;
-    var test = this.generateTemplate(this.objects);
-    return test;
-
 };
 
 /**
@@ -29,36 +27,28 @@ var TemplateClass = function(name, description, objects, compId){
  * @param objects
  * @returns Retourne un objet CompTagClass qui possède tous ses PropagClass
  */
-TemplateClass.prototype.generateTemplate = function(objects){
+TemplateClass.prototype.generateTemplate = function(folder, linksTag){
     Logger.info("generateTemplate");
+    var thisComp = null;
+    var components = Array();
     try{
-        var thisComp = null;
-        //On vérifie que le 'objects' soit un tableau
-        if(objects instanceof Array && objects.length>0){
-            //On regarde tout ce que contient le tableau 'objects'
-            for(var i = 0; i<objects.length; i++){
-                if(objects[i].type !== undefined && objects[i].type!== ""){
-                    //On créer le CompTagClass
-                    thisComp = this.makeComp(objects[i]);
-                }
-                if(objects[i].childrens !== undefined && objects[i].childrens.length>0){
-                    for(var j = 0; j<objects[i].childrens.length; j++)
-                        thisComp.addChildren(this.generateTemplate(objects[i].childrens[j]));
+        if(this.objects instanceof Array && this.objects.length>0){
+            for(var i =0; i<this.objects.length; i++){
+                //console.log(objects[i]);
+                if(this.objects[i].type !== undefined && this.objects[i].type !== ""){
+                    thisComp = this.makeComp(this.objects[i]);
+                    folder.addChildren(thisComp);
                 }
             }
         }
-        //Si 'objects' n'est pas un tableau alors on créer directement le CompTagClass
-        else{
-            if(objects.type !== undefined && objects.type !== ""){
-                //console.log(objects);
-                thisComp = this.makeComp(objects);
+        if(this.links instanceof Array && this.links.length>0){
+            for(var i =0; i<this.links.length; i++){
+
             }
         }
-        return thisComp;
     }
     catch(ex){
-        Logger.error(ex.message);
-        return;
+        console.log(ex.message);
     }
 };
 
@@ -79,6 +69,7 @@ TemplateClass.prototype.makeComp = function(object){
             for(var i = 0; i<thisSlots.length; i++){
                 var value;
                 if(thisSlots[i]._default !== undefined) value=thisSlots[i]._default;
+                else if(thisSlots[i].type)
                 //TODO: Prévoir l'utilisation de la fonction makeProp
                 //Si le slot possede le flag 'c' alors on le prend
                 if(thisSlots[i].flags !== undefined && thisSlots[i].flags.match(/c/))
@@ -105,8 +96,8 @@ TemplateClass.prototype.makeProp = function(name, value){
 /**
  * Permet de créer les liens associés au objets présent dans le template
  */
-TemplateClass.prototype.makeLink = function(){
-    Logger.info("makeLink");
+TemplateClass.prototype.makeLinks = function(links){
+    Logger.info("makeLinks");
 
 };
 

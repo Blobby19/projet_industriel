@@ -1,58 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <sedonaApp>
 <schema>
-<kit name="basicSchedule" checksum="7fdca638"/>
-<kit name="control" checksum="808b7db3"/>
-<kit name="datetime" checksum="3a280dce"/>
-<kit name="datetimeStd" checksum="fc5628d7"/>
-<kit name="driver" checksum="b4cc82ce"/>
-<kit name="func" checksum="821b7396"/>
-<kit name="hvac" checksum="7264c67c"/>
-<kit name="inet" checksum="25648ba7"/>
-<kit name="logic" checksum="9fe95ce1"/>
-<kit name="logManager" checksum="da7714f6"/>
-<kit name="math" checksum="c22b255c"/>
-<kit name="platUnix" checksum="751711ab"/>
-<kit name="platWin32" checksum="3746c8c1"/>
-<kit name="pricomp" checksum="b5cd6698"/>
-<kit name="pstore" checksum="7ea2cb06"/>
-<kit name="serial" checksum="87314b6e"/>
-<kit name="sox" checksum="397a84dd"/>
-<kit name="soxcert" checksum="69ef332c"/>
-<kit name="sys" checksum="d3984c51"/>
-<kit name="SysMikAlarm" checksum="39ab7535"/>
-<kit name="SysMikBaActuator" checksum="6a7c4482"/>
-<kit name="SysMikBaAppGeneral" checksum="271d417"/>
-<kit name="SysMikBaAppHvac" checksum="a02c6c4c"/>
-<kit name="SysMikBaAppLighting" checksum="df3c99ca"/>
-<kit name="SysMikBaAppShading" checksum="d929a2e0"/>
-<kit name="SysMikBaOperator" checksum="77247d50"/>
-<kit name="SysMikBaSensor" checksum="43f651c0"/>
-<kit name="SysMikHistory" checksum="e4efc46c"/>
-<kit name="SysMikIcsManualCtrl" checksum="1bcf7e2a"/>
-<kit name="SysMikInlineIo" checksum="67ec948"/>
-<kit name="SysMikIntesaNet" checksum="6a64c832"/>
-<kit name="SysMikLocalIo" checksum="ad4f131b"/>
-<kit name="SysMikModbusClient" checksum="2cd715ea"/>
-<kit name="SysMikModbusClientStat" checksum="3c1e7cf"/>
-<kit name="SysMikModbusServer" checksum="c4064f4f"/>
-<kit name="SysMikMp" checksum="87047161"/>
-<kit name="SysMikMpBus" checksum="4e06d802"/>
-<kit name="SysMikNativeLib" checksum="324911d8"/>
-<kit name="SysMikPlatIcs" checksum="b0a638d8"/>
-<kit name="SysMikPlatScc41x" checksum="d8945fa7"/>
-<kit name="SysMikPlatScc41xm" checksum="8babb598"/>
-<kit name="SysMikPlatScc52x" checksum="7955ba73"/>
-<kit name="SysMikPlatSccFb" checksum="f37abcb8"/>
-<kit name="SysMikSchedule" checksum="a93107af"/>
-<kit name="timing" checksum="aeaac82a"/>
-<kit name="tutorial" checksum="89858e3e"/>
-<kit name="types" checksum="10936551"/>
-<kit name="web" checksum="462d43e"/>
 </schema>
 <app>
-<prop name="deviceName" val="SCC410"/>
-<prop name="appName" val="TestLuc"/>
+<prop name="deviceName" val="SCC-410M"/>
+<prop name="appName" val="Test"/>
 <prop name="scanPeriod" val="100"/>
 <comp name="service" type="sys::Folder" id="1">
 <comp name="plat" type="SysMikPlatScc41xm::SccPlatformService" id="2">
@@ -67,36 +18,42 @@
 <comp name="sox" type="sox::SoxService" id="5">
 </comp>
 </comp>
-<comp name="App" type="sys::Folder" id="6">
-<comp name="Ete" type="sys::Folder" id="7">
-<comp name="ConsEte" type="types::ConstFloat" id="8">
-<prop name="out" val="0"/>
+<comp name="Inputs" type="sys::Folder" id="6">
+<comp name="Entree1" type="SysMikPlatScc41xm::IoAI" id="7">
+<prop name="channel" val="0"/>
 </comp>
-<comp name="Kp" type="types::ConstFloat" id="9">
-<prop name="out" val="0"/>
+<comp name="Entree2" type="SysMikPlatScc41xm::IoDI" id="8">
+<prop name="channel" val="1"/>
 </comp>
-<comp name="Ki" type="types::ConstFloat" id="10">
-<prop name="out" val="0"/>
 </comp>
-<comp name="TRep" type="types::WriteFloat" id="11">
+<comp name="Outputs" type="sys::Folder" id="9">
+<comp name="Sortie1" type="SysMikPlatScc41xm::IoAO" id="10">
+<prop name="channel" val="0"/>
+</comp>
+<comp name="Sortie2" type="SysMikPlatScc41xm::IoDO" id="11">
+<prop name="channel" val="1"/>
+</comp>
+</comp>
+<comp name="Hiver" type="sys::Folder" id="12">
+<comp name="SetPt" type="types::WriteFloat" id="13">
 <prop name="in" val="0"/>
 </comp>
-<comp name="LP" type="func::LP" id="12">
-<prop name="enable" val="true"/>
-<prop name="sp" val="0.0"/>
-<prop name="kp" val="1.0"/>
-<prop name="ki" val="0.0"/>
-<prop name="kd" val="0.0"/>
-<prop name="max" val="100.0"/>
-<prop name="min" val="0.0"/>
-<prop name="bias" val="0.0"/>
-<prop name="maxDelta" val="0.0"/>
-<prop name="direct" val="true"/>
-<prop name="exTime" val="1000"/>
+<comp name="Kp" type="types::ConstFloat" id="14">
+<prop name="out" val="0"/>
 </comp>
-<comp name="VFr" type="types::WriteFloat" id="13">
+<comp name="Ki" type="types::ConstFloat" id="15">
+<prop name="out" val="0"/>
+</comp>
+<comp name="Input" type="types::WriteFloat" id="16">
 <prop name="in" val="0"/>
 </comp>
+<comp name="Enable" type="types::WriteBool" id="17">
+<prop name="in" val="0"/>
+</comp>
+<comp name="LP" type="func::LP" id="18">
+</comp>
+<comp name="Output" type="types::WriteFloat" id="19">
+<prop name="in" val="0"/>
 </comp>
 </comp>
 </app>

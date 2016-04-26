@@ -142,25 +142,73 @@ Application.prototype.addOutputsFolder = function(outputs){
 /**
  * Add Template to appTag
  * @param name
- *
  */
 Application.prototype.addTemplate = function(template){
     var folder = this.createFolder(template.folder_name);
     var file = JSON.parse(fs.readFileSync(__dirname+'\\..\\templates\\'+template.name+'.json'));
     //console.log(file.objects.childrens);
-    var templateObject = new TemplateClass(file.name, file.description, file.objects.childrens, this.compId);
-    console.log(templateObject);
+    var templateObject = new TemplateClass(file.name, file.description, file.objects.childrens, file.objects.links, this.compId);
+    templateObject.generateTemplate(folder);
     folder.addChildren(templateObject);
-    //TODO: Modifier le parsing des templates de façon a récupérer les objets et non uniquement le dernier objet
     this.sedonaApp.appTag.addChildren(folder);
-    this.makeInternalLinks(folder, file.objects.links);
+    console.log(this.sedonaApp.generateTag());
 };
 
-Application.prototype.makeInternalLinks = function(folder, links){
+Application.prototype.generateProgram = function(){
+    var file = "";
+    file+="<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
+    this.getAllManifestsDependancies(this.sedonaApp);
 
-    //TODO: Ajouter la création des templates
-    "/app/Hiver/Output.out";
-    console.log(this.sedonaApp.generateTag());
+};
+
+/**
+ * Retourne tout les types utilisés
+ * @param obj
+ * @returns {*}
+ */
+Application.prototype.getAllManifestsDependancies = function(obj){
+    //TODO: Finir cette fonction récursive
+    var kits = Array();
+    for(key in obj){
+        console.log(typeof(obj[key]));
+        if(obj[key] instanceof Object){
+            if(obj[key].type !== undefined){
+                console.log(obj[key].type);
+                var kit = obj[key].type.replace(/::.+/gi, '');
+                var present = false;
+                for(var i = 0; i<kits.length; i++){
+                    if(kit===kits[i]){
+                        present = false;
+                        break;
+                    }
+                    present = true;
+                }
+                if(present || kits.length == 0) kits.push(kit);
+                console.log(kits);
+                return;
+            }
+            else{
+                this.getAllManifestsDependancies(obj[key]);
+            }
+        }
+        else if(obj[key] instanceof Array){
+            this.getAllManifestsDependancies(obj[key]);
+        }
+        else if(obj[key] instanceof Function){
+            return;
+        }
+        /*if(obj[key] instanceof Object && !(obj[key] instanceof Array)){
+            console.log(obj[key]);
+        }
+        else if((obj[key] instanceof Array)) {
+            obj[key].forEach(function(obj){
+                obj = replaceDynamically(obj, arg, valid);
+            });
+        }
+        else return obj;*/
+    }
+    return obj;
+
 };
 
 module.exports = Application;

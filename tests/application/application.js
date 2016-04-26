@@ -51,7 +51,6 @@ describe('Test Tags Class', function(){
         expect(application.sedonaApp.appTag).to.not.equal(null);
         expect(application.sedonaApp.appTag.childrens).to.have.property('length');
         var count = application.sedonaApp.appTag.childrens.length;
-
         application.createService();
         expect(application.sedonaApp.appTag).to.deep.property('childrens['+count+'].name').to.equal('service');
         expect(application.sedonaApp.appTag).to.deep.property('childrens['+count+'].childrens[0].name').to.equal('plat');
@@ -127,6 +126,12 @@ describe('Test Tags Class', function(){
         application.addTemplate(template);
         expect(application.sedonaApp.appTag).to.deep.property('childrens['+count+'].tagName').to.equal('comp');
         expect(application.sedonaApp.appTag).to.deep.property('childrens['+count+'].name').to.equal(template.folder_name);
+        expect(application.sedonaApp.appTag).to.deep.property('childrens['+count+'].childrens[0].tagName').to.equal('comp');
+        expect(application.sedonaApp.appTag).to.deep.property('childrens['+count+'].childrens[0].name').to.equal('SetPt');
+    });
+
+    it('save to File correctly', function(){
+        application.generateProgram();
     });
 
     /*
