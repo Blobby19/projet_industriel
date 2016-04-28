@@ -144,3 +144,35 @@
 {"name":"CompTagClass","hostname":"PC-Luc","pid":20780,"level":50,"msg":"this.type.contains is not a function","time":"2016-04-28T09:00:54.834Z","v":0}
 {"name":"CompTagClass","hostname":"PC-Luc","pid":20780,"level":50,"msg":"this.type.contains is not a function","time":"2016-04-28T09:00:54.834Z","v":0}
 {"name":"CompTagClass","hostname":"PC-Luc","pid":20780,"level":50,"msg":"this.type.contains is not a function","time":"2016-04-28T09:00:54.834Z","v":0}
+{"name":"TemplateClass","hostname":"PC-Luc","pid":8180,"level":50,"msg":"self is not defined","time":"2016-04-28T10:57:36.795Z","v":0}
+{"name":"TemplateClass","hostname":"PC-Luc","pid":8180,"level":50,"msg":"self is not defined","time":"2016-04-28T10:57:36.796Z","v":0}
+{"name":"TemplateClass","hostname":"PC-Luc","pid":8180,"level":50,"msg":"self is not defined","time":"2016-04-28T10:57:36.797Z","v":0}
+{"name":"TemplateClass","hostname":"PC-Luc","pid":8180,"level":50,"msg":"self is not defined","time":"2016-04-28T10:57:36.797Z","v":0}
+{"name":"TemplateClass","hostname":"PC-Luc","pid":8180,"level":50,"msg":"self is not defined","time":"2016-04-28T10:57:36.798Z","v":0}
+{"name":"Application","hostname":"PC-Luc","pid":9848,"level":50,"msg":"SedonaSCodeTagClass is not defined","time":"2016-04-28T13:24:13.774Z","v":0}
+{"name":"Application","hostname":"PC-Luc","pid":9848,"level":50,"msg":"SedonaSCodeTagClass is not defined","time":"2016-04-28T13:24:45.909Z","v":0}
+{"name":"Application","hostname":"PC-Luc","pid":9848,"level":50,"msg":"SedonaSCodeTagClass is not a function","time":"2016-04-28T13:25:28.955Z","v":0}
+{"name":"Application","hostname":"PC-Luc","pid":9848,"level":50,"msg":"SedonaSCodeTagClass is not a function","time":"2016-04-28T13:25:30.960Z","v":0}
+{"name":"Application","hostname":"PC-Luc","pid":13564,"level":50,"msg":"SedonaSCodeTagClass is not a function","time":"2016-04-28T13:25:58.514Z","v":0}
+{"name":"Application","hostname":"PC-Luc","pid":13564,"level":50,"msg":"SedonaSCodeTagClass is not a function","time":"2016-04-28T13:26:00.391Z","v":0}
+{"name":"Application","hostname":"PC-Luc","pid":13564,"level":50,"msg":"SedonaSCodeTagClass is not a function","time":"2016-04-28T13:27:11.955Z","v":0}
+{"name":"Application","hostname":"PC-Luc","pid":13564,"level":50,"msg":"SedonaSCodeTagClass is not a function","time":"2016-04-28T13:27:34.504Z","v":0}
+{"name":"Application","hostname":"PC-Luc","pid":13564,"level":50,"msg":"SedonaSCodeTagClass is not a function","time":"2016-04-28T13:27:39.618Z","v":0}
+{"name":"Application","hostname":"PC-Luc","pid":13564,"level":50,"msg":"SedonaSCodeTagClass is not a function","time":"2016-04-28T13:27:42.006Z","v":0}
+{"name":"Application","hostname":"PC-Luc","pid":13564,"level":50,"msg":"SedonaSCodeTagClass is not a function","time":"2016-04-28T13:29:53.843Z","v":0}
+{"name":"Application","hostname":"PC-Luc","pid":17364,"level":50,"msg":"SedonaSCodeTagClass is not defined","time":"2016-04-28T13:50:38.569Z","v":0}
+{"name":"SedonaSCodeTagClass","hostname":"PC-Luc","pid":17364,"level":50,"msg":"this.kits.generateTag is not a function","time":"2016-04-28T13:51:46.845Z","v":0}
+{"name":"SedonaSCodeTagClass","hostname":"PC-Luc","pid":17364,"level":50,"msg":"this.kits.generateTag is not a function","time":"2016-04-28T13:52:12.781Z","v":0}
+{"name":"SedonaSCodeTagClass","hostname":"PC-Luc","pid":17364,"level":50,"msg":"this.kits.generateTag is not a function","time":"2016-04-28T13:52:37.550Z","v":0}
+{"name":"SedonaSCodeTagClass","hostname":"PC-Luc","pid":17364,"level":50,"msg":"this.kits.generateTag is not a function","time":"2016-04-28T13:53:15.386Z","v":0}
+{"name":"SedonaSCodeTagClass","hostname":"PC-Luc","pid":17364,"level":50,"msg":"this.kits.generateTag is not a function","time":"2016-04-28T13:53:52.959Z","v":0}
+{"name":"SedonaSCodeTagClass","hostname":"PC-Luc","pid":17364,"level":50,"msg":"kit.generateTag is not a function","time":"2016-04-28T13:53:57.045Z","v":0}
+{"name":"SedonaSCodeTagClass","hostname":"PC-Luc","pid":17364,"level":50,"msg":"kit.generateTag is not a function","time":"2016-04-28T13:54:15.272Z","v":0}
+{"name":"Application","hostname":"PC-Luc","pid":18260,"level":50,"msg":"SCodeDependTagClass is not defined","time":"2016-04-28T13:57:37.197Z","v":0}
+{"name":"ManifestFileClass","hostname":"PC-Luc","pid":18260,"level":50,"msg":"ENOENT: no such file or directory, access 'C:\\Users\\Luc\\WebstormProjects\\CTAMaker\\app\\result\\meta-inf'","time":"2016-04-28T14:20:04.652Z","v":0}
+{"name":"ManifestFileClass","hostname":"PC-Luc","pid":18260,"level":50,"msg":"ENOENT: no such file or directory, access 'C:\\Users\\Luc\\WebstormProjects\\CTAMaker\\app\\result\\meta-inf'","time":"2016-04-28T14:21:13.307Z","v":0}
+{"name":"ManifestFileClass","hostname":"PC-Luc","pid":18260,"level":50,"msg":"ENOENT: no such file or directory, access 'C:\\Users\\Luc\\WebstormProjects\\CTAMaker\\app\\result\\meta-inf'","time":"2016-04-28T14:23:31.301Z","v":0}
+{"name":"ManifestFileClass","hostname":"PC-Luc","pid":18260,"level":50,"msg":"ENOENT: no such file or directory, access 'C:\\Users\\Luc\\WebstormProjects\\CTAMaker\\app\\result\\meta-inf'","time":"2016-04-28T14:24:14.800Z","v":0}
+{"name":"ManifestFileClass","hostname":"PC-Luc","pid":18260,"level":50,"msg":"ENOENT: no such file or directory, access 'C:\\Users\\Luc\\WebstormProjects\\CTAMaker\\app\\result\\meta-inf'","time":"2016-04-28T14:24:50.064Z","v":0}
+{"name":"ManifestFileClass","hostname":"PC-Luc","pid":18260,"level":50,"msg":"ENOENT: no such file or directory, access 'C:\\Users\\Luc\\WebstormProjects\\CTAMaker\\app\\result\\meta-inf'","time":"2016-04-28T14:25:50.145Z","v":0}
+{"name":"Application","hostname":"PC-Luc","pid":18260,"level":50,"msg":"SedonaSCodeTagClass is not defined","time":"2016-04-28T15:05:40.265Z","v":0}

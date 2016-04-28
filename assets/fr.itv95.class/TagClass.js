@@ -4,10 +4,11 @@
 
 var Logger = require('..\\fr.itv95.logger\\LoggerClass.js')('TagClass');
 
-var TagClass = function(tagName, listOfAttributes, childrens){
+var TagClass = function(tagName, listOfAttributes, childrens, parent){
     this.tagName = tagName;
     this.listOfAttributes = (listOfAttributes != undefined)?listOfAttributes: new Array;
     this.childrens = (childrens != undefined)?childrens:new Array;
+    this.parent = (parent!= undefined)?parent:null;
 };
 
 TagClass.prototype.getTagName = function(){
@@ -39,7 +40,19 @@ TagClass.prototype.setChildrens = function(childrens){
 };
 
 TagClass.prototype.addChildren = function(children){
+    if(children instanceof TagClass){
+        children.setParent(this);
+    }
+
     this.childrens.push(children);
+};
+
+TagClass.prototype.getParent = function(){
+    return this.parent;
+};
+
+TagClass.prototype.setParent = function(parent){
+    this.parent = parent;
 };
 
 TagClass.prototype.generateTag = function(){

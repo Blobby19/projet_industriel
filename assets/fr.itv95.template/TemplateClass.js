@@ -70,8 +70,10 @@ TemplateClass.prototype.makeComp = function(object){
                 else if(thisSlots[i].type)
                 //TODO: Prévoir l'utilisation de la fonction makeProp
                 //Si le slot possede le flag 'c' alors on le prend
-                if(thisSlots[i].flags !== undefined && thisSlots[i].flags.match(/c/))
-                    thisComp.addChildren(this.makeProp(thisSlots[i].name, value));
+                if(thisSlots[i].flags !== undefined && thisSlots[i].flags.match(/c/)) {
+                    var prop = this.makeProp(thisSlots[i].name, value);
+                    thisComp.addChildren(prop);
+                }
             }
         }
         return thisComp;
@@ -96,7 +98,6 @@ TemplateClass.prototype.makeProp = function(name, value){
  */
 TemplateClass.prototype.makeLinks = function(links){
     Logger.info("makeLinks");
-
 };
 
 /**

@@ -100,10 +100,15 @@ Application.prototype.addInputsFolder = function(inputs){
             else
                 object = new CompTagClass(input.name, "SysMikPlatScc41xm::IoDI", ++self.compId);
 
+            //channel.setParent(object);
             object.addChildren(channel);
+            //object.setParent(folder);
             folder.addChildren(object);
         });
     }
+    //folder.setParent(this.sedonaApp.appTag);
+    console.log(folder.getParent());
+
     this.sedonaApp.appTag.addChildren(folder);
 };
 
@@ -146,6 +151,7 @@ Application.prototype.addTemplate = function(template){
     var templateObject = new TemplateClass(file.name, file.description, file.objects.childrens, file.objects.links, this.compId);
     templateObject.generateTemplate(folder);
     folder.addChildren(templateObject);
+    templateObject.makeLinks();
     this.sedonaApp.appTag.addChildren(folder);
 };
 
@@ -170,6 +176,7 @@ Application.prototype.getAllManifestsDependancies = function(obj){
         if(present || this.kits.length == 0) this.kits.push(kit);
     }
     for(key in obj){
+        if(key ==='parent') continue;
         if(typeof(obj[key])=== 'object'){
             if(obj[key].length === undefined){
                 if(obj[key].tagName === 'prop'){
@@ -206,6 +213,7 @@ Application.prototype.getAllManifestsDependancies = function(obj){
  */
 Application.prototype.makeAllKitTags = function(){
     var kitTags = new Array();
+    var manifestKitTag = new Array();
     var self = this;
     if(this.kits.length>0){
         var manifests = fs.readdirSync(__dirname+'//fr.itv95.db//');
@@ -221,9 +229,8 @@ Application.prototype.makeAllKitTags = function(){
             });
         }
     }
-    return kitTags;
+    return {kitTags: kitTags, manifestKitTag: manifestKitTag};
 };
-
 
 /**
  * Génère le programme sax
@@ -231,10 +238,16 @@ Application.prototype.makeAllKitTags = function(){
 Application.prototype.generateProgram = function(){
     var self = this;
     this.getAllManifestsDependancies(this.sedonaApp);
-    this.makeAllKitTags().forEach(function(kit){
-        self.sedonaApp.schemaTag.childrens.push(kit);
+    var kitTagsObjects = this.makeAllKitTags();
+    kitTagsObjects.kitTags.forEach(function(kit){
+        self.sedonaApp.schemaTag.addChildren(kit);
     });
-    fs.writeFileSync(__dirname+'\/testLuc.sax', this.sedonaApp.generateTag());
+    kitTagsObjects.manifestKitTag.forEach(function(kit){
+        self.sedonaSCode.addKit(kit);
+    });
+    var dest = 'C:\/Users\/Luc\/WebstormProjects\/CTAMaker\/app\/result';
+    fs.writeFileSync(dest+'\/testLuc.sax', this.sedonaApp.generateTag());
+
 };
 
 module.exports = Application;

@@ -24,6 +24,7 @@ describe('Test Tags Class', function(){
     });
 
     it('create application correctly', function(){
+        console.log(application);
         expect(application).to.not.equal(null);
         expect(application).to.have.property('compId').to.equal(0);
         expect(application).to.deep.property('sedonaApp.tagName').to.equal('sedonaApp');
