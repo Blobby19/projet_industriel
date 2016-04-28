@@ -26,15 +26,7 @@ var Application = function(){
         this.compId = 0;
         this.sedonaApp = new SedonaAppTagClass();
         this.linksArray = new Array();
-        /*console.log(configuration);
-        this.createApp(configuration.configuration[0].application_name, configuration.configuration[0].device_name);
-        this.createService();
-        if(configuration.inputs.length>0 && configuration.outputs.length>0){
-            this.createApplication(configuration.inputs, configuration.outputs, templates);
-            //this.createApplication(__dirname+"\\..\\templates\\template_regulation.json");
-        }
-        var tag = this.sedonaApp.generateTag();
-        console.log(tag);*/
+        this.kits = new Array();
     }
     catch(ex){
         Logger.error(ex.message);
@@ -75,6 +67,11 @@ Application.prototype.createService = function(){
     this.sedonaApp.appTag.addChildren(service);
 };
 
+/**
+ * Permet de créer un dossier dans le sax
+ * @param name
+ * @returns {*|Object}
+ */
 Application.prototype.createFolder = function(name){
     if(name !== undefined){
         return new CompTagClass(name, "sys::Folder", ++this.compId);
@@ -146,19 +143,10 @@ Application.prototype.addOutputsFolder = function(outputs){
 Application.prototype.addTemplate = function(template){
     var folder = this.createFolder(template.folder_name);
     var file = JSON.parse(fs.readFileSync(__dirname+'\\..\\templates\\'+template.name+'.json'));
-    //console.log(file.objects.childrens);
     var templateObject = new TemplateClass(file.name, file.description, file.objects.childrens, file.objects.links, this.compId);
     templateObject.generateTemplate(folder);
     folder.addChildren(templateObject);
     this.sedonaApp.appTag.addChildren(folder);
-    console.log(this.sedonaApp.generateTag());
-};
-
-Application.prototype.generateProgram = function(){
-    var file = "";
-    file+="<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
-    this.getAllManifestsDependancies(this.sedonaApp);
-
 };
 
 /**
@@ -167,48 +155,86 @@ Application.prototype.generateProgram = function(){
  * @returns {*}
  */
 Application.prototype.getAllManifestsDependancies = function(obj){
+    var self = this;
     //TODO: Finir cette fonction récursive
-    var kits = Array();
+    if(typeof(obj)==='object' && obj.type !== undefined){
+        var kit = obj.type.replace(/::.+/gi, '');
+        var present = false;
+        for(var i = 0; i<this.kits.length; i++){
+            if(kit === this.kits[i]){
+                present = false;
+                break;
+            }
+            present = true;
+        }
+        if(present || this.kits.length == 0) this.kits.push(kit);
+    }
     for(key in obj){
-        console.log(typeof(obj[key]));
-        if(obj[key] instanceof Object){
-            if(obj[key].type !== undefined){
-                console.log(obj[key].type);
-                var kit = obj[key].type.replace(/::.+/gi, '');
-                var present = false;
-                for(var i = 0; i<kits.length; i++){
-                    if(kit===kits[i]){
-                        present = false;
-                        break;
-                    }
-                    present = true;
+        if(typeof(obj[key])=== 'object'){
+            if(obj[key].length === undefined){
+                if(obj[key].tagName === 'prop'){
+                    return;
                 }
-                if(present || kits.length == 0) kits.push(kit);
-                console.log(kits);
-                return;
+                else if(obj[key].tagName ==='comp'){
+                }
+                else{
+                    this.getAllManifestsDependancies(obj[key]);
+                }
             }
             else{
-                this.getAllManifestsDependancies(obj[key]);
+                if(obj[key].length>0){
+                    obj[key].forEach(function(obj){
+                        self.getAllManifestsDependancies(obj);
+                    });
+                    return;
+
+                }
             }
         }
-        else if(obj[key] instanceof Array){
-            this.getAllManifestsDependancies(obj[key]);
+        else if(typeof(obj[key])==='string') {
+            continue;
         }
-        else if(obj[key] instanceof Function){
-            return;
-        }
-        /*if(obj[key] instanceof Object && !(obj[key] instanceof Array)){
-            console.log(obj[key]);
-        }
-        else if((obj[key] instanceof Array)) {
-            obj[key].forEach(function(obj){
-                obj = replaceDynamically(obj, arg, valid);
+        else return obj;
+    }
+    return;
+
+};
+
+/**
+ * Retourne un tableau avec tout les kitTags nécessaires.
+ * @returns {Array}
+ */
+Application.prototype.makeAllKitTags = function(){
+    var kitTags = new Array();
+    var self = this;
+    if(this.kits.length>0){
+        var manifests = fs.readdirSync(__dirname+'//fr.itv95.db//');
+        if(manifests.length>0){
+            manifests.forEach(function(manifest){
+                var nomManifest = manifest.replace(/.json/gi, '');
+                self.kits.forEach(function(kit){
+                   if(kit === nomManifest){
+                       var contentManifest = JSON.parse(fs.readFileSync(__dirname+'//fr.itv95.db//'+manifest));
+                       kitTags.push(new KitTagClass(contentManifest.name, contentManifest.checksum));
+                   }
+                });
             });
         }
-        else return obj;*/
     }
-    return obj;
+    return kitTags;
+};
 
+
+/**
+ * Génère le programme sax
+ */
+Application.prototype.generateProgram = function(){
+    var self = this;
+    this.getAllManifestsDependancies(this.sedonaApp);
+    this.makeAllKitTags().forEach(function(kit){
+        self.sedonaApp.schemaTag.childrens.push(kit);
+    });
+    fs.writeFileSync(__dirname+'\/testLuc.sax', this.sedonaApp.generateTag());
 };
 
 module.exports = Application;

@@ -14,7 +14,6 @@ var fs = require('fs');
  * @constructor
  */
 var TemplateClass = function(name, description, objects, links, compId){
-    console.log(objects);
     this.name = name;
     this.description = description;
     this.objects = objects;
@@ -34,7 +33,6 @@ TemplateClass.prototype.generateTemplate = function(folder, linksTag){
     try{
         if(this.objects instanceof Array && this.objects.length>0){
             for(var i =0; i<this.objects.length; i++){
-                //console.log(objects[i]);
                 if(this.objects[i].type !== undefined && this.objects[i].type !== ""){
                     thisComp = this.makeComp(this.objects[i]);
                     folder.addChildren(thisComp);

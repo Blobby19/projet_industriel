@@ -75,7 +75,8 @@ SedonaAppTagClass.prototype.setLinksTag = function(linksTag){
  */
 SedonaAppTagClass.prototype.generateTag = function(){
     try{
-        var startTag = "<"+this.tagName+">\n";
+        var startTag = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n";
+        startTag += "<"+this.tagName+">\n";
         var inTag = "";
         inTag += this.schemaTag.generateTag();
         inTag += this.appTag.generateTag();
@@ -87,6 +88,6 @@ SedonaAppTagClass.prototype.generateTag = function(){
         Logger.error(ex.message);
         return;
     }
-}
+};
 
 module.exports = SedonaAppTagClass;

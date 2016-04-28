@@ -89,8 +89,10 @@ CompTagClass.prototype.generateTag = function(){
         var inTag = "";
         if(this.childrens != undefined || this.childrens.length>0){
             for(key in this.childrens){
-                if(this.childrens[key] instanceof TagClass)
-                    inTag += this.childrens[key].generateTag();
+                if(!this.type.match(/Bool/gi)){
+                    if(this.childrens[key] instanceof TagClass)
+                        inTag += this.childrens[key].generateTag();
+                }
             }
         }
 

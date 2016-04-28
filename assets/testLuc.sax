@@ -1,5 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <sedonaApp>
 <schema>
+<kit name="func" checksum="821b7396"/>
+<kit name="sox" checksum="397a84dd"/>
+<kit name="sys" checksum="d3984c51"/>
+<kit name="SysMikPlatScc41xm" checksum="8babb598"/>
+<kit name="types" checksum="10936551"/>
 </schema>
 <app>
 <prop name="deviceName" val="SCC-410M"/>
@@ -48,7 +54,6 @@
 <prop name="in" val="0"/>
 </comp>
 <comp name="Enable" type="types::WriteBool" id="17">
-<prop name="in" val="0"/>
 </comp>
 <comp name="LP" type="func::LP" id="18">
 </comp>

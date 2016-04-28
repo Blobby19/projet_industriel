@@ -56,4 +56,20 @@ KitTagClass.prototype.setChecksum = function(checksum){
     this.checksum = checksum;
 };
 
+KitTagClass.prototype.generateTag = function(){
+    try{
+        var string = "<kit ";
+        if(this.name!=null && this.name!="")
+            string+="name=\""+this.name+"\" ";
+        if(this.checksum!=null && this.checksum!="")
+            string+="checksum=\""+this.checksum+"\"";
+        else string+="checksum=\"0\"";
+        string+="/>\n";
+        return string;
+    }
+    catch(ex){
+        Logger.error(ex.message);
+    }
+};
+
 module.exports = KitTagClass;

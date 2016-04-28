@@ -136,3 +136,11 @@
 {"name":"TemplateClass","hostname":"PC-Luc","pid":15832,"level":50,"msg":"Cannot read property 'type' of undefined","time":"2016-04-25T14:30:29.664Z","v":0}
 {"name":"TemplateClass","hostname":"PC-Luc","pid":15832,"level":50,"msg":"Cannot read property 'type' of undefined","time":"2016-04-25T14:30:43.559Z","v":0}
 {"name":"TemplateClass","hostname":"PC-Luc","pid":19712,"level":50,"msg":"Cannot read property 'addChildren' of null","time":"2016-04-25T15:02:16.525Z","v":0}
+{"name":"CompTagClass","hostname":"PC-Luc","pid":20780,"level":50,"msg":"this.type.contains is not a function","time":"2016-04-28T09:00:54.832Z","v":0}
+{"name":"CompTagClass","hostname":"PC-Luc","pid":20780,"level":50,"msg":"this.type.contains is not a function","time":"2016-04-28T09:00:54.833Z","v":0}
+{"name":"CompTagClass","hostname":"PC-Luc","pid":20780,"level":50,"msg":"this.type.contains is not a function","time":"2016-04-28T09:00:54.833Z","v":0}
+{"name":"CompTagClass","hostname":"PC-Luc","pid":20780,"level":50,"msg":"this.type.contains is not a function","time":"2016-04-28T09:00:54.834Z","v":0}
+{"name":"CompTagClass","hostname":"PC-Luc","pid":20780,"level":50,"msg":"this.type.contains is not a function","time":"2016-04-28T09:00:54.834Z","v":0}
+{"name":"CompTagClass","hostname":"PC-Luc","pid":20780,"level":50,"msg":"this.type.contains is not a function","time":"2016-04-28T09:00:54.834Z","v":0}
+{"name":"CompTagClass","hostname":"PC-Luc","pid":20780,"level":50,"msg":"this.type.contains is not a function","time":"2016-04-28T09:00:54.834Z","v":0}
+{"name":"CompTagClass","hostname":"PC-Luc","pid":20780,"level":50,"msg":"this.type.contains is not a function","time":"2016-04-28T09:00:54.834Z","v":0}
