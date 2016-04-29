@@ -12,10 +12,13 @@ var TagClass = require('./TagClass');
  * @constructor
  */
 var SedonaAppTagClass = function(){
+    Logger.info('Constructeur');
     TagClass.call(this, "sedonaApp");
     this.schemaTag = new TagClass("schema");
-    this.appTag = new TagClass("app");
+    this.appTag = new TagClass("app", null, null, "/");
     this.linksTag = new TagClass("links");
+
+
 };
 
 SedonaAppTagClass.prototype = Object.create(TagClass.prototype);
@@ -26,6 +29,7 @@ SedonaAppTagClass.prototype.constructor = SedonaAppTagClass;
  * @returns {TagClass|exports|module.exports|*}
  */
 SedonaAppTagClass.prototype.getSchemaTag = function(){
+    Logger.info('getSchemaTag');
     return this.schemaTag;
 };
 
@@ -34,6 +38,7 @@ SedonaAppTagClass.prototype.getSchemaTag = function(){
  * @param schemaTag
  */
 SedonaAppTagClass.prototype.setSchemaTag = function(schemaTag){
+    Logger.info('setSchemaTag');
     this.schemaTag = schemaTag;
 };
 
@@ -42,6 +47,7 @@ SedonaAppTagClass.prototype.setSchemaTag = function(schemaTag){
  * @returns {TagClass|exports|module.exports|*}
  */
 SedonaAppTagClass.prototype.getAppTag = function(){
+    Logger.info('getAppTag');
     return this.appTag;
 };
 
@@ -50,6 +56,7 @@ SedonaAppTagClass.prototype.getAppTag = function(){
  * @param appTag
  */
 SedonaAppTagClass.prototype.setAppTag = function(appTag){
+    Logger.info('setAppTag');
     this.appTag = appTag;
 };
 
@@ -58,7 +65,9 @@ SedonaAppTagClass.prototype.setAppTag = function(appTag){
  * @returns {TagClass|exports|module.exports|*}
  */
 SedonaAppTagClass.prototype.getLinksTag = function(){
+    Logger.info('getLinksTag');
     return this.linksTag;
+
 };
 
 /**
@@ -66,6 +75,7 @@ SedonaAppTagClass.prototype.getLinksTag = function(){
  * @param linksTag
  */
 SedonaAppTagClass.prototype.setLinksTag = function(linksTag){
+    Logger.info('setLinksTag');
     this.linksTag = linksTag;
 };
 
@@ -74,6 +84,7 @@ SedonaAppTagClass.prototype.setLinksTag = function(linksTag){
  * @returns {string}
  */
 SedonaAppTagClass.prototype.generateTag = function(){
+    Logger.info('generateTag');
     try{
         var startTag = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n";
         startTag += "<"+this.tagName+">\n";

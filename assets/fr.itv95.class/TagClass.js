@@ -2,60 +2,68 @@
  * Created by Fedora on 10/03/2016.
  */
 
-var Logger = require('..\\fr.itv95.logger\\LoggerClass.js')('TagClass');
+var Logger = require(__dirname+'\\..\\fr.itv95.logger\\LoggerClass.js')('TagClass');
 
-var TagClass = function(tagName, listOfAttributes, childrens, parent){
+var TagClass = function(tagName, listOfAttributes, childrens, path){
+    Logger.info('Constructeur');
     this.tagName = tagName;
-    this.listOfAttributes = (listOfAttributes != undefined)?listOfAttributes: new Array;
-    this.childrens = (childrens != undefined)?childrens:new Array;
-    this.parent = (parent!= undefined)?parent:null;
+    this.listOfAttributes = (listOfAttributes != undefined && listOfAttributes !=null)?listOfAttributes: new Array;
+    this.childrens = (childrens != undefined && childrens !== null)?childrens:new Array;
+    this.path = (path !== undefined)?path:null;
 };
 
 TagClass.prototype.getTagName = function(){
+    Logger.info('getTagName');
     return this.tagName;
 };
 
 TagClass.prototype.setTagName = function(tag){
+    Logger.info('setTagName');
     this.tagName = tagName;
 };
 
 TagClass.prototype.getListOfAttributes = function(){
+    Logger.info('getListOfAttributes');
     return this.listOfAttributes;
 };
 
 TagClass.prototype.setListOfAttributes = function(listOfAttributes){
+    Logger.info('setListOfAttributes');
     this.listOfAttributes = listOfAttributes;
 };
 
 TagClass.prototype.addAttribute = function(attribute){
+    Logger.info('addAttribute');
     this.listOfAttributes.push(attribute);
 };
 
 TagClass.prototype.getChildrens = function(){
+    Logger.info('getChildrens');
     return this.childrens;
 };
 
 TagClass.prototype.setChildrens = function(childrens){
+    Logger.info('setChildrens');
     this.childrens = childrens;
 };
 
 TagClass.prototype.addChildren = function(children){
-    if(children instanceof TagClass){
-        children.setParent(this);
-    }
-
+    Logger.info('addChildren');
     this.childrens.push(children);
 };
 
-TagClass.prototype.getParent = function(){
-    return this.parent;
+TagClass.prototype.getPath = function(){
+    Logger.info('getPath');
+    return this.path;
 };
 
-TagClass.prototype.setParent = function(parent){
-    this.parent = parent;
+TagClass.prototype.setPath = function(path){
+    Logger.info('setPath');
+    this.path = path;
 };
 
 TagClass.prototype.generateTag = function(){
+    Logger.info('generateTag');
     try{
         var startTag = "<"+this.tagName+">\n";
         var inTag = "";

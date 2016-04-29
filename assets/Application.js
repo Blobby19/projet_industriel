@@ -9,6 +9,7 @@ var CompTagClass = require(__dirname+'\\fr.itv95.class\\CompTagClass.js');
 var PropTagClass = require(__dirname+'\\fr.itv95.class\\PropTagClass.js');
 var LinkTagClass = require(__dirname+'\\fr.itv95.class\\LinkTagClass.js');
 var KitTagClass = require(__dirname+'\\fr.itv95.class\\KitTagClass.js');
+var TagClass = require(__dirname+'\\fr.itv95.class\\TagClass.js');
 
 var TemplateClass = require(__dirname+'\\fr.itv95.template\\TemplateClass.js');
 
@@ -99,16 +100,10 @@ Application.prototype.addInputsFolder = function(inputs){
                 object = new CompTagClass(input.name, "SysMikPlatScc41xm::IoAI", ++self.compId);
             else
                 object = new CompTagClass(input.name, "SysMikPlatScc41xm::IoDI", ++self.compId);
-
-            //channel.setParent(object);
             object.addChildren(channel);
-            //object.setParent(folder);
             folder.addChildren(object);
         });
     }
-    //folder.setParent(this.sedonaApp.appTag);
-    console.log(folder.getParent());
-
     this.sedonaApp.appTag.addChildren(folder);
 };
 
@@ -151,7 +146,6 @@ Application.prototype.addTemplate = function(template){
     var templateObject = new TemplateClass(file.name, file.description, file.objects.childrens, file.objects.links, this.compId);
     templateObject.generateTemplate(folder);
     folder.addChildren(templateObject);
-    templateObject.makeLinks();
     this.sedonaApp.appTag.addChildren(folder);
 };
 
@@ -176,7 +170,7 @@ Application.prototype.getAllManifestsDependancies = function(obj){
         if(present || this.kits.length == 0) this.kits.push(kit);
     }
     for(key in obj){
-        if(key ==='parent') continue;
+        if(key === 'path' || key === 'parent') continue;
         if(typeof(obj[key])=== 'object'){
             if(obj[key].length === undefined){
                 if(obj[key].tagName === 'prop'){
@@ -205,6 +199,26 @@ Application.prototype.getAllManifestsDependancies = function(obj){
     }
     return;
 
+};
+
+/**
+ * Permet de générer tous les path de chaque objet
+ * @param obj
+ * @param parentPath
+ */
+Application.prototype.updateAllPathsInAppTag = function(obj, parentPath){
+    Logger.info('updateAllPathsInAppTag');
+    if(parentPath === undefined) parentPath=obj.getPath();
+    if(obj instanceof TagClass){
+        if(obj.getPath()!== '/') parentPath = (parentPath!='/')?((obj.getTagName()!=='comp')?(parentPath+'.'+obj.getName()):(parentPath+'/'+obj.getName())):(parentPath+obj.getName());
+        obj.setPath(parentPath);
+        if(obj.childrens.length>0){
+            for(var children in obj.childrens){
+                this.updateAllPathsInAppTag(obj.childrens[children], parentPath);
+            }
+        }
+    }
+    return;
 };
 
 /**
@@ -245,9 +259,10 @@ Application.prototype.generateProgram = function(){
     kitTagsObjects.manifestKitTag.forEach(function(kit){
         self.sedonaSCode.addKit(kit);
     });
+    this.updateAllPathsInAppTag(this.sedonaApp.appTag);
+    //console.log(this.sedonaApp.appTag.childrens[6]);
     var dest = 'C:\/Users\/Luc\/WebstormProjects\/CTAMaker\/app\/result';
     fs.writeFileSync(dest+'\/testLuc.sax', this.sedonaApp.generateTag());
-
 };
 
 module.exports = Application;

@@ -30,7 +30,6 @@ var CompTagClass = function(name, type, id){
     {
         this.type = type;
     }
-
     this.id = id;
 };
 
