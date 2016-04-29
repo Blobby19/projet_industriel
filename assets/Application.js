@@ -28,6 +28,7 @@ var Application = function(){
         this.sedonaApp = new SedonaAppTagClass();
         this.linksArray = new Array();
         this.kits = new Array();
+        this.templates = new Array();
     }
     catch(ex){
         Logger.error(ex.message);
@@ -147,6 +148,7 @@ Application.prototype.addTemplate = function(template){
     templateObject.generateTemplate(folder);
     folder.addChildren(templateObject);
     this.sedonaApp.appTag.addChildren(folder);
+    this.templates.push(templateObject);
 };
 
 /**
@@ -260,7 +262,7 @@ Application.prototype.generateProgram = function(){
         self.sedonaSCode.addKit(kit);
     });
     this.updateAllPathsInAppTag(this.sedonaApp.appTag);
-    //console.log(this.sedonaApp.appTag.childrens[6]);
+    console.log(this.sedonaApp.appTag.childrens[6]);
     var dest = 'C:\/Users\/Luc\/WebstormProjects\/CTAMaker\/app\/result';
     fs.writeFileSync(dest+'\/testLuc.sax', this.sedonaApp.generateTag());
 };

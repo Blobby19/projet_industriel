@@ -39,11 +39,6 @@ TemplateClass.prototype.generateTemplate = function(folder, linksTag){
                 }
             }
         }
-        if(this.links instanceof Array && this.links.length>0){
-            for(var i =0; i<this.links.length; i++){
-
-            }
-        }
     }
     catch(ex){
         console.log(ex.message);
